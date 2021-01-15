@@ -4,15 +4,24 @@
 1. Why did Fibonacci fail the testThrowsIllegalArgumentException< test? What (if anything) did
 you have to do to fix it? If you did not have to change anything to fix this issue, explain why.
 
+When we use 0 as the input of getFibTerm method, it is expected to return 1 as the answer.
+But it throws exception indicating the input number is negative, and this is wrong. I changed
+the if condition to "if (n < 0)" and the else if condition to "else if (n < 2)" to fix it.
 
 
 2. Why did Fibonacci fail the testBaseCase test? What (if anything) did you have to do to fix
 it? If you did not have to change anything to fix this issue, explain why.
 
+This is similar to the previous question. It's looking for the result from input 0 of the getFibTerm
+method. It is expected to return 1 but it throws exception in this case. I changed the if condition
+to "if (n < 0)" to fix it.
 
 
 3.Why did Fibonacci fail the testInductiveCase test? What (if anything) did you have to do to
 fix it? If you did not have to change anything to fix this issue, explain why.
 
+When we use 2 as the input of getFibTerm method, the expected result is 2 but the actual output is 0.
+I changed the return statement in the else branch to "return getFibTerm(n - 1) + getFibTerm(n - 2);"
+to fix it.
 
 
