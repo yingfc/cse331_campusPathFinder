@@ -12,6 +12,8 @@
 package setup;
 
 import java.lang.Iterable;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 /**
@@ -25,6 +27,7 @@ public class Box implements Iterable<Ball> {
      * ballContainer is used to internally store balls for this Box
      */
     private BallContainer ballContainer;
+    private double maxVolume;
 
     /**
      * Constructor that creates a new box.
@@ -32,8 +35,8 @@ public class Box implements Iterable<Ball> {
      * @param maxVolume Total volume of balls that this box can contain.
      */
     public Box(double maxVolume) {
-        // Your code goes here.  Remove the exception after you're done.
-        throw new RuntimeException("Method not implemented");
+        ballContainer = new BallContainer();
+        this.maxVolume = maxVolume;
     }
 
     /**
@@ -64,8 +67,11 @@ public class Box implements Iterable<Ball> {
      * @spec.requires b != null.
      */
     public boolean add(Ball b) {
-        // Your code goes here.  Remove the exception after you're done.
-        throw new RuntimeException("Method not implemented");
+        if (contains(b) || b.getVolume() + getVolume() > maxVolume) {
+            return false;
+        } else {
+            return ballContainer.add(b);
+        }
     }
 
     /**
@@ -77,8 +83,19 @@ public class Box implements Iterable<Ball> {
      * ascending size.
      */
     public Iterator<Ball> getBallsFromSmallest() {
-        // Your code goes here.  Remove the exception after you're done.
-        throw new RuntimeException("Method not implemented");
+        Iterator<Ball> iterator = iterator();
+        ArrayList<Ball> balls = new ArrayList<>();
+        while (iterator.hasNext()) {
+            balls.add(iterator.next());
+        }
+        balls.sort(new ballComparator());
+        return balls.iterator();
+    }
+
+    public static class ballComparator implements Comparator<Ball> {
+        public int compare(Ball b1, Ball b2) {
+            return Double.compare(b1.getVolume(), b2.getVolume());
+        }
     }
 
     /**
