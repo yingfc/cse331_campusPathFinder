@@ -92,12 +92,6 @@ public class Box implements Iterable<Ball> {
         return balls.iterator();
     }
 
-    public static class ballComparator implements Comparator<Ball> {
-        public int compare(Ball b1, Ball b2) {
-            return Double.compare(b1.getVolume(), b2.getVolume());
-        }
-    }
-
     /**
      * Removes a ball from the box. This method returns
      * <code>true</code> if ball was successfully removed from the
@@ -154,4 +148,21 @@ public class Box implements Iterable<Ball> {
         return ballContainer.contains(b);
     }
 
+    public static class ballComparator implements Comparator<Ball> {
+
+        /**
+         * This method compares the volume of two balls.
+         * It returns either negative/zero/positive based on the comparison of two volumes.
+         *
+         * @param b1 the first ball to be compared
+         * @param b2 the second ball to be compared
+         * @return a negative value if the the first ball is less than the second.
+         * Returns zero if the two balls have same volume. Returns a positive value
+         * if the first ball is larger than the second.
+         * @spec.requires b1 != null and b2 != null.
+         */
+        public int compare(Ball b1, Ball b2) {
+            return Double.compare(b1.getVolume(), b2.getVolume());
+        }
+    }
 }
