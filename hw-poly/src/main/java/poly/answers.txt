@@ -3,11 +3,26 @@
 ###########################################################################
 
 1. Multiplication Pseudocode
-
+    r = p * q:
+        set r = 0
+        foreach term, t_p, in p:
+            foreach term, t_q, in q:
+                set t_pq to be the multiplication of t_p and t_q
+                if any term, t_r, in r has the same degree as t_pq
+                    then replace t_r by the sum of t_r and t_pq
+                    else insert t_pq to r as a new term
 
 
 2. Division Pseudocode
-
+    q = u / v:
+        set r = u by making a term-by-term copy of all terms in u to r
+        set q = 0
+        set v_h = the highest degree of v
+        while the highest degree of r is greater than or equal to v_h
+            set c = coefficient of the highest degree term of r / coefficient of the highest degree term of v
+            set d = highest degree of r - v_h
+            adding a term with coefficient c and degree d to q
+            subtracting (v multiplied by c and with each term's degree increased by d)
 
 
 3. Division Example: (x3+x-1) / (x+1) = x2-x+2
@@ -22,6 +37,10 @@
     The constructor RatNum(int n, int d) needs to remove calling gcd() method
     to meet the new rep invariant. This change is more efficient as it bypass
     the procedure of calling gcd(), making the execution to be faster.
+
+    The method checkRep() needs to remove the if check as the rep invariant
+    changes. This makes the code more clear and makes the method to run faster
+    as it now requires less condition check.
 
     The methods hashCode() and equals(Object obj) need to add calling gcd()
     method to so that they could treat numbers that are in reduced form and
@@ -45,7 +64,10 @@
 
 3. Constructor checkReps
     The reason why calling checkRep only at the end of the constructors is already
-    sufficient is that the RatNum class represents immutable rational numbers.
+    sufficient is that the denom is set to 1 in constructor RatNum(int n), and this
+    won't violate the rep invariant. And denom is set to -d in case of being negative
+    at first in the constructor RatNum(int n, int d), and this won't violate the rep
+    invariant. Additionally, RatNum class represents immutable rational numbers.
     These instance variables are initialized at the very beginning and declared as
     final, and no methods could even modify them as they are just doing arithmetic
     work. Therefore, calling checkRep only at the end of the constructors is
@@ -57,19 +79,44 @@
 ###########################################################################
 
 1. Calls to checkRep in RatTerm
-
+    I include calls to the checkRep at the end of the constructor RatTerm(RatNum c, int e).
+    The reason is that RatTerm is an immutable representation of a term in a single-variable
+    polynomial expression. The instance variables are initialized at the beginning and
+    declared as final, and no method could modify them as all methods are returning new
+    RatTerm object, leaving the original objects unmodified. Therefore, calling the checkRep
+    at the end of the constructor is sufficient to meet the rep invariant.
 
 
 2. Weakened Rep Invariant
+    The constructor RatTerm(RatNum c, int e) needs to remove the part that checks coeff to set expt.
+    This change makes the code clear and reduces the execution time.
 
+    The method add(RatTerm arg) needs to add a check for the condition that both this.coeff and arg.coeff
+    are ZERO, and return RatTerm.ZERO in case of both are ZERO. This change makes the code more complex
+    and may takes longer execution time(very tiny) as it requires further condition check.
+
+    The method toString() needs to add a call of method isZero() to check if the coeff is equal to
+    ZERO and return 0 accordingly. This change makes the code more complex and may takes longer
+    execution time(very tiny) as it requires further condition check.
+
+    The method equals(Object obj) needs to add a check for both this.coeff and obj are ZERO, and
+    return true in case of both are true. This change makes the code more complex and takes longer
+    execution time(very tiny) as it requires further condition check.
+
+    The method checkRep() needs to remove the second assert. This change makes the code more efficient,
+    and reduces the execution time of the method as it requires less assertion check.
 
 
 3. Alternate Rep Invariant
+    The constructor RatTerm(RatNum c, int e) needs to change. In case of passing in NaN, it
+    should be "NaN" instead of "NaN*x^e" in order to handle this special case. This changes
+    makes the code more clear.
 
 
-
-4. Preferred Invariants
-
+4. Preferred Invariants TODO: FIXME
+    Both. The reason is that these two rep invariants could avoid special cases like NaN*x^2,
+    0*x^2. In this case, there is no need to consider these cases when doing the arithmetic
+    calculations.
 
 
 
