@@ -19,15 +19,37 @@
 ###########################################################################
 
 1. Weakened Rep Invariant
+    The constructor RatNum(int n, int d) needs to remove calling gcd() method
+    to meet the new rep invariant. This change is more efficient as it bypass
+    the procedure of calling gcd(), making the execution to be faster.
 
+    The methods hashCode() and equals(Object obj) need to add calling gcd()
+    method to so that they could treat numbers that are in reduced form and
+    numbers that are not in reduced form at same standard. Then, both methods
+    could return the correct results. This change is less efficient as it needs
+    extra execution of gcd(), making the overall execution time to be longer.
+
+    The method toString() needs to add calling gcd() method to meet the new
+    rep invariant. This change is less efficient as it requires extra execution,
+    making the overall execution time to be longer.
 
 
 2. Alternate add, sub, mul, div
-
+    The changes fail to meet the specifications of the methods because the specs
+    of these methods don't have @sepc.modifies clause, meaning it should not be
+    modified by the methods.
+    The changes fail to meet the specifications of the RatNum class because the
+    general spec of the class says that RatNum represents an immutable rational
+    number, whereas the changes will mutate numbers.
 
 
 3. Constructor checkReps
-
+    The reason why calling checkRep only at the end of the constructors is already
+    sufficient is that the RatNum class represents immutable rational numbers.
+    These instance variables are initialized at the very beginning and declared as
+    final, and no methods could even modify them as they are just doing arithmetic
+    work. Therefore, calling checkRep only at the end of the constructors is
+    sufficient to maintain the rep invariant.
 
 
 
