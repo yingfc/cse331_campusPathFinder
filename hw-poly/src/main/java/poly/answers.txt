@@ -84,7 +84,7 @@
     polynomial expression. The instance variables are initialized at the beginning and
     declared as final, and no method could modify them as all methods are returning new
     RatTerm object, leaving the original objects unmodified. Therefore, calling the checkRep
-    at the end of the constructor is sufficient to meet the rep invariant.
+    at the end of the constructor is already sufficient to meet the rep invariant.
 
 
 2. Weakened Rep Invariant
@@ -124,10 +124,18 @@
 ###########################################################################
 
 1. Calls to checkRep in RatPoly
-
+    I include calls to checkRep at the end of four constructors. The reason is that RatPoly
+     represents an immutable single-variate polynomial expression. The instance variable terms
+     is initialized at the beginning and declared as final, and no method could modify it as
+     all methods are returning new object, leaving the original object unmodified. Therefore,
+     calling the checkRep at the end of the constructors is already sufficient to meet the
+     rep invariant.
 
 
 2. Alternate Representation
-
+    In case of using two separate lists to keep track of the RatNum coefficients and int exponents
+    of each term, it has the advantage of accessing coefficient and exponent for typical term to be
+    to be actually the same, maybe more intuitive. However, it has the disadvantage when adding/removing
+    term into a RatPoly as we now need to modify two lists and this is prone to make mistakes.
 
 
