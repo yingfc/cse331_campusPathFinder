@@ -15,19 +15,59 @@
 
 2. Division Pseudocode
     q = u / v:
-        set r = u by making a term-by-term copy of all terms in u to r
         set q = 0
-        set v_h = the highest degree of v
-        while the highest degree of r is greater than or equal to v_h
+        set r = u by making a term-by-term copy of all terms in u to r
+        while the highest degree of r is greater than or equal to the highest degree of v
             set c = coefficient of the highest degree term of r / coefficient of the highest degree term of v
-            set d = highest degree of r - v_h
+            set d = highest degree of r - highest degree of v
             adding a term with coefficient c and degree d to q
-            subtracting (v multiplied by c and with each term's degree increased by d)
+            subtracting (v multiplied by c and with each term's degree increased by d) from r
 
 
 3. Division Example: (x3+x-1) / (x+1) = x2-x+2
+    u = x^3+x-1
+    v = x+1
+    q = 0
+    r = u = x^3+x-1
+    the highest degree of v(x+1) is 1
 
+    1st iteration: highest degree of r = 3, highest degree of v = 1
+    [while the highest degree of r is greater than or equal to the highest degree of v] [TRUE]
+        [set c = coefficient of the highest degree term of r / coefficient of the highest degree term of v]
+        c = 1 / 1 = 1
+        [set d = highest degree of r - highest degree of v]
+        d = 3 - 1 = 2
+        [adding a term with coefficient c and degree d to q]
+        q = q + 1*x^2 = x^2
+        [subtracting (v multiplied by the term with coefficient c and degree d) from r]
+        r = r - v*c*x^d = (x^3+x-1) - (x+1)*(1)*(x^2) = (x^3+x-1) - (x^3+x^2) = -x^2+x-1
 
+    2nd iteration: highest degree of r = 2, highest degree of v = 1
+    [while the highest degree of r is greater than or equal to the highest degree of v] [TRUE]
+        [set c = coefficient of the highest degree term of r / coefficient of the highest degree term of v]
+        c = -1 / 1 = -1
+        [set d = highest degree of r - highest degree of v]
+        d = 2 - 1 = 1
+        [adding a term with coefficient c and degree d to q]
+        q = q + (-1)*x^1 = x^2 - x
+        [subtracting (v multiplied by the term with coefficient c and degree d) from r]
+        r = r - v*c*x^d = (-x^2+x-1) - (x+1)*(-1)*(x^1) = (-x^2+x-1) - (-x^2-x) = 2x-1
+
+    3rd iteration: highest degree of r = 1, highest degree of v = 1
+    [while the highest degree of r is greater than or equal to the highest degree of v] [TRUE]
+        [set c = coefficient of the highest degree term of r / coefficient of the highest degree term of v]
+        c = 2 / 1 = 2
+        [set d = highest degree of r - highest degree of v]
+        d = 1 - 1 = 0
+        [adding a term with coefficient c and degree d to q]
+        q = q + (2)*x^0 = (x^2 - x) + 2
+        [subtracting (v multiplied by the term with coefficient c and degree d) from r]
+        r = r - v*c*x^d = (-x^2+x-1) - (x+1)*(2)*(x^0) = (2x-1) - (2x+2) = -3
+
+    highest degree of r = 0, highest degree of v = 1    =>
+    [while the highest degree of r is greater than or equal to the highest degree of v] [FALSE]
+    q = x^2 - x + 2
+    =>  (x3+x-1) / (x+1) = x2-x+2
 
 
 ## Part 1
