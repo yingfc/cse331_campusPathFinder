@@ -17,7 +17,7 @@
     q = u / v:
         set q = 0
         set r = u by making a term-by-term copy of all terms in u to r
-        while the highest degree of r is greater than or equal to the highest degree of v
+        while (the highest degree of r) is greater than or equal to (the highest degree of v)
             set c = coefficient of the highest degree term of r / coefficient of the highest degree term of v
             set d = highest degree of r - highest degree of v
             adding a term with coefficient c and degree d to q
@@ -25,14 +25,14 @@
 
 
 3. Division Example: (x3+x-1) / (x+1) = x2-x+2
-    u = x^3+x-1
-    v = x+1
+    u = (x^3+x-1)
+    v = (x+1)
     q = 0
-    r = u = x^3+x-1
+    r = u = (x^3+x-1)
     the highest degree of v(x+1) is 1
 
-    1st iteration: highest degree of r = 3, highest degree of v = 1
-    [while the highest degree of r is greater than or equal to the highest degree of v] [TRUE]
+    Iteration 1: u=(x^3+x-1), v=(x+1), q=0, r=(x^3+x-1), highest degree of r=3, highest degree of v=1
+    [while the highest degree of r is greater than or equal to the highest degree of v] [YES]
         [set c = coefficient of the highest degree term of r / coefficient of the highest degree term of v]
         c = 1 / 1 = 1
         [set d = highest degree of r - highest degree of v]
@@ -42,19 +42,19 @@
         [subtracting (v multiplied by the term with coefficient c and degree d) from r]
         r = r - v*c*x^d = (x^3+x-1) - (x+1)*(1)*(x^2) = (x^3+x-1) - (x^3+x^2) = -x^2+x-1
 
-    2nd iteration: highest degree of r = 2, highest degree of v = 1
-    [while the highest degree of r is greater than or equal to the highest degree of v] [TRUE]
+    2nd iteration: u=(x^3+x-1), v=(x+1), q=(x^2), r=(-x^2+x-1), highest degree of r=2, highest degree of v=1
+    [while the highest degree of r is greater than or equal to the highest degree of v] [YES]
         [set c = coefficient of the highest degree term of r / coefficient of the highest degree term of v]
         c = -1 / 1 = -1
         [set d = highest degree of r - highest degree of v]
         d = 2 - 1 = 1
         [adding a term with coefficient c and degree d to q]
-        q = q + (-1)*x^1 = x^2 - x
+        q = q + (-1)*x^1 = x^2-x
         [subtracting (v multiplied by the term with coefficient c and degree d) from r]
         r = r - v*c*x^d = (-x^2+x-1) - (x+1)*(-1)*(x^1) = (-x^2+x-1) - (-x^2-x) = 2x-1
 
-    3rd iteration: highest degree of r = 1, highest degree of v = 1
-    [while the highest degree of r is greater than or equal to the highest degree of v] [TRUE]
+    3rd iteration: u=(x^3+x-1), v=(x+1), q=(x^2-x), r=(2x-1), highest degree of r = 1, highest degree of v = 1
+    [while the highest degree of r is greater than or equal to the highest degree of v] [YES]
         [set c = coefficient of the highest degree term of r / coefficient of the highest degree term of v]
         c = 2 / 1 = 2
         [set d = highest degree of r - highest degree of v]
@@ -64,9 +64,9 @@
         [subtracting (v multiplied by the term with coefficient c and degree d) from r]
         r = r - v*c*x^d = (-x^2+x-1) - (x+1)*(2)*(x^0) = (2x-1) - (2x+2) = -3
 
-    highest degree of r = 0, highest degree of v = 1    =>
-    [while the highest degree of r is greater than or equal to the highest degree of v] [FALSE]
-    q = x^2 - x + 2
+    u=(x^3+x-1), v=(x+1), q=(x^2-x+2), r=-3, highest degree of r = 0, highest degree of v = 1    =>
+    [while the highest degree of r is greater than or equal to the highest degree of v] [NO]
+    Here we have q = x^2-x+2, and we are DONE!
     =>  (x3+x-1) / (x+1) = x2-x+2
 
 
@@ -107,11 +107,11 @@
     sufficient is that the denom is set to 1 in constructor RatNum(int n), and this
     won't violate the rep invariant. And denom is set to -d in case of being negative
     at first in the constructor RatNum(int n, int d), and this won't violate the rep
-    invariant. Additionally, RatNum class represents immutable rational numbers.
-    These instance variables are initialized at the very beginning and declared as
-    final, and no methods could even modify them as they are just doing arithmetic
-    work. Therefore, calling checkRep only at the end of the constructors is
-    sufficient to maintain the rep invariant.
+    invariant. Additionally, RatNum class represents immutable rational numbers, so
+    these instance variables are initialized at the beginning and declared as final,
+    and no methods could even modify them as they are just doing arithmetic work.
+    Therefore, calling checkRep only at the end of the constructors is sufficient to
+    maintain the rep invariant.
 
 
 
@@ -121,7 +121,7 @@
 1. Calls to checkRep in RatTerm
     I include calls to the checkRep at the end of the constructor RatTerm(RatNum c, int e).
     The reason is that RatTerm is an immutable representation of a term in a single-variable
-    polynomial expression. The instance variables are initialized at the beginning and
+    polynomial expression, so the instance variables are initialized at the beginning and
     declared as final, and no method could modify them as all methods are returning new
     RatTerm object, leaving the original objects unmodified. Therefore, calling the checkRep
     at the end of the constructor is already sufficient to meet the rep invariant.

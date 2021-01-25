@@ -146,7 +146,7 @@ public final class RatPoly {
      * @spec.requires !this.isNaN()
      */
     public RatTerm getTerm(int deg) {
-        // TODO: Fill in this method, then remove the RuntimeException
+        // TODO: inv
         for (RatTerm rt: terms) {
             if (rt.getExpt() == deg) {
                 return rt;
@@ -161,7 +161,7 @@ public final class RatPoly {
      * @return true if and only if this has some coefficient = "NaN"
      */
     public boolean isNaN() {
-        // TODO: Fill in this method, then remove the RuntimeException
+        // TODO: inv
         for (RatTerm rt: terms) {
             if (rt.isNaN()) {
                 return true;
@@ -184,6 +184,7 @@ public final class RatPoly {
     private static void scaleCoeff(List<RatTerm> lst, RatNum scalar) {
         // TODO: Fill in this method as specified, modify it to your liking, or remove it.
         // Do not leave this method as-is. You must either use it somehow or remove it.
+        // TODO: inv
         for (int i = 0; i < lst.size(); i++) {
             lst.set(i, new RatTerm(lst.get(i).getCoeff().mul(scalar), lst.get(i).getExpt()));
         }
@@ -203,6 +204,7 @@ public final class RatPoly {
     private static void incremExpt(List<RatTerm> lst, int degree) {
         // TODO: Fill in this method as specified, modify it to your liking, or remove it.
         // Do not leave this method as-is. You must either use it somehow or remove it.
+        // TODO: inv
         for (int i = 0; i < lst.size(); i++) {
             lst.set(i, new RatTerm(lst.get(i).getCoeff(), lst.get(i).getExpt() + degree));
             if (lst.get(i).getExpt() < 0) {
@@ -236,21 +238,25 @@ public final class RatPoly {
         // TODO: Fill in this method, then remove the RuntimeException
         // Note: Some of the provided code in this class relies on this method working as-specified.
         if (!newTerm.isZero()) {
+            boolean inserted = false;
             int i = 0;
-            int exptNew = newTerm.getExpt();
-            while (i < lst.size() && lst.get(i).getExpt() > exptNew) {
+            // TODO: inv
+            while (i < lst.size() && !inserted) {
+                if (lst.get(i).getExpt() == newTerm.getExpt()) {
+                    if (lst.get(i).add(newTerm).getCoeff().equals(RatNum.ZERO)) {
+                        lst.remove(i);
+                    } else {
+                        lst.set(i, lst.get(i).add(newTerm));
+                    }
+                    inserted = true;
+                } else if (lst.get(i).getExpt() < newTerm.getExpt()) {
+                    lst.add(i, newTerm);
+                    inserted = true;
+                }
                 i++;
             }
-            if (i == lst.size()) {
-                lst.add(newTerm);
-            } else if (lst.get(i).getExpt() == exptNew) {
-                if (lst.get(i).add(newTerm).getCoeff().equals(RatNum.ZERO)) {
-                    lst.remove(i);
-                } else {
-                    lst.set(i, lst.get(i).add(newTerm));
-                }
-            } else {
-                lst.add(i, newTerm);
+            if (!inserted) {
+                lst.add(newTerm);   // add to end
             }
         }
     }
@@ -284,6 +290,7 @@ public final class RatPoly {
             return NaN;
         }
         List<RatTerm> res = new ArrayList<>(p.terms);
+        // TODO: inv
         for (RatTerm rt: terms) {
             sortedInsert(res, rt);
         }
@@ -317,6 +324,7 @@ public final class RatPoly {
             return NaN;
         }
         RatPoly res = new RatPoly();
+        // TODO: inv
         for (RatTerm rt: terms) {
             List<RatTerm> tmp = new ArrayList<>(p.terms);
             scaleCoeff(tmp, rt.getCoeff());
@@ -366,7 +374,7 @@ public final class RatPoly {
         }
         List<RatTerm> res = new ArrayList<>();
         RatPoly tmp = new RatPoly(new ArrayList<>(this.terms));
-
+        // TODO: inv
         while (!tmp.terms.isEmpty() && tmp.degree() >= p.degree()) {
             RatTerm term = tmp.terms.get(0).div(p.terms.get(0));
             res.add(term);
@@ -389,6 +397,7 @@ public final class RatPoly {
             return NaN;
         } else {
             List<RatTerm> res = new ArrayList<>(this.terms);
+            // TODO: inv
             for (int i = 0; i < res.size(); i++) {
                 if (res.get(i).getExpt() == 0) {
                     res.remove(i);
@@ -418,6 +427,7 @@ public final class RatPoly {
             return NaN;
         } else {
             List<RatTerm> res = new ArrayList<>();
+            // TODO: inv
             for (RatTerm term : terms) {
                 res.add(term.antiDifferentiate());
             }
@@ -463,6 +473,7 @@ public final class RatPoly {
             return Double.NaN;
         }
         double res = 0.0;
+        // TODO: inv
         for (RatTerm rt: terms) {
             res += rt.eval(d);
         }
