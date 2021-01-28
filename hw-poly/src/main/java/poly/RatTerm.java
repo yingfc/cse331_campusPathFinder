@@ -73,7 +73,6 @@ public final class RatTerm {
      * t.expt = 0, otherwise t.expt = e
      */
     public RatTerm(RatNum c, int e) {
-        // TODO: Fill in this method, then remove the RuntimeException
         coeff = c;
         if (c.equals(RatNum.ZERO)) {
             expt = 0;
@@ -236,7 +235,6 @@ public final class RatTerm {
      * function, RatPoly, contains a rep. invariant stating that b is never less than 0.)
      */
     public RatTerm antiDifferentiate() {
-        // TODO: Fill in this method, then remove the RuntimeException
         if (this.isNaN()) {
             return NaN;
         }

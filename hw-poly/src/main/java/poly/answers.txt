@@ -21,7 +21,7 @@
             set c = coefficient of the highest degree term of r / coefficient of the highest degree term of v
             set d = highest degree of r - highest degree of v
             adding a term with coefficient c and degree d to q
-            subtracting (v multiplied by c and with each term's degree increased by d) from r
+            subtracting (v multiplied by the term with coefficient c and degree d) from r
 
 
 3. Division Example: (x3+x-1) / (x+1) = x2-x+2
@@ -42,7 +42,7 @@
         [subtracting (v multiplied by the term with coefficient c and degree d) from r]
         r = r - v*c*x^d = (x^3+x-1) - (x+1)*(1)*(x^2) = (x^3+x-1) - (x^3+x^2) = -x^2+x-1
 
-    2nd iteration: u=(x^3+x-1), v=(x+1), q=(x^2), r=(-x^2+x-1), highest degree of r=2, highest degree of v=1
+    Iteration 2: u=(x^3+x-1), v=(x+1), q=(x^2), r=(-x^2+x-1), highest degree of r=2, highest degree of v=1
     [while the highest degree of r is greater than or equal to the highest degree of v] [YES]
         [set c = coefficient of the highest degree term of r / coefficient of the highest degree term of v]
         c = -1 / 1 = -1
@@ -53,7 +53,7 @@
         [subtracting (v multiplied by the term with coefficient c and degree d) from r]
         r = r - v*c*x^d = (-x^2+x-1) - (x+1)*(-1)*(x^1) = (-x^2+x-1) - (-x^2-x) = 2x-1
 
-    3rd iteration: u=(x^3+x-1), v=(x+1), q=(x^2-x), r=(2x-1), highest degree of r = 1, highest degree of v = 1
+    Iteration 3: u=(x^3+x-1), v=(x+1), q=(x^2-x), r=(2x-1), highest degree of r = 1, highest degree of v = 1
     [while the highest degree of r is greater than or equal to the highest degree of v] [YES]
         [set c = coefficient of the highest degree term of r / coefficient of the highest degree term of v]
         c = 2 / 1 = 2
@@ -75,8 +75,11 @@
 
 1. Weakened Rep Invariant
     The constructor RatNum(int n, int d) needs to remove calling gcd() method
-    to meet the new rep invariant. This change is more efficient as it bypass
-    the procedure of calling gcd(), making the execution to be faster.
+    and the following two lines of code to meet the new rep invariant. This
+    change is more efficient as it bypass the procedure of calling gcd() for
+    this constructor, making the execution to be faster and the code shorter.
+    However, it will then require those methods that rely on using reduced form
+    to do these extra transformation, which will slow down the execution.
 
     The method checkRep() needs to remove the if check as the rep invariant
     changes. This makes the code more clear and makes the method to run faster
@@ -84,34 +87,37 @@
 
     The methods hashCode() and equals(Object obj) need to add calling gcd()
     method to so that they could treat numbers that are in reduced form and
-    numbers that are not in reduced form at same standard. Then, both methods
+    numbers that are not in reduced form at same standard so that both methods
     could return the correct results. This change is less efficient as it needs
     extra execution of gcd(), making the overall execution time to be longer.
 
-    The method toString() needs to add calling gcd() method to meet the new
-    rep invariant. This change is less efficient as it requires extra execution,
-    making the overall execution time to be longer.
+    The method toString() needs to add calling gcd() method for reduction to meet
+    the new rep invariant. This change is less efficient as it requires extra
+    execution, making the overall execution time to be longer.
 
 
 2. Alternate add, sub, mul, div
     The changes fail to meet the specifications of the methods because the specs
     of these methods don't have @sepc.modifies clause, meaning it should not be
-    modified by the methods.
+    modified by the methods. In case of assign new values via the implementation
+    in the question, we are actually modify things and it violates the spec.
+
     The changes fail to meet the specifications of the RatNum class because the
     general spec of the class says that RatNum represents an immutable rational
-    number, whereas the changes will mutate numbers.
+    number, whereas the given changes will mutate numbers and therefore violate
+    the spec.
 
 
 3. Constructor checkReps
     The reason why calling checkRep only at the end of the constructors is already
-    sufficient is that the denom is set to 1 in constructor RatNum(int n), and this
+    sufficient is that the denom is set to 1 in constructor RatNum(int n), which
     won't violate the rep invariant. And denom is set to -d in case of being negative
     at first in the constructor RatNum(int n, int d), and this won't violate the rep
     invariant. Additionally, RatNum class represents immutable rational numbers, so
     these instance variables are initialized at the beginning and declared as final,
-    and no methods could even modify them as they are just doing arithmetic work.
-    Therefore, calling checkRep only at the end of the constructors is sufficient to
-    maintain the rep invariant.
+    and no methods could even modify them except constructors. It prevents the fields
+    to be modified and that's why calling checkRep only at the end of the constructors
+    is sufficient to maintain the rep invariant.
 
 
 
@@ -124,22 +130,22 @@
     polynomial expression, so the instance variables are initialized at the beginning and
     declared as final, and no method could modify them as all methods are returning new
     RatTerm object, leaving the original objects unmodified. Therefore, calling the checkRep
-    at the end of the constructor is already sufficient to meet the rep invariant.
+    at the end of this constructor is already sufficient to meet the rep invariant.
 
 
 2. Weakened Rep Invariant
     The constructor RatTerm(RatNum c, int e) needs to remove the part that checks coeff to set expt.
-    This change makes the code clear and reduces the execution time.
+    This change makes the code a bit clear and reduces the execution time.
 
-    The method add(RatTerm arg) needs to add a check for the condition that both this.coeff and arg.coeff
-    are ZERO, and return RatTerm.ZERO in case of both are ZERO. This change makes the code more complex
-    and may takes longer execution time(very tiny) as it requires further condition check.
+    The method add(RatTerm arg) needs to make changes to fit the case when one of the input RatTerms
+    being zero, and the corresponding returned expt should be the non-zero one. This change makes the
+    code more complex and may takes longer execution time as it requires further condition check.
 
-    The method toString() needs to add a call of method isZero() to check if the coeff is equal to
-    ZERO and return 0 accordingly. This change makes the code more complex and may takes longer
+    The method toString() needs to add a call of method isZero() to check if the coeff is zero and
+    then return 0 accordingly. This change makes the code a bit more complex and may takes longer
     execution time(very tiny) as it requires further condition check.
 
-    The method equals(Object obj) needs to add a check for both this.coeff and obj are ZERO, and
+    The method equals(Object obj) needs to add a check for both this.coeff and obj are ZEROs, and
     return true in case of both are true. This change makes the code more complex and takes longer
     execution time(very tiny) as it requires further condition check.
 
@@ -147,10 +153,10 @@
     and reduces the execution time of the method as it requires less assertion check.
 
 
-3. Alternate Rep Invariant
-    The constructor RatTerm(RatNum c, int e) needs to change. In case of passing in NaN, it
-    should be "NaN" instead of "NaN*x^e" in order to handle this special case. This changes
-    makes the code more clear.
+3. Alternate Rep Invariant  TODO: FIXME
+    The constructor RatTerm(RatNum c, int e) needs to change to fit the condition when passed parameter
+    being NaN. In case of passing in NaN, it should be "NaN" instead of "NaN*x^e" in order to handle
+    this special case. This changes makes the code more clear.
 
 
 4. Preferred Invariants TODO: FIXME
