@@ -87,7 +87,6 @@ public final class RatPoly {
      * @spec.effects Constructs a new Poly equal to "rt". If rt.isZero(), constructs a "0" polynomial.
      */
     public RatPoly(RatTerm rt) {
-        // TODO
         terms = new ArrayList<RatTerm>();
         if (!rt.isZero()) {
             terms.add(rt);
@@ -144,7 +143,7 @@ public final class RatPoly {
      * @spec.requires !this.isNaN()
      */
     public RatTerm getTerm(int deg) {
-        // TODO: add loop inv
+        // inv: for all RatTerms in terms being checked before the current one in the loop, expt != deg
         for (RatTerm rt: terms) {
             if (rt.getExpt() == deg) {
                 return rt;
@@ -159,7 +158,7 @@ public final class RatPoly {
      * @return true if and only if this has some coefficient = "NaN"
      */
     public boolean isNaN() {
-        // TODO: add loop inv
+        // inv: for all RatTerms in terms being checked before the current one in the loop, rt.isNaN() is false
         for (RatTerm rt: terms) {
             if (rt.isNaN()) {
                 return true;
@@ -182,7 +181,7 @@ public final class RatPoly {
     private static void scaleCoeff(List<RatTerm> lst, RatNum scalar) {
         // TODO: Fill in this method as specified, modify it to your liking, or remove it.
         // Do not leave this method as-is. You must either use it somehow or remove it.
-        // TODO: add loop inv
+        // inv: 0 <= i < lst.size()
         for (int i = 0; i < lst.size(); i++) {
             lst.set(i, new RatTerm(lst.get(i).getCoeff().mul(scalar), lst.get(i).getExpt()));
         }
@@ -285,7 +284,7 @@ public final class RatPoly {
             return NaN;
         }
         List<RatTerm> res = new ArrayList<>(p.terms);
-        // TODO: add loop inv
+        // inv: the current RatTerm being checked is within the range of terms elements
         for (RatTerm rt: terms) {
             sortedInsert(res, rt);
         }
@@ -317,7 +316,7 @@ public final class RatPoly {
             return NaN;
         }
         RatPoly res = new RatPoly();
-        // TODO: add loop inv
+        // inv: the current RatTerm being checked is within the range of terms elements
         for (RatTerm rt: terms) {
             List<RatTerm> tmp = new ArrayList<>(p.terms);
             scaleCoeff(tmp, rt.getCoeff());
@@ -366,7 +365,7 @@ public final class RatPoly {
         }
         List<RatTerm> res = new ArrayList<>();
         RatPoly tmp = new RatPoly(new ArrayList<>(this.terms));
-        // TODO: add loop inv
+        // inv: res is empty, tmp is the copy of terms
         while (!tmp.terms.isEmpty() && tmp.degree() >= p.degree()) {
             RatTerm term = tmp.terms.get(0).div(p.terms.get(0));
             res.add(term);
@@ -388,7 +387,7 @@ public final class RatPoly {
             return NaN;
         } else {
             List<RatTerm> res = new ArrayList<>(this.terms);
-            // TODO: add loop inv
+            // inv: 0 <= i < lst.size()
             for (int i = 0; i < res.size(); i++) {
                 RatTerm current = res.get(i);
                 if (current.getExpt() == 0) {
@@ -418,7 +417,7 @@ public final class RatPoly {
             return NaN;
         } else {
             List<RatTerm> res = new ArrayList<>();
-            // TODO: inv
+            // inv: the current RatTerm being checked is within the range of terms elements
             for (RatTerm term : terms) {
                 res.add(term.antiDifferentiate());
             }
@@ -462,7 +461,7 @@ public final class RatPoly {
             return Double.NaN;
         }
         double res = 0.0;
-        // TODO: add loop inv
+        // inv: the current RatTerm being checked is within the range of terms elements
         for (RatTerm rt: terms) {
             res += rt.eval(d);
         }
