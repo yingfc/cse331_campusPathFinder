@@ -179,7 +179,6 @@ public final class RatPoly {
      * @see RatTerm regarding (C . E) notation
      */
     private static void scaleCoeff(List<RatTerm> lst, RatNum scalar) {
-        // TODO: Fill in this method as specified, modify it to your liking, or remove it.
         // Do not leave this method as-is. You must either use it somehow or remove it.
         // inv: 0 <= i < lst.size()
         for (int i = 0; i < lst.size(); i++) {
@@ -199,9 +198,8 @@ public final class RatPoly {
      * @see RatTerm regarding (C . E) notation
      */
     private static void incremExpt(List<RatTerm> lst, int degree) {
-        // TODO: Fill in this method as specified, modify it to your liking, or remove it.
         // Do not leave this method as-is. You must either use it somehow or remove it.
-        // TODO: inv
+        // inv: 0 <= i < lst.size()
         for (int i = 0; i < lst.size(); i++) {
             lst.set(i, new RatTerm(lst.get(i).getCoeff(), lst.get(i).getExpt() + degree));
             if (lst.get(i).getExpt() < 0) {
@@ -236,7 +234,7 @@ public final class RatPoly {
         if (!newTerm.isZero()) {
             boolean inserted = false;
             int i = 0;
-            // TODO: add loop inv
+            // inv: 0 <= i < lst.size() and inserted is false
             while (i < lst.size() && !inserted) {
                 if (lst.get(i).getExpt() == newTerm.getExpt()) {
                     if (lst.get(i).add(newTerm).getCoeff().equals(RatNum.ZERO)) {
