@@ -153,16 +153,16 @@
     and reduces the execution time of the method as it requires less assertion check.
 
 
-3. Alternate Rep Invariant  TODO: FIXME
+3. Alternate Rep Invariant  FIXME
     The constructor RatTerm(RatNum c, int e) needs to change to fit the condition when passed parameter
     being NaN. In case of passing in NaN, it should be "NaN" instead of "NaN*x^e" in order to handle
     this special case. This changes makes the code more clear.
 
 
-4. Preferred Invariants TODO: FIXME
-    Both. The reason is that these two rep invariants could avoid special cases like NaN*x^2,
-    0*x^2. In this case, there is no need to consider these cases when doing the arithmetic
-    calculations.
+4. Preferred Invariants FIXME
+    I prefer coeff.equals(RatNum.ZERO) => expt = 0. The reason is that this rep invariants is much stronger
+    than the other one. It covers more edge cases and there is no need to consider these cases when doing
+    the arithmetic calculations.
 
 
 
@@ -171,11 +171,11 @@
 
 1. Calls to checkRep in RatPoly
     I include calls to checkRep at the end of four constructors. The reason is that RatPoly
-     represents an immutable single-variate polynomial expression. The instance variable terms
-     is initialized at the beginning and declared as final, and no method could modify it as
-     all methods are returning new object, leaving the original object unmodified. Therefore,
-     calling the checkRep at the end of the constructors is already sufficient to meet the
-     rep invariant.
+    represents an immutable single-variate polynomial expression. The instance variable terms
+    is initialized at the beginning and declared as final, and no method could modify it as
+    all methods are returning new object, leaving the original object unmodified. Therefore,
+    calling the checkRep at the end of the constructors is already sufficient to meet the
+    rep invariant.
 
 
 2. Alternate Representation
