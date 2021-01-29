@@ -137,9 +137,13 @@
     The constructor RatTerm(RatNum c, int e) needs to remove the part that checks coeff to set expt.
     This change makes the code a bit clear and reduces the execution time.
 
-    The method add(RatTerm arg) needs to make changes to fit the case when one of the input RatTerms
-    being zero, and the corresponding returned expt should be the non-zero one. This change makes the
-    code more complex and may takes longer execution time as it requires further condition check.
+    The method getExpt() needs to add a check if the coeff is zero and then return 0 accordingly.
+    This change requires extra condition check, making code more complex and may takes longer execution
+    time.
+
+    The method add(RatTerm arg) needs to make changes to fit the case when both the input RatTerms are
+    actually being 0, and the return RatTerm.ZERO accordingly. This change makes the code more complex
+    and may takes longer execution time as it requires further condition check.
 
     The method toString() needs to add a call of method isZero() to check if the coeff is zero and
     then return 0 accordingly. This change makes the code a bit more complex and may takes longer
@@ -148,6 +152,9 @@
     The method equals(Object obj) needs to add a check for both this.coeff and obj are ZEROs, and
     return true in case of both are true. This change makes the code more complex and takes longer
     execution time(very tiny) as it requires further condition check.
+
+    The method hashCode() needs to add a check for coeff is 0 and expt is not 0. And return 0 accordingly.
+    This change requires extra check and makes the code more complex and takes longer exeuction time.
 
     The method checkRep() needs to remove the second assert. This change makes the code more efficient,
     and reduces the execution time of the method as it requires less assertion check.
