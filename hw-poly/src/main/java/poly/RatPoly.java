@@ -143,7 +143,7 @@ public final class RatPoly {
      * @spec.requires !this.isNaN()
      */
     public RatTerm getTerm(int deg) {
-        // inv: for all RatTerms in terms being checked before the current one in the loop, expt != deg
+        // inv: for the RatTerm in terms being checked, expt != deg
         for (RatTerm rt: terms) {
             if (rt.getExpt() == deg) {
                 return rt;
@@ -158,7 +158,7 @@ public final class RatPoly {
      * @return true if and only if this has some coefficient = "NaN"
      */
     public boolean isNaN() {
-        // inv: for all RatTerms in terms being checked before the current one in the loop, rt.isNaN() is false
+        // inv: for the RatTerm in terms being checked, rt.isNaN() is false
         for (RatTerm rt: terms) {
             if (rt.isNaN()) {
                 return true;
@@ -201,8 +201,9 @@ public final class RatPoly {
         // Do not leave this method as-is. You must either use it somehow or remove it.
         // inv: 0 <= i < lst.size()
         for (int i = 0; i < lst.size(); i++) {
-            lst.set(i, new RatTerm(lst.get(i).getCoeff(), lst.get(i).getExpt() + degree));
-            if (lst.get(i).getExpt() < 0) {
+            int expt = lst.get(i).getExpt();
+            lst.set(i, new RatTerm(lst.get(i).getCoeff(), expt + degree));
+            if (expt < 0) {
                 lst.remove(i);
                 i--;
             }
@@ -236,21 +237,23 @@ public final class RatPoly {
             int i = 0;
             // inv: 0 <= i < lst.size() and inserted is false
             while (i < lst.size() && !inserted) {
-                if (lst.get(i).getExpt() == newTerm.getExpt()) {
+                int currExpt = lst.get(i).getExpt();
+                if (currExpt == newTerm.getExpt()) {
                     if (lst.get(i).add(newTerm).getCoeff().equals(RatNum.ZERO)) {
                         lst.remove(i);
                     } else {
                         lst.set(i, lst.get(i).add(newTerm));
                     }
                     inserted = true;
-                } else if (lst.get(i).getExpt() < newTerm.getExpt()) {
+                } else if (currExpt < newTerm.getExpt()) {
                     lst.add(i, newTerm);
                     inserted = true;
                 }
                 i++;
             }
             if (!inserted) {
-                lst.add(newTerm);   // add to end
+                // add to end
+                lst.add(newTerm);
             }
         }
     }
@@ -363,7 +366,7 @@ public final class RatPoly {
         }
         List<RatTerm> res = new ArrayList<>();
         RatPoly tmp = new RatPoly(new ArrayList<>(this.terms));
-        // inv: res is empty, tmp is the copy of terms
+        // inv: tmp.terms is not empty and the expt of tmp >= the expt of p
         while (!tmp.terms.isEmpty() && tmp.degree() >= p.degree()) {
             RatTerm term = tmp.terms.get(0).div(p.terms.get(0));
             res.add(term);
@@ -442,9 +445,10 @@ public final class RatPoly {
     public double integrate(double lowerBound, double upperBound) {
         if (this.isNaN() || Double.isNaN(lowerBound) || Double.isNaN(upperBound)) {
             return Double.NaN;
+        } else {
+            RatPoly res = antiDifferentiate(RatNum.ZERO);
+            return (res.eval(upperBound) - res.eval(lowerBound));
         }
-        RatPoly res = antiDifferentiate(new RatNum(1));
-        return res.eval(upperBound) - res.eval(lowerBound);
     }
 
     /**
@@ -457,13 +461,14 @@ public final class RatPoly {
     public double eval(double d) {
         if (this.isNaN()) {
             return Double.NaN;
+        } else {
+            double res = 0.0;
+            // inv: the current RatTerm being checked is within the range of terms elements
+            for (RatTerm rt : terms) {
+                res += rt.eval(d);
+            }
+            return res;
         }
-        double res = 0.0;
-        // inv: the current RatTerm being checked is within the range of terms elements
-        for (RatTerm rt: terms) {
-            res += rt.eval(d);
-        }
-        return res;
     }
 
     /**
