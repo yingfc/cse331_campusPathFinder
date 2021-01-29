@@ -8,27 +8,48 @@
     ### IntQueue1
 
     Abstraction Function:
+        AF(this) = Queue<Integer> entries such that
+            queue = entries = [] if there are no elements in entries
+            queue = entries = [n1, n2, ..., n_k] that k is the number of elements in entries
 
 
 
     Representation Invariant:
-
+        entries != null
+        entries does not contain any null element
 
 
 
     ### IntQueue2
 
     Abstraction Function:
+        AF(this) = Queue<Integer> such that
+            entries = [n1, n2, ..., n_k], front = i, size = n
+            queue = [] if size = 0
+            queue = [a_(i+1), ..., a_(i+n)] if front+size <= entries.length
+            queue = [a_(i+1), ..., a_k, a1, ..., a_(k-i)] if front+size > entries.length
 
 
 
     Representation Invariant:
-
+        size >= 0
+        front >= 0
+        entries != null
+        front < entries.length
 
 
 
 2. Group the snapshots of IntQueue2's internal state into groups that have the same abstract state.
+    queue a = [1, 2]
+    queue b = [2, 3, 4]
+    queue c = [1, 2, 3]
+    queue d = [1, 2]
+    queue e = [1, 2, 3, 4]
+    queue f = [1, 2, 3]
+    queue g = [1, 2]
+    queue h = [2, 3, 4]
 
+    Upon the write-up above, queue a, d, g are identical. queue c, f are identical. queue b, h are identical.
 
 
 
@@ -36,27 +57,33 @@
 could possibly expose the representation, given the information available. Explain any assumptions you made.
 
     a. `public int solveEquations(int x, int y, int z)`
-
+        This could never expose the representation because it takes parameters and returns the same
+        primitive data type(int) instead of mutable objects. The client can not interact with it.
 
 
     b. `public String[] decode(boolean slowly)`
-
+        This is possible to expose the representation because it returns an array of String here and
+        array is a mutable type.
 
 
     c. `private Date myBirthday()`
-
+        This is possible to expose the representation in the case of the Date type is mutable and the
+        returned Data is not a copy of the original Date.
 
 
     d. `public String toString()`
-
+        This could never expose the representation because the return type String is immutable.
 
 
     e. `public Iterator<Integer> elements()`
-
+        This is possible to expose the representation in the case of the returned Iterator refers
+        to the original collection and it has the remove method that client could use to remove
+        elements.
 
 
     f. `public Deck(List<Card> cards)`
-
+        This is possible to expose the representation in the case of Deck is mutable and it's not
+        a copy of the original Deck as client could make modification to it.
 
 
 
