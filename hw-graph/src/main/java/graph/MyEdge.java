@@ -1,5 +1,11 @@
 package graph;
 
+/**
+ * <b>MyEdge</b> represents an edge with label and destination.
+ *
+ * @param <T> The type of the destination of the edge.
+ * @param <E> The type of the label of the edge.
+ */
 public class MyEdge<T extends Comparable<T>, E extends Comparable<E>> implements Comparable<MyEdge<T, E>> {
 
     // Abstraction Function:
@@ -25,7 +31,7 @@ public class MyEdge<T extends Comparable<T>, E extends Comparable<E>> implements
      *
      * @param dest the destination of the edge to be constructed
      * @param edgeLabel the edge label of the edge to be constructed
-     * @spec.requires dest != null && edgeLabel != null
+     * @spec.requires {@code dest != null && edgeLabel != null}
      * @spec.effects Constructs a new labeled edge e, with e.dest = dest, and e.edgeLabel = edgeLabel
      */
     public MyEdge(T dest, E edgeLabel) {
@@ -81,8 +87,17 @@ public class MyEdge<T extends Comparable<T>, E extends Comparable<E>> implements
         throw new RuntimeException("hashCode method is not yet implemented");
     }
 
+    /**
+     * Compares this object with object obj for order. Returns a negative integer, zero,
+     * or a positive integer in the case of this object is less than, equal to, or greater
+     * than the compared object obj.
+     *
+     * @param obj the object to be compared
+     * @return a negative integer, zero, or a positive integer in the case of this object
+     * is less than, equal to, or greater than the compared object obj
+     */
     @Override
-    public int compareTo(MyEdge<T, E> o) {
+    public int compareTo(MyEdge<T, E> obj) {
         throw new RuntimeException("compareTo method is not yet implemented");
     }
 
