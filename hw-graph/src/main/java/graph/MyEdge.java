@@ -1,0 +1,96 @@
+package graph;
+
+public class MyEdge<T extends Comparable<T>, E extends Comparable<E>> implements Comparable<MyEdge<T, E>> {
+
+    // Abstraction Function:
+    // AF(this) = a labeled edge with no origin, le, such that
+    //      le.destination = this.dest
+    //      le.label = this.edgeLabel
+
+    // Representation Invariant:
+    // dest != null && edgeLabel != null
+
+    /**
+     * Destination of this edge
+     */
+    private final T dest;
+
+    /**
+     * Label of this edge
+     */
+    private final E edgeLabel;
+
+    /**
+     * Creates a labeled edge.
+     *
+     * @param dest the destination of the edge to be constructed
+     * @param edgeLabel the edge label of the edge to be constructed
+     * @spec.requires dest != null && edgeLabel != null
+     * @spec.effects Constructs a new labeled edge e, with e.dest = dest, and e.edgeLabel = edgeLabel
+     */
+    public MyEdge(T dest, E edgeLabel) {
+        throw new RuntimeException("MyEdge constructor is not yet implemented");
+    }
+
+    /**
+     * Returns the destination of this edge.
+     *
+     * @return the destination of this edge
+     */
+    public T getDest() {
+        throw new RuntimeException("getDest method is not yet implemented");
+    }
+
+    /**
+     * Returns the edge label of this edge.
+     *
+     * @return the edge label of this edge
+     */
+    public E getEdgeLabel() {
+        throw new RuntimeException("getEdgeLabel method is not yet implemented");
+    }
+
+    /**
+     * Returns a string representation of this edge.
+     *
+     * @return a String representation of the edge represented by this.
+     */
+     @Override
+    public String toString() {
+        throw new RuntimeException("toString method is not yet implemented");
+    }
+
+    /**
+     * Standard equality operation.
+     *
+     * @param obj the object to be compared for equality
+     * @return true if o represents the same dest and edgeLabel as this edge
+     */
+    @Override
+    public boolean equals(Object obj) {
+        throw new RuntimeException("equals method is not yet implemented");
+    }
+
+    /**
+     * Standard hashCode function.
+     *
+     * @return an int that all objects equal to this will also return
+     */
+    @Override
+    public int hashCode() {
+        throw new RuntimeException("hashCode method is not yet implemented");
+    }
+
+    @Override
+    public int compareTo(MyEdge<T, E> o) {
+        throw new RuntimeException("compareTo method is not yet implemented");
+    }
+
+    /**
+     * Throws an exception if the representation invariant is violated.
+     */
+    private void checkRep() {
+        assert(!dest.equals(null)) : "NULL DESTINATION";
+        assert(!edgeLabel.equals(null)) : "NULL EDGE LABEL";
+    }
+}
