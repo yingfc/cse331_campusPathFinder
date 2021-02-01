@@ -21,16 +21,16 @@ public class MyEdge<T extends Comparable<T>, E extends Comparable<E>> implements
     }
 
     /**
-     * Returns the destination of this edge.
+     * Gets the destination node of this edge.
      *
-     * @return the destination of this edge
+     * @return the destination node of this edge
      */
     public T getDest() {
         throw new RuntimeException("getDest method is not yet implemented");
     }
 
     /**
-     * Returns the edge label of this edge.
+     * Gets the edge label of this edge.
      *
      * @return the edge label of this edge
      */
