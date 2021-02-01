@@ -3,28 +3,10 @@ package graph;
 /**
  * <b>MyEdge</b> represents an edge with label and destination.
  *
- * @param <T> The type of the destination of the edge.
+ * @param <T> The type of the destination node of the edge.
  * @param <E> The type of the label of the edge.
  */
 public class MyEdge<T extends Comparable<T>, E extends Comparable<E>> implements Comparable<MyEdge<T, E>> {
-
-    // Abstraction Function:
-    // AF(this) = a labeled edge with no origin, le, such that
-    //      le.destination = this.dest
-    //      le.label = this.edgeLabel
-
-    // Representation Invariant:
-    // dest != null && edgeLabel != null
-
-    /**
-     * Destination of this edge
-     */
-    private final T dest;
-
-    /**
-     * Label of this edge
-     */
-    private final E edgeLabel;
 
     /**
      * Creates a labeled edge.
@@ -105,7 +87,6 @@ public class MyEdge<T extends Comparable<T>, E extends Comparable<E>> implements
      * Throws an exception if the representation invariant is violated.
      */
     private void checkRep() {
-        assert(!dest.equals(null)) : "NULL DESTINATION";
-        assert(!edgeLabel.equals(null)) : "NULL EDGE LABEL";
+        throw new RuntimeException("checkRep method is not yet implemented");
     }
 }
