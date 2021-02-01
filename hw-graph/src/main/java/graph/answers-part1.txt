@@ -196,5 +196,13 @@ obtain information about the graph.
 What was your testing strategy for this assignment? How do your script tests and JUnit tests
 differ from each other (if they do), and why?
 
-
+I followed the hint of designing tests, using "0, 1, 2" case analysis.
+Specifically, I have cases of empty graph, graph with only one node, graph with one node and one
+edge, graph with only two nodes, graph with two nodes and one edge(covered in the exampleTest1),
+graph with two nodes and two edges(both node pointing to each other and the version including self-loop),
+the graph with two nodes and full edges(cover both nodes pointing to each other and self-loop),
+and the graph with two nodes and multiple edges(including the repeated edges that share the same
+starting node and destination node). Also, I included the case to check the adding order of nodes
+and edges to test the order.
+TODO: comparison with JUnit test
 
