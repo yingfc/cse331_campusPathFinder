@@ -82,11 +82,4 @@ public class MyEdge<T extends Comparable<T>, E extends Comparable<E>> implements
     public int compareTo(MyEdge<T, E> obj) {
         throw new RuntimeException("compareTo method is not yet implemented");
     }
-
-    /**
-     * Throws an exception if the representation invariant is violated.
-     */
-    private void checkRep() {
-        throw new RuntimeException("checkRep method is not yet implemented");
-    }
 }
