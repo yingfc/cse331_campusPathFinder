@@ -1,0 +1,13 @@
+# Tests graph with adding two nodes in reversed order
+
+# Create a graph
+CreateGraph graph1
+
+# Add a pair of nodes in reversed order
+AddNode graph1 n2
+AddNode graph1 n1
+
+# Print the nodes in the graph, the outgoing edges from n1, and the outgoing edges from n2
+ListNodes graph1
+ListChildren graph1 n1
+ListChildren graph1 n2

@@ -1,0 +1,13 @@
+# Tests graph with adding two nodes in reversed order
+
+# Create a graph
+created graph graph1
+
+# Add a pair of nodes in reversed order
+added node n2 to graph1
+added node n1 to graph1
+
+# Print the nodes in the graph, the outgoing edges from n1, and the outgoing edges from n2
+graph1 contains: n1 n2
+the children of n1 in graph1 are:
+the children of n2 in graph1 are:
