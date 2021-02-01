@@ -13,7 +13,7 @@ public class MyEdge<T extends Comparable<T>, E extends Comparable<E>> implements
      *
      * @param dest the destination of the edge to be constructed
      * @param edgeLabel the edge label of the edge to be constructed
-     * @spec.requires {@code dest != null && edgeLabel != null}
+     * @spec.requires dest != null &amp;&amp; edgeLabel != null
      * @spec.effects Constructs a new labeled edge e, with e.dest = dest, and e.edgeLabel = edgeLabel
      */
     public MyEdge(T dest, E edgeLabel) {

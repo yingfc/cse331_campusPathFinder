@@ -44,7 +44,8 @@ public class MyGraph<T , E extends Comparable<E>> {
      * @param dest destination node of the edge
      * @param label the label of the edge
      * @return true if the edge being successfully added to the graph, otherwise return false
-     * @spec.requires source != null && dest != null && label != null && source and dest nodes are in the graph
+     * @spec.requires source != null &amp;&amp; dest != null &amp;&amp; label != null &amp;&amp;
+     *                source and dest nodes are in the graph
      * @spec.modifies this
      * @spec.effects add the edge to the graph if it is not already present
      */
@@ -72,7 +73,8 @@ public class MyGraph<T , E extends Comparable<E>> {
      * @param dest destination node of the edge
      * @param label the label of the edge
      * @return true if the edge being successfully removed from the graph, otherwise return false
-     * @spec.requires source != null && dest != null && label != null && source and dest nodes are in the graph
+     * @spec.requires source != null &amp;&amp; dest != null &amp;&amp; label != null &amp;&amp;
+     *                source and dest nodes are in the graph
      * @spec.modifies this
      * @spec.effects remove the edge from the graph if possible
      */
@@ -98,7 +100,8 @@ public class MyGraph<T , E extends Comparable<E>> {
      * @param dest the destination node of the edge to be checked
      * @param label the edge label of the edge to be checked
      * @return ture if the edge is present in the graph, otherwise return false
-     * @spec.requires source != null && dest != null && label != null && source and dest nodes are in the graph
+     * @spec.requires source != null &amp;&amp; dest != null &amp;&amp; label != null &amp;&amp;
+     *                source and dest nodes are in the graph
      */
     public boolean containsEdge(T source, T dest, E label) {
         throw new RuntimeException("containsEdge method is not yet implemented");
@@ -110,7 +113,7 @@ public class MyGraph<T , E extends Comparable<E>> {
      * @param source the source node to be checked
      * @param dest the destination node to be checked
      * @return true if there are any edge connecting these two nodes, otherwise return false
-     * @spec.requires source != null && dest != null && source and dest nodes are in the graph
+     * @spec.requires source != null &amp;&amp; dest != null &amp;&amp; source and dest nodes are in the graph
      */
     public boolean isConnected(T source, T dest) {
         throw new RuntimeException("isConnected method is not yet implemented");
@@ -121,7 +124,7 @@ public class MyGraph<T , E extends Comparable<E>> {
      *
      * @param node the node treated as the head node to be traced
      * @return the set of nodes directly connected to the given node
-     * @spec.requires node != null && node is in the graph
+     * @spec.requires node != null &amp;&amp; node is in the graph
      */
     public Set<T> adjacentNodes(T node) {
         throw new RuntimeException("adjacentNodes method is not yet implemented");
@@ -132,7 +135,7 @@ public class MyGraph<T , E extends Comparable<E>> {
      *
      * @param node the node treated as the head node to be traced for connecting edges
      * @return an arrayList of edges that are connecting to the given node
-     * @spec.requires node != null && node is in the graph
+     * @spec.requires node != null &amp;&amp; node is in the graph
      */
     public ArrayList<E> getEdges(T node) {
         throw new RuntimeException("getEdges method is not yet implemented");
