@@ -10,13 +10,13 @@
     Abstraction Function:
         AF(this) = Queue<Integer> entries such that
             queue = entries = [] if there are no elements in entries
-            queue = entries = [n1, n2, ..., n_k] that k is the number of elements in entries
+            queue = entries = [n1, n2, ..., n_k] that k is the number of elements in entries (entries.size())
 
 
 
     Representation Invariant:
         entries != null
-        entries does not contain any null element
+        && entries.get(i) != null when 0 <= i < entries.size()
 
 
 
@@ -32,10 +32,11 @@
 
 
     Representation Invariant:
-        size >= 0
-        front >= 0
         entries != null
-        front < entries.length
+        && size >= 0
+        && size <= entries.length
+        && front >= 0
+        && front < entries.length
 
 
 
@@ -49,7 +50,11 @@
     queue g = [1, 2]
     queue h = [2, 3, 4]
 
-    Upon the write-up above, queue a, d, g are identical. queue c, f are identical. queue b, h are identical.
+    Upon the write-up above,
+    queue a, d, g are identical = [1, 2].
+    queue c, f are identical = [1, 2, 3].
+    queue b, h are identical = [2, 3, 4].
+    queue e is unique here = [1, 2, 3, 4].
 
 
 
@@ -68,7 +73,8 @@ could possibly expose the representation, given the information available. Expla
 
     c. `private Date myBirthday()`
         This is possible to expose the representation in the case of the Date type is mutable and the
-        returned Data is not a copy of the original Date.
+        returned Data is not a copy of the original Date. Otherwise, there will be no representation
+        expose.
 
 
     d. `public String toString()`
