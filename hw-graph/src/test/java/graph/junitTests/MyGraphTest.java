@@ -129,12 +129,89 @@ public class MyGraphTest {
     }
 
     @Test
-    public void testToString() {
-        assertEquals("{}", graph1.toString());
-        assertEquals("{node1=[]}", graph2.toString());
-        assertEquals("{node1=[(node1,edge31), (node1,edge11)], " +
-                "node2=[(node2,edge12), (node2,edge22)], " +
-                "node3=[(node3,edge23), (node3,edge33)]}", graph3.toString());
+    public void testContainsNode() {
+        assertFalse(graph1.containsNode("node1"));
+        assertTrue(graph2.containsNode("node1"));
+        assertFalse(graph2.containsNode("node3"));
+        assertTrue(graph3.containsNode("node1"));
+        assertTrue(graph3.containsNode("node3"));
+        assertFalse(graph3.containsNode("node8"));
+    }
+
+    @Test
+    public void testContainsNodeAfterAdding() {
+        // before adding nodes
+        assertFalse(graph1.containsNode("node8"));
+        assertFalse(graph2.containsNode("node8"));
+        assertFalse(graph3.containsNode("node8"));
+
+        // after adding nodes
+        graph1.addNode("node8");
+        graph2.addNode("node8");
+        graph3.addNode("node8");
+        assertTrue(graph1.containsNode("node8"));
+        assertTrue(graph2.containsNode("node8"));
+        assertTrue(graph3.containsNode("node8"));
+    }
+
+    @Test
+    public void testContainsNodeAfterRemoving() {
+        // before removing nodes
+        assertTrue(graph2.containsNode("node1"));
+        assertTrue(graph3.containsNode("node1"));
+
+        // after removing nodes
+        graph2.addNode("node1");
+        graph3.addNode("node1");
+        assertFalse(graph2.containsNode("node1"));
+        assertFalse(graph3.containsNode("node1"));
+    }
+
+    @Test
+    public void testContainsEdge() {
+        assertFalse(graph1.containsEdge("node1", "node1", "edge11"));
+        assertFalse(graph2.containsEdge("node1", "node1", "edge11"));
+        assertTrue(graph3.containsEdge("node1", "node1", "edge11"));
+        assertFalse(graph3.containsEdge("node2", "node3", "edge33"));
+        assertFalse(graph3.containsEdge("node8", "node8", "edge88"));
+    }
+
+    @Test
+    public void testContainsEdgeAfterAdding() {
+        assertFalse(graph2.containsEdge("node1", "node1", "edge11"));
+        graph2.addEdge("node1", "node1", "edge11");
+        assertTrue(graph2.containsEdge("node1", "node1", "edge11"));
+    }
+
+    @Test
+    public void testContainsEdgeAfterRemoving() {
+        assertTrue(graph3.containsEdge("node1", "node1", "edge11"));
+        graph2.removeEdge("node1", "node1", "edge11");
+        assertFalse(graph3.containsEdge("node1", "node1", "edge11"));
+    }
+
+    @Test
+    public void testIsConnected() {
+        assertFalse(graph2.isConnected("node1", "node1"));
+        assertTrue(graph3.isConnected("node1", "node2"));
+        assertFalse(graph3.isConnected("node4", "node2"));
+    }
+
+    @Test
+    public void testIsConnectedAfterAdding() {
+        assertFalse(graph2.isConnected("node1", "node1"));
+        graph2.addEdge("node1", "node1", "edge11");
+        assertTrue(graph2.isConnected("node1", "node1"));
+    }
+
+    @Test
+    public void testIsConnectedAfterRemoving() {
+        assertTrue(graph3.isConnected("node1", "node2"));
+        assertTrue(graph3.isConnected("node3", "node2"));
+        graph3.removeEdge("node1", "node2", "edge12");
+        graph3.removeEdge("node3", "node2", "edge32");
+        assertFalse(graph3.isConnected("node1", "node2"));
+        assertFalse(graph3.isConnected("node3", "node2"));
     }
 
     @Test
@@ -160,6 +237,8 @@ public class MyGraphTest {
         assertEquals(nodes3, graph3.getAllNodes());
     }
 
+    // TODO: adding tests for adjacentNodes() and getEdges()
+
     @Test
     public void testGetAllEdges() {
         assertEquals(edges1, graph1.getAllEdges());
@@ -181,5 +260,14 @@ public class MyGraphTest {
         graph3.removeEdge("node1", "node2", "edge12");
         edges3.remove(new MyEdge<>("node2", "edge12"));
         assertEquals(edges3, graph3.getAllEdges());
+    }
+
+    @Test
+    public void testToString() {
+        assertEquals("{}", graph1.toString());
+        assertEquals("{node1=[]}", graph2.toString());
+        assertEquals("{node1=[(node1,edge31), (node1,edge11)], " +
+                "node2=[(node2,edge12), (node2,edge22)], " +
+                "node3=[(node3,edge23), (node3,edge33)]}", graph3.toString());
     }
 }
