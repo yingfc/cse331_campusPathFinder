@@ -1,7 +1,7 @@
 package graph.junitTests;
 
 import graph.LabeledEdge;
-import graph.MyGraph;
+import graph.DirectedGraph;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,28 +12,28 @@ import java.util.Set;
 
 import static org.junit.Assert.*;
 
-public class MyGraphTest {
+public class DirectedGraphTest {
     @Rule
     public Timeout globalTimeout = Timeout.seconds(10); // 10 seconds max per method tested
 
-    private MyGraph<String, String> graph1, graph2, graph3, graph4;
+    private DirectedGraph<String, String> graph1, graph2, graph3, graph4;
     private Set<String> nodes1, nodes2, nodes3, nodes4;
     private Set<LabeledEdge<String, String>> edges1, edges2, edges3, edges4;
 
 
     @Before
     public void setUp() throws Exception {
-        graph1 = new MyGraph<>();
+        graph1 = new DirectedGraph<>();
         nodes1 = new HashSet<>();
         edges1 = new HashSet<>();
 
-        graph2 = new MyGraph<>();
+        graph2 = new DirectedGraph<>();
         nodes2 = new HashSet<>();
         edges2 = new HashSet<>();
         graph2.addNode("node1");
         nodes2.add("node1");
 
-        graph3 = new MyGraph<>();
+        graph3 = new DirectedGraph<>();
         nodes3 = new HashSet<>();
         edges3 = new HashSet<>();
         graph3.addNode("node1");

@@ -3,7 +3,7 @@ package graph;
 import java.util.Set;
 
 /**
- * <b>MyGraph</b> represents a mutable, directed graph.
+ * <b>DirectedGraph</b> represents a mutable, directed graph.
  * This graph does not contain two identical edges with same source, destination, and label.
  * It is a collection of nodes (also called vertices) and edges. Each edge contains an destination
  * node and an edge label.
@@ -11,15 +11,15 @@ import java.util.Set;
  * @param <T> The type of the destination node of the edge.
  * @param <E> The type of the label of the edge.
  */
-public class MyGraph<T extends Comparable<T>, E extends Comparable<E>> {
+public class DirectedGraph<T extends Comparable<T>, E extends Comparable<E>> {
 
     /**
      * Creates an empty directed graph.
      *
      * @spec.effects Constructs an empty directed graph
      */
-    public MyGraph() {
-        throw new RuntimeException("MyGraph constructor is not yet implemented");
+    public DirectedGraph() {
+        throw new RuntimeException("DirectedGraph constructor is not yet implemented");
     }
 
     /**
@@ -192,7 +192,7 @@ public class MyGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * Standard equality operation.
      *
      * @param obj the object to be compared for equality
-     * @return true if obj represents the same MyGraph instance as this edge
+     * @return true if obj represents the same DirectedGraph instance as this edge
      */
     @Override
     public boolean equals(Object obj) {

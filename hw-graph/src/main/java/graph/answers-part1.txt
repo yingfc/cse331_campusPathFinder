@@ -101,7 +101,7 @@ interface to a graph. If your design includes multiple classes or interfaces, ex
 included each one; if not, explain whether you considered additional classes and why you decided
 not to include them.
 
-I included two classes here, named LabeledEdge and MyGraph. I separate into these two classes for
+I included two classes here, named LabeledEdge and DirectedGraph. I separate into these two classes for
 better clarity, making things to be more organized.
 
 LabeledEdge stores the destination node and the edge label of an edge.
@@ -129,9 +129,9 @@ It has the following constructors/methods:
 
 
 
-MyGraph stores all the nodes and edges in the graph.
+DirectedGraph stores all the nodes and edges in the graph.
 It has the following constructors/methods:
-    MyGraph()
+    DirectedGraph()
         Creates an empty directed graph.
 
     boolean addNode(T node)
