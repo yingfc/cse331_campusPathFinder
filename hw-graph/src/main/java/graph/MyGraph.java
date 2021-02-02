@@ -136,7 +136,7 @@ public class MyGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * @return the set of of edges that are connecting to the given node
      * @spec.requires node != null &amp;&amp; node is in the graph
      */
-    public Set<MyEdge<T, E>> getEdges(T node) {
+    public Set<LabeledEdge<T, E>> getEdges(T node) {
         throw new RuntimeException("getEdges method is not yet implemented");
     }
 
@@ -156,7 +156,7 @@ public class MyGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * @return the set of of all edges in the graph
      * @spec.requires the graph is not null
      */
-    public Set<MyEdge<T, E>> getAllEdges() {
+    public Set<LabeledEdge<T, E>> getAllEdges() {
         throw new RuntimeException("getAllEdges method is not yet implemented");
     }
 

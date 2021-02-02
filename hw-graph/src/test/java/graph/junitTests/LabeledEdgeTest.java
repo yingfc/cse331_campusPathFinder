@@ -1,6 +1,6 @@
 package graph.junitTests;
 
-import graph.MyEdge;
+import graph.LabeledEdge;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -9,29 +9,29 @@ import org.junit.rules.Timeout;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class MyEdgeTest {
+public class LabeledEdgeTest {
 
     @Rule
     public Timeout globalTimeout = Timeout.seconds(10); // 10 seconds max per method tested
 
-    private MyEdge<String, String> edge1, edge2, edge3;
+    private LabeledEdge<String, String> edge1, edge2, edge3;
 
     @Before
     public void setUp() throws Exception {
-        edge1 = new MyEdge<>("", "");
-        edge2 = new MyEdge<>("a", "aa");
-        edge3 = new MyEdge<>("b", "ab");
+        edge1 = new LabeledEdge<>("", "");
+        edge2 = new LabeledEdge<>("a", "aa");
+        edge3 = new LabeledEdge<>("b", "ab");
     }
 
     // tests for constructor
     @Test(expected = IllegalArgumentException.class)
     public void testConstructEdgeWithNullDest() {
-        new MyEdge<>(null, "aa");
+        new LabeledEdge<>(null, "aa");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testConstructEdgeWithNullEdgeLabel() {
-        new MyEdge<>("a", null);
+        new LabeledEdge<>("a", null);
     }
 
     // tests for getDest()
@@ -66,15 +66,15 @@ public class MyEdgeTest {
 
     @Test
     public void testEqualsSymmetric() {
-        edge2 = new MyEdge<>("", "");
+        edge2 = new LabeledEdge<>("", "");
         assertTrue(edge1.equals(edge2));
         assertTrue(edge2.equals(edge1));
     }
 
     @Test
     public void testEqualsTransitive() {
-        edge2 = new MyEdge<>("", "");
-        edge3 = new MyEdge<>("", "");
+        edge2 = new LabeledEdge<>("", "");
+        edge3 = new LabeledEdge<>("", "");
         assertTrue(edge1.equals(edge2));
         assertTrue(edge2.equals(edge3));
         assertTrue(edge3.equals(edge1));
@@ -82,12 +82,12 @@ public class MyEdgeTest {
 
     @Test
     public void testEqualsDifferentEdge() {
-        assertTrue(edge3.equals(new MyEdge<>("bb", "bb")));
+        assertTrue(edge3.equals(new LabeledEdge<>("bb", "bb")));
     }
 
     @Test
     public void testEqualsSameEdge() {
-        assertTrue(edge3.equals(new MyEdge<>("b", "ab")));
+        assertTrue(edge3.equals(new LabeledEdge<>("b", "ab")));
     }
 
     // test hashCode()
@@ -98,32 +98,32 @@ public class MyEdgeTest {
 
     @Test
     public void testHashCodeOfSameEdge() {
-        assertEquals(new MyEdge<>("b", "ab").hashCode(), edge3.hashCode());
+        assertEquals(new LabeledEdge<>("b", "ab").hashCode(), edge3.hashCode());
     }
 
     // test compareTo()
     @Test
     public void testCompareToSameEdge() {
-        assertTrue(edge3.compareTo(new MyEdge<>("b", "ab")) == 0);
+        assertTrue(edge3.compareTo(new LabeledEdge<>("b", "ab")) == 0);
     }
 
     @Test
     public void testCompareToSmallerDest() {
-        assertTrue(edge3.compareTo(new MyEdge<>("a", "ab")) > 0);
+        assertTrue(edge3.compareTo(new LabeledEdge<>("a", "ab")) > 0);
     }
 
     @Test
     public void testCompareToBiggerDest() {
-        assertTrue(edge3.compareTo(new MyEdge<>("d", "ab")) < 0);
+        assertTrue(edge3.compareTo(new LabeledEdge<>("d", "ab")) < 0);
     }
 
     @Test
     public void testCompareToSmallerEdgeLabel() {
-        assertTrue(edge3.compareTo(new MyEdge<>("a", "aa")) > 0);
+        assertTrue(edge3.compareTo(new LabeledEdge<>("a", "aa")) > 0);
     }
 
     @Test
     public void testCompareToBiggerEdgeLabel() {
-        assertTrue(edge3.compareTo(new MyEdge<>("a", "cc")) < 0);
+        assertTrue(edge3.compareTo(new LabeledEdge<>("a", "cc")) < 0);
     }
 }

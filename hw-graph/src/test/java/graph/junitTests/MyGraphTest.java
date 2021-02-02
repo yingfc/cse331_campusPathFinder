@@ -1,6 +1,6 @@
 package graph.junitTests;
 
-import graph.MyEdge;
+import graph.LabeledEdge;
 import graph.MyGraph;
 import org.junit.Before;
 import org.junit.Rule;
@@ -18,7 +18,7 @@ public class MyGraphTest {
 
     private MyGraph<String, String> graph1, graph2, graph3, graph4;
     private Set<String> nodes1, nodes2, nodes3, nodes4;
-    private Set<MyEdge<String, String>> edges1, edges2, edges3, edges4;
+    private Set<LabeledEdge<String, String>> edges1, edges2, edges3, edges4;
 
 
     @Before
@@ -48,12 +48,12 @@ public class MyGraphTest {
         graph3.addEdge("node1", "node1", "edge11");
         graph3.addEdge("node2", "node2", "edge22");
         graph3.addEdge("node3", "node3", "edge33");
-        edges3.add(new MyEdge<>("node2", "edge12"));
-        edges3.add(new MyEdge<>("node3", "edge23"));
-        edges3.add(new MyEdge<>("node1", "edge31"));
-        edges3.add(new MyEdge<>("node1", "edge11"));
-        edges3.add(new MyEdge<>("node2", "edge22"));
-        edges3.add(new MyEdge<>("node3", "edge33"));
+        edges3.add(new LabeledEdge<>("node2", "edge12"));
+        edges3.add(new LabeledEdge<>("node3", "edge23"));
+        edges3.add(new LabeledEdge<>("node1", "edge31"));
+        edges3.add(new LabeledEdge<>("node1", "edge11"));
+        edges3.add(new LabeledEdge<>("node2", "edge22"));
+        edges3.add(new LabeledEdge<>("node3", "edge33"));
     }
 
     @Test
@@ -250,7 +250,7 @@ public class MyGraphTest {
     public void testGetAllEdgesAdding() {
         assertEquals(edges2, graph2.getAllEdges());
         graph2.addEdge("node1", "node1", "edge1");
-        edges2.add(new MyEdge<>("node1", "edge1"));
+        edges2.add(new LabeledEdge<>("node1", "edge1"));
         assertEquals(edges2, graph2.getAllEdges());
     }
 
@@ -258,7 +258,7 @@ public class MyGraphTest {
     public void testGetAllEdgesRemoving() {
         assertEquals(edges3, graph3.getAllEdges());
         graph3.removeEdge("node1", "node2", "edge12");
-        edges3.remove(new MyEdge<>("node2", "edge12"));
+        edges3.remove(new LabeledEdge<>("node2", "edge12"));
         assertEquals(edges3, graph3.getAllEdges());
     }
 

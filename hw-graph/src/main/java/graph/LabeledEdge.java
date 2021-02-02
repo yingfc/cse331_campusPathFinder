@@ -1,12 +1,12 @@
 package graph;
 
 /**
- * <b>MyEdge</b> represents an edge with label and destination.
+ * <b>LabeledEdge</b> represents an edge with label and destination.
  *
  * @param <T> The type of the destination node of the edge.
  * @param <E> The type of the label of the edge.
  */
-public class MyEdge<T extends Comparable<T>, E extends Comparable<E>> implements Comparable<MyEdge<T, E>> {
+public class LabeledEdge<T extends Comparable<T>, E extends Comparable<E>> implements Comparable<LabeledEdge<T, E>> {
 
     /**
      * Creates a labeled edge.
@@ -16,8 +16,8 @@ public class MyEdge<T extends Comparable<T>, E extends Comparable<E>> implements
      * @spec.requires dest != null &amp;&amp; edgeLabel != null
      * @spec.effects Constructs a new labeled edge e, with e.dest = dest, and e.edgeLabel = edgeLabel
      */
-    public MyEdge(T dest, E edgeLabel) {
-        throw new RuntimeException("MyEdge constructor is not yet implemented");
+    public LabeledEdge(T dest, E edgeLabel) {
+        throw new RuntimeException("LabeledEdge constructor is not yet implemented");
     }
 
     /**
@@ -79,7 +79,7 @@ public class MyEdge<T extends Comparable<T>, E extends Comparable<E>> implements
      * is less than, equal to, or greater than the compared object obj
      */
     @Override
-    public int compareTo(MyEdge<T, E> obj) {
+    public int compareTo(LabeledEdge<T, E> obj) {
         throw new RuntimeException("compareTo method is not yet implemented");
     }
 }

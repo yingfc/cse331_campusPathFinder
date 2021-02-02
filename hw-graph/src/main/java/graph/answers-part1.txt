@@ -101,12 +101,12 @@ interface to a graph. If your design includes multiple classes or interfaces, ex
 included each one; if not, explain whether you considered additional classes and why you decided
 not to include them.
 
-I included two classes here, named MyEdge and MyGraph. I separate into these two classes for
+I included two classes here, named LabeledEdge and MyGraph. I separate into these two classes for
 better clarity, making things to be more organized.
 
-MyEdge stores the destination node and the edge label of an edge.
+LabeledEdge stores the destination node and the edge label of an edge.
 It has the following constructors/methods:
-    MyEdge(T dest, E edgeLabel)
+    LabeledEdge(T dest, E edgeLabel)
         Creates a labeled edge.
 
     T getDest()
@@ -124,7 +124,7 @@ It has the following constructors/methods:
     int hashCode()
         Standard hashCode function.
 
-    int compareTo(MyEdge<T, E> obj)
+    int compareTo(LabeledEdge<T, E> obj)
         Compares this object with object obj for order.
 
 
