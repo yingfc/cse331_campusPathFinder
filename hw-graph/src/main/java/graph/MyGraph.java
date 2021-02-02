@@ -12,7 +12,7 @@ import java.util.Set;
  * @param <T> The type of the destination node of the edge.
  * @param <E> The type of the label of the edge.
  */
-public class MyGraph<T , E extends Comparable<E>> {
+public class MyGraph<T extends Comparable<T>, E extends Comparable<E>> {
 
     /**
      * Creates an empty directed graph.
@@ -134,10 +134,10 @@ public class MyGraph<T , E extends Comparable<E>> {
      * Get the edges that connects to the given node.
      *
      * @param node the node treated as the head node to be traced for connecting edges
-     * @return an arrayList of edges that are connecting to the given node
+     * @return the set of of edges that are connecting to the given node
      * @spec.requires node != null &amp;&amp; node is in the graph
      */
-    public ArrayList<E> getEdges(T node) {
+    public Set<MyEdge<T, E>> getEdges(T node) {
         throw new RuntimeException("getEdges method is not yet implemented");
     }
 
@@ -154,10 +154,10 @@ public class MyGraph<T , E extends Comparable<E>> {
     /**
      * Get all the edges in the graph.
      *
-     * @return an arrayList of all edges in the graph
+     * @return the set of of all edges in the graph
      * @spec.requires the graph is not null
      */
-    public ArrayList<E> getAllEdges() {
+    public Set<MyEdge<T, E>> getAllEdges() {
         throw new RuntimeException("getAllEdges method is not yet implemented");
     }
 
