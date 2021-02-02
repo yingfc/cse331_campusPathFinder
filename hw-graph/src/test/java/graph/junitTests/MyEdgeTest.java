@@ -60,15 +60,24 @@ public class MyEdgeTest {
 
     // test equals()
     @Test
-    public void testEqualsSelf() {
+    public void testEqualsReflexive() {
         assertTrue(edge1.equals(edge1));
     }
 
     @Test
-    public void testEqualsBiDirectional() {
+    public void testEqualsSymmetric() {
         edge2 = new MyEdge<>("", "");
         assertTrue(edge1.equals(edge2));
         assertTrue(edge2.equals(edge1));
+    }
+
+    @Test
+    public void testEqualsTransitive() {
+        edge2 = new MyEdge<>("", "");
+        edge3 = new MyEdge<>("", "");
+        assertTrue(edge1.equals(edge2));
+        assertTrue(edge2.equals(edge3));
+        assertTrue(edge3.equals(edge1));
     }
 
     @Test
