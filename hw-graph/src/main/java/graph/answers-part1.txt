@@ -197,6 +197,8 @@ What was your testing strategy for this assignment? How do your script tests and
 differ from each other (if they do), and why?
 
 I followed the hint of designing tests, using "0, 1, 2" case analysis.
+
+For the script tests, I wrote a bunch of tests that can be checked using the given test script commands.
 Specifically, I have cases of empty graph, graph with only one node, graph with one node and one
 edge, graph with only two nodes, graph with two nodes and one edge(covered in the exampleTest1),
 graph with two nodes and two edges(both node pointing to each other and the version including self-loop),
@@ -204,5 +206,12 @@ the graph with two nodes and full edges(cover both nodes pointing to each other 
 and the graph with two nodes and multiple edges(including the repeated edges that share the same
 starting node and destination node). Also, I included the case to check the adding order of nodes
 and edges to test the order.
-TODO: comparison with JUnit test
+While for the JUnit tests, they cover the tests for that cannot be tested using the given test script
+commands, such as tests on toString(), equals(), hashCode(), and compareTo() for the Edge class, and
+tests on isConnected(), toString(), size(), isEmpty(), removeNode(), removeEdge(), etc for the Graph class.
+
+Therefore, the script tests and the JUnit tests combine together to cover as many tests as possible,
+The script tests mainly work on creating graph, adding node/edge, getting nodes/children nodes, and
+the JUnit tests work on the rest of implementation methods such as removing node/edge, checking connection,
+etc.
 
