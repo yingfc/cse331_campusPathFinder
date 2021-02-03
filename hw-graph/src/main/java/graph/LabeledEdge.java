@@ -1,7 +1,7 @@
 package graph;
 
 /**
- * <b>LabeledEdge</b> represents an edge with label and destination.
+ * <b>LabeledEdge</b> class represents an edge with label and destination node.
  */
 public class LabeledEdge implements Comparable<LabeledEdge> {
 

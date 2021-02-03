@@ -3,7 +3,7 @@ package graph;
 import java.util.Set;
 
 /**
- * <b>DirectedGraph</b> represents a mutable, directed graph.
+ * <b>DirectedGraph</b> class represents a mutable, directed graph.
  * This graph does not contain two identical edges with same source, destination, and label.
  * It is a collection of nodes (also called vertices) and edges. Each edge contains an destination
  * node and an edge label.
