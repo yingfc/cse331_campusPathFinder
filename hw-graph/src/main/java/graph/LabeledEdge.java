@@ -2,11 +2,8 @@ package graph;
 
 /**
  * <b>LabeledEdge</b> represents an edge with label and destination.
- *
- * @param <T> The type of the destination node of the edge.
- * @param <E> The type of the label of the edge.
  */
-public class LabeledEdge<T extends Comparable<T>, E extends Comparable<E>> implements Comparable<LabeledEdge<T, E>> {
+public class LabeledEdge implements Comparable<LabeledEdge> {
 
     /**
      * Creates a labeled edge.
@@ -16,7 +13,7 @@ public class LabeledEdge<T extends Comparable<T>, E extends Comparable<E>> imple
      * @spec.requires dest != null &amp;&amp; edgeLabel != null
      * @spec.effects Constructs a new labeled edge e, with e.dest = dest, and e.edgeLabel = edgeLabel
      */
-    public LabeledEdge(T dest, E edgeLabel) {
+    public LabeledEdge(String dest, String edgeLabel) {
         throw new RuntimeException("LabeledEdge constructor is not yet implemented");
     }
 
@@ -25,7 +22,7 @@ public class LabeledEdge<T extends Comparable<T>, E extends Comparable<E>> imple
      *
      * @return the destination node of this edge
      */
-    public T getDest() {
+    public String getDest() {
         throw new RuntimeException("getDest method is not yet implemented");
     }
 
@@ -34,7 +31,7 @@ public class LabeledEdge<T extends Comparable<T>, E extends Comparable<E>> imple
      *
      * @return the edge label of this edge
      */
-    public E getEdgeLabel() {
+    public String getEdgeLabel() {
         throw new RuntimeException("getEdgeLabel method is not yet implemented");
     }
 
@@ -79,7 +76,7 @@ public class LabeledEdge<T extends Comparable<T>, E extends Comparable<E>> imple
      * is less than, equal to, or greater than the compared object obj
      */
     @Override
-    public int compareTo(LabeledEdge<T, E> obj) {
+    public int compareTo(LabeledEdge obj) {
         throw new RuntimeException("compareTo method is not yet implemented");
     }
 }

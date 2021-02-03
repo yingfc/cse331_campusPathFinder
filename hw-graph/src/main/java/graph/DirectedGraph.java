@@ -7,11 +7,8 @@ import java.util.Set;
  * This graph does not contain two identical edges with same source, destination, and label.
  * It is a collection of nodes (also called vertices) and edges. Each edge contains an destination
  * node and an edge label.
- *
- * @param <T> The type of the destination node of the edge.
- * @param <E> The type of the label of the edge.
  */
-public class DirectedGraph<T extends Comparable<T>, E extends Comparable<E>> {
+public class DirectedGraph {
 
     /**
      * Creates an empty directed graph.
@@ -31,7 +28,7 @@ public class DirectedGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * @spec.modifies this
      * @spec.effects add the node to the graph if it is not already present
      */
-    public boolean addNode(T node) {
+    public boolean addNode(String node) {
         throw new RuntimeException("addNode method is not yet implemented");
     }
 
@@ -48,7 +45,7 @@ public class DirectedGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * @spec.modifies this
      * @spec.effects add the edge to the graph if it is not already present
      */
-    public boolean addEdge(T source, T dest, E label) {
+    public boolean addEdge(String source, String dest, String label) {
         throw new RuntimeException("addEdge method is not yet implemented");
     }
 
@@ -61,7 +58,7 @@ public class DirectedGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * @spec.modifies this
      * @spec.effects remove the node and its connecting edges from the graph
      */
-    public boolean removeNode(T node) {
+    public boolean removeNode(String node) {
         throw new RuntimeException("removeNode method is not yet implemented");
     }
 
@@ -77,7 +74,7 @@ public class DirectedGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * @spec.modifies this
      * @spec.effects remove the edge from the graph if possible
      */
-    public boolean removeEdge(T source, T dest, E label) {
+    public boolean removeEdge(String source, String dest, String label) {
         throw new RuntimeException("removeEdge method is not yet implemented");
     }
 
@@ -88,7 +85,7 @@ public class DirectedGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * @return true if the node is in the graph, otherwise return false
      * @spec.requires node != null
      */
-    public boolean containsNode(T node) {
+    public boolean containsNode(String node) {
         throw new RuntimeException("containsNode method is not yet implemented");
     }
 
@@ -102,7 +99,7 @@ public class DirectedGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * @spec.requires source != null &amp;&amp; dest != null &amp;&amp; label != null &amp;&amp;
      *                source and dest nodes are in the graph
      */
-    public boolean containsEdge(T source, T dest, E label) {
+    public boolean containsEdge(String source, String dest, String label) {
         throw new RuntimeException("containsEdge method is not yet implemented");
     }
 
@@ -114,7 +111,7 @@ public class DirectedGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * @return true if there are any edge connecting these two nodes, otherwise return false
      * @spec.requires source != null &amp;&amp; dest != null &amp;&amp; source and dest nodes are in the graph
      */
-    public boolean isConnected(T source, T dest) {
+    public boolean isConnected(String source, String dest) {
         throw new RuntimeException("isConnected method is not yet implemented");
     }
 
@@ -125,7 +122,7 @@ public class DirectedGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * @return the set of nodes directly connected to the given node
      * @spec.requires node != null &amp;&amp; node is in the graph
      */
-    public Set<T> adjacentNodes(T node) {
+    public Set<String> adjacentNodes(String node) {
         throw new RuntimeException("adjacentNodes method is not yet implemented");
     }
 
@@ -136,7 +133,7 @@ public class DirectedGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * @return the set of of edges that are connecting to the given node
      * @spec.requires node != null &amp;&amp; node is in the graph
      */
-    public Set<LabeledEdge<T, E>> getEdges(T node) {
+    public Set<LabeledEdge> getEdges(String node) {
         throw new RuntimeException("getEdges method is not yet implemented");
     }
 
@@ -146,7 +143,7 @@ public class DirectedGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * @return the set of all nodes in the graph
      * @spec.requires the graph is not null
      */
-    public Set<T> getAllNodes() {
+    public Set<String> getAllNodes() {
         throw new RuntimeException("getAllNodes method is not yet implemented");
     }
 
@@ -156,7 +153,7 @@ public class DirectedGraph<T extends Comparable<T>, E extends Comparable<E>> {
      * @return the set of of all edges in the graph
      * @spec.requires the graph is not null
      */
-    public Set<LabeledEdge<T, E>> getAllEdges() {
+    public Set<LabeledEdge> getAllEdges() {
         throw new RuntimeException("getAllEdges method is not yet implemented");
     }
 

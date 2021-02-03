@@ -106,13 +106,13 @@ better clarity, making things to be more organized.
 
 LabeledEdge stores the destination node and the edge label of an edge.
 It has the following constructors/methods:
-    LabeledEdge(T dest, E edgeLabel)
+    LabeledEdge(String dest, String edgeLabel)
         Creates a labeled edge.
 
-    T getDest()
+    String getDest()
         Gets the destination node of this edge.
 
-    E getEdgeLabel()
+    String getEdgeLabel()
         Gets the edge label of this edge.
 
     String toString()
@@ -124,7 +124,7 @@ It has the following constructors/methods:
     int hashCode()
         Standard hashCode function.
 
-    int compareTo(LabeledEdge<T, E> obj)
+    int compareTo(LabeledEdge obj)
         Compares this object with object obj for order.
 
 
@@ -134,39 +134,39 @@ It has the following constructors/methods:
     DirectedGraph()
         Creates an empty directed graph.
 
-    boolean addNode(T node)
+    boolean addNode(String node)
         Add a new node to the graph in case of it is not present already.
 
-    boolean addEdge(T source, T dest, E label)
+    boolean addEdge(String source, String dest, String label)
         Add a new edge(source, destination, label) to the graph if
         both end nodes exist in the graph and the edge connecting
         two ends is not present in the graph yet.
 
-    boolean removeNode(T node)
+    boolean removeNode(String node)
         Remove a node with its connecting edges from the graph.
 
-    boolean removeEdge(T source, T dest, E label)
+    boolean removeEdge(String source, String dest, String label)
         Remove an edge from the graph.
 
-    boolean containsNode(T node)
+    boolean containsNode(String node)
         Check if the node is in the graph.
 
-    boolean containsEdge(T source, T dest, E label)
+    boolean containsEdge(String source, String dest, String label)
         Check if the edge is in the graph.
 
-    boolean isConnected(T source, T dest)
+    boolean isConnected(String source, String dest)
         Check if two given nodes are connected by any edge.
 
-    Set<T> adjacentNodes(T node)
+    Set<String> adjacentNodes(String node)
         Get the nodes that are directly connected by a single edge to the given node.
 
-    ArrayList<E> getEdges(T node)
+    Set<LabeledEdge> getEdges(String node)
         Get the edges that connects to the given node.
 
-    Set<T> getAllNodes()
+    Set<String> getAllNodes()
         Get all the nodes in the graph.
 
-    ArrayList<E> getAllEdges()
+    Set<LabeledEdge> getAllEdges()
         Get all the edges in the graph.
 
     int size()
