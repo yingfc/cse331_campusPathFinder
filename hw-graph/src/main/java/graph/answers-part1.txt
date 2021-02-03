@@ -104,7 +104,7 @@ not to include them.
 I included two classes here, named LabeledEdge and DirectedGraph. I separate into these two classes for
 better clarity, making things to be more organized.
 
-LabeledEdge stores the destination node and the edge label of an edge.
+LabeledEdge class stores the destination node and the edge label of an edge.
 It has the following constructors/methods:
     LabeledEdge(String dest, String edgeLabel)
         Creates a labeled edge.
@@ -129,7 +129,7 @@ It has the following constructors/methods:
 
 
 
-DirectedGraph stores all the nodes and edges in the graph.
+DirectedGraph class stores all the nodes and edges in the graph.
 It has the following constructors/methods:
     DirectedGraph()
         Creates an empty directed graph.
@@ -184,10 +184,12 @@ It has the following constructors/methods:
     String toString()
         Returns a string representation of this directed graph.
 
-With these constructor/methods, the graph could then add/remove nodes and edges, get specific
-node(s)/edge(s) or get all nodes/edges in the graph, check if two given nodes are connected
-directly, and get all edges from a typical node, etc. These methods allow the user/client to
-obtain information about the graph.
+With these constructor/methods, the graph could then add nodes/edges to construct the graph,
+remove nodes/edges can let users to remove things if they want to. At the same time, methods
+like getting specific node(s)/edge(s) or getting all nodes/edges in the graph, checking if
+two given nodes are connected directly, and getting all edges from a typical node allow the
+user/client to obtain information about the graph. containsNodes and containsEdges prevent
+having duplicated nodes/edges.
 
 
 ## Section 3
