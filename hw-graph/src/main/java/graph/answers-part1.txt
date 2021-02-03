@@ -8,7 +8,7 @@
     ### IntQueue1
 
     Abstraction Function:
-        AF(this) = Queue<Integer> entries such that
+        AF(this) = Queue<Integer> such that
             queue = entries = [] if there are no elements in entries
             queue = entries = [n1, n2, ..., n_k] that k is the number of elements in entries (entries.size())
 
@@ -16,7 +16,7 @@
 
     Representation Invariant:
         entries != null
-        && entries.get(i) != null when 0 <= i < entries.size()
+        && entries.get(i) != null (entries has no null elements) when 0 <= i < entries.size()
 
 
 
@@ -24,10 +24,10 @@
 
     Abstraction Function:
         AF(this) = Queue<Integer> such that
-            entries = [n1, n2, ..., n_k], front = i, size = n
-            queue = [] if size = 0
-            queue = [a_(i+1), ..., a_(i+n)] if front+size <= entries.length
-            queue = [a_(i+1), ..., a_k, a1, ..., a_(k-i)] if front+size > entries.length
+            entries = [n1, n2, ..., n_k], and front = i, size = n
+            queue = [] when size = 0
+            queue = [n_(i+1), ..., n_(i+n)] when front+size <= entries.length
+            queue = [n_(i+1), ..., n_k, n1, ..., n_(k-i)] when front+size > entries.length
 
 
 
