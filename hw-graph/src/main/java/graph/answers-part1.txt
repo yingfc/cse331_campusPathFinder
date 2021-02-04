@@ -142,12 +142,6 @@ It has the following constructors/methods:
         both end nodes exist in the graph and the edge connecting
         two ends is not present in the graph yet.
 
-    boolean removeNode(String node)
-        Remove a node with its connecting edges from the graph.
-
-    boolean removeEdge(String source, String dest, String label)
-        Remove an edge from the graph.
-
     boolean containsNode(String node)
         Check if the node is in the graph.
 
@@ -157,8 +151,8 @@ It has the following constructors/methods:
     boolean isConnected(String source, String dest)
         Check if two given nodes are connected by any edge.
 
-    Set<String> adjacentNodes(String node)
-        Get the nodes that are directly connected by a single edge to the given node.
+    Set<String> childrenOf(String node)
+        Get the children nodes of the given node.
 
     Set<LabeledEdge> getEdges(String node)
         Get the edges that connects to the given node.
@@ -185,11 +179,10 @@ It has the following constructors/methods:
         Returns a string representation of this directed graph.
 
 With these constructor/methods, the graph could then add nodes/edges to construct the graph,
-remove nodes/edges can let users to remove things if they want to. At the same time, methods
-like getting specific node(s)/edge(s) or getting all nodes/edges in the graph, checking if
-two given nodes are connected directly, and getting all edges from a typical node allow the
-user/client to obtain information about the graph. containsNodes and containsEdges prevent
-having duplicated nodes/edges.
+At the same time, methods like getting specific node(s)/edge(s) or getting all nodes/edges
+in the graph, checking if two given nodes are connected directly, and getting children nodes/edges
+from a typical node allow the user/client to obtain information about the graph.
+containsNodes and containsEdges prevent having duplicated nodes/edges.
 
 
 ## Section 3
@@ -202,18 +195,18 @@ I followed the hint of designing tests, using "0, 1, 2" case analysis.
 
 For the script tests, I wrote a bunch of tests that can be checked using the given test script commands.
 Specifically, I have cases of empty graph, graph with only one node, graph with one node and one
-edge, graph with only two nodes, graph with two nodes and one edge(covered in the exampleTest1),
-graph with two nodes and two edges(both node pointing to each other and the version including self-loop),
+edge, graph with only two nodes, graph with two nodes and one edge, graph with two nodes and two edges
+(both node pointing to each other and the version including self-loop),
 the graph with two nodes and full edges(cover both nodes pointing to each other and self-loop),
 and the graph with two nodes and multiple edges(including the repeated edges that share the same
 starting node and destination node). Also, I included the case to check the adding order of nodes
 and edges to test the order.
 While for the JUnit tests, they cover the tests for that cannot be tested using the given test script
 commands, such as tests on toString(), equals(), hashCode(), and compareTo() for the Edge class, and
-tests on isConnected(), toString(), size(), isEmpty(), removeNode(), removeEdge(), etc for the Graph class.
+tests on isConnected(), toString(), size(), isEmpty(), childrenOf(), etc for the Graph class.
 
 Therefore, the script tests and the JUnit tests combine together to cover as many tests as possible,
 The script tests mainly work on creating graph, adding node/edge, getting nodes/children nodes, and
-the JUnit tests work on the rest of implementation methods such as removing node/edge, checking connection,
-etc.
+the JUnit tests work on the rest of implementation methods such as checking connection, getting children
+nodes, etc.
 
