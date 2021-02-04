@@ -1,6 +1,5 @@
 package graph.junitTests;
 
-import graph.LabeledEdge;
 import graph.DirectedGraph;
 import org.junit.Before;
 import org.junit.Rule;
@@ -18,7 +17,7 @@ public class DirectedGraphTest {
 
     private DirectedGraph graph1, graph2, graph3, graph4;
     private Set<String> nodes1, nodes2, nodes3, nodes4;
-    private Set<LabeledEdge> edges1, edges2, edges3, edges4;
+    private Set<DirectedGraph.LabeledEdge> edges1, edges2, edges3, edges4;
 
 
     @Before
@@ -48,12 +47,12 @@ public class DirectedGraphTest {
         graph3.addEdge("node1", "node1", "edge11");
         graph3.addEdge("node2", "node2", "edge22");
         graph3.addEdge("node3", "node3", "edge33");
-        edges3.add(new LabeledEdge("node2", "edge12"));
-        edges3.add(new LabeledEdge("node3", "edge23"));
-        edges3.add(new LabeledEdge("node1", "edge31"));
-        edges3.add(new LabeledEdge("node1", "edge11"));
-        edges3.add(new LabeledEdge("node2", "edge22"));
-        edges3.add(new LabeledEdge("node3", "edge33"));
+        edges3.add(new DirectedGraph.LabeledEdge("node2", "edge12"));
+        edges3.add(new DirectedGraph.LabeledEdge("node3", "edge23"));
+        edges3.add(new DirectedGraph.LabeledEdge("node1", "edge31"));
+        edges3.add(new DirectedGraph.LabeledEdge("node1", "edge11"));
+        edges3.add(new DirectedGraph.LabeledEdge("node2", "edge22"));
+        edges3.add(new DirectedGraph.LabeledEdge("node3", "edge33"));
     }
 
     @Test
@@ -199,8 +198,8 @@ public class DirectedGraphTest {
     public void testGetEdges() {
         assertTrue(graph2.childrenOf("node1").isEmpty());
         edges3 = new HashSet<>();
-        edges3.add(new LabeledEdge("node2", "edge12"));
-        edges3.add(new LabeledEdge("node1", "edge11"));
+        edges3.add(new DirectedGraph.LabeledEdge("node2", "edge12"));
+        edges3.add(new DirectedGraph.LabeledEdge("node1", "edge11"));
         assertEquals(edges3, graph3.getEdges("node1"));
     }
 
@@ -215,7 +214,7 @@ public class DirectedGraphTest {
     public void testGetAllEdgesAdding() {
         assertEquals(edges2, graph2.getAllEdges());
         graph2.addEdge("node1", "node1", "edge1");
-        edges2.add(new LabeledEdge("node1", "edge1"));
+        edges2.add(new DirectedGraph.LabeledEdge("node1", "edge1"));
         assertEquals(edges2, graph2.getAllEdges());
     }
 

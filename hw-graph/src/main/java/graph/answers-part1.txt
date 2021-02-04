@@ -101,10 +101,10 @@ interface to a graph. If your design includes multiple classes or interfaces, ex
 included each one; if not, explain whether you considered additional classes and why you decided
 not to include them.
 
-I included two classes here, named LabeledEdge and DirectedGraph. I separate into these two classes for
-better clarity, making things to be more organized.
+I included two classes here, a helper class named LabeledEdge and a main class named DirectedGraph.
+I used the inner helper class for better clarity, making things to be more organized.
 
-LabeledEdge class stores the destination node and the edge label of an edge.
+LabeledEdge inner class stores the destination node and the edge label of an edge.
 It has the following constructors/methods:
     LabeledEdge(String dest, String edgeLabel)
         Creates a labeled edge.
@@ -206,7 +206,7 @@ commands, such as tests on toString(), equals(), hashCode(), and compareTo() for
 tests on isConnected(), toString(), size(), isEmpty(), childrenOf(), etc for the Graph class.
 
 Therefore, the script tests and the JUnit tests combine together to cover as many tests as possible,
-The script tests mainly work on creating graph, adding node/edge, getting nodes/children nodes, and
-the JUnit tests work on the rest of implementation methods such as checking connection, getting children
-nodes, etc.
+The script tests mainly work on creating graph, adding node/edge, getting nodes/children nodes, these
+that can be easily tested using the given commands. While the JUnit tests work on the rest of methods
+such as checking connection, getting children nodes/edges, etc.
 
