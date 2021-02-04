@@ -101,7 +101,7 @@ interface to a graph. If your design includes multiple classes or interfaces, ex
 included each one; if not, explain whether you considered additional classes and why you decided
 not to include them.
 
-I included two classes here, a helper class named LabeledEdge and a main class named DirectedGraph.
+I included two classes here, an inner helper class named LabeledEdge and a main class named DirectedGraph.
 I used the inner helper class for better clarity, making things to be more organized.
 
 LabeledEdge inner class stores the destination node and the edge label of an edge.
