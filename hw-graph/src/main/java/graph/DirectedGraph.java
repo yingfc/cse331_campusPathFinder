@@ -50,35 +50,6 @@ public class DirectedGraph {
     }
 
     /**
-     * Remove a node with its connecting edges from the graph.
-     *
-     * @param node the node to be removed from the graph
-     * @return true if the node being successfully removed from the graph, otherwise return false
-     * @spec.requires node != null
-     * @spec.modifies this
-     * @spec.effects remove the node and its connecting edges from the graph
-     */
-    public boolean removeNode(String node) {
-        throw new RuntimeException("removeNode method is not yet implemented");
-    }
-
-    /**
-     * Remove an edge from the graph.
-     *
-     * @param source source node of the edge
-     * @param dest destination node of the edge
-     * @param label the label of the edge
-     * @return true if the edge being successfully removed from the graph, otherwise return false
-     * @spec.requires source != null &amp;&amp; dest != null &amp;&amp; label != null &amp;&amp;
-     *                source and dest nodes are in the graph
-     * @spec.modifies this
-     * @spec.effects remove the edge from the graph if possible
-     */
-    public boolean removeEdge(String source, String dest, String label) {
-        throw new RuntimeException("removeEdge method is not yet implemented");
-    }
-
-    /**
      * Check if the node is in the graph.
      *
      * @param node the node to be check if present in the graph
@@ -116,21 +87,21 @@ public class DirectedGraph {
     }
 
     /**
-     * Get the nodes that are directly connected by a single edge to the given node.
+     * Get the children nodes of the given node.
      *
-     * @param node the node treated as the head node to be traced
-     * @return the set of nodes directly connected to the given node
+     * @param node the node treated as the head node to be traced for its children nodes
+     * @return the set of nodes that are the children of the given nodes
      * @spec.requires node != null &amp;&amp; node is in the graph
      */
-    public Set<String> adjacentNodes(String node) {
-        throw new RuntimeException("adjacentNodes method is not yet implemented");
+    public Set<String> childrenOf(String node) {
+        throw new RuntimeException("childrenOf method is not yet implemented");
     }
 
     /**
      * Get the edges that connects to the given node.
      *
      * @param node the node treated as the head node to be traced for connecting edges
-     * @return the set of of edges that are connecting to the given node
+     * @return the set of edges that are connecting to the given node
      * @spec.requires node != null &amp;&amp; node is in the graph
      */
     public Set<LabeledEdge> getEdges(String node) {

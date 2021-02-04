@@ -80,19 +80,6 @@ public class DirectedGraphTest {
     }
 
     @Test
-    public void testIsEmptyRemoving() {
-        // before removing nodes
-        assertFalse(graph2.isEmpty());
-        assertFalse(graph3.isEmpty());
-
-        // after removing nodes
-        graph2.removeNode("node1");
-        graph3.removeNode("node1");
-        assertTrue(graph2.isEmpty());
-        assertFalse(graph3.isEmpty());
-    }
-
-    @Test
     public void testSize() {
         assertEquals(0, graph1.size());
         assertEquals(1, graph2.size());
@@ -113,19 +100,6 @@ public class DirectedGraphTest {
         assertEquals(1, graph1.size());
         assertEquals(2, graph2.size());
         assertEquals(4, graph3.size());
-    }
-
-    @Test
-    public void testSizeRemoving() {
-        // before removing nodes
-        assertEquals(1, graph2.size());
-        assertEquals(3, graph3.size());
-
-        // after removing nodes
-        graph2.removeNode("node1");
-        graph3.removeNode("node1");
-        assertEquals(0, graph2.size());
-        assertEquals(2, graph3.size());
     }
 
     @Test
@@ -184,13 +158,6 @@ public class DirectedGraphTest {
     }
 
     @Test
-    public void testContainsEdgeAfterRemoving() {
-        assertTrue(graph3.containsEdge("node1", "node1", "edge11"));
-        graph2.removeEdge("node1", "node1", "edge11");
-        assertFalse(graph3.containsEdge("node1", "node1", "edge11"));
-    }
-
-    @Test
     public void testIsConnected() {
         assertFalse(graph2.isConnected("node1", "node1"));
         assertTrue(graph3.isConnected("node1", "node2"));
@@ -202,16 +169,6 @@ public class DirectedGraphTest {
         assertFalse(graph2.isConnected("node1", "node1"));
         graph2.addEdge("node1", "node1", "edge11");
         assertTrue(graph2.isConnected("node1", "node1"));
-    }
-
-    @Test
-    public void testIsConnectedAfterRemoving() {
-        assertTrue(graph3.isConnected("node1", "node2"));
-        assertTrue(graph3.isConnected("node3", "node2"));
-        graph3.removeEdge("node1", "node2", "edge12");
-        graph3.removeEdge("node3", "node2", "edge32");
-        assertFalse(graph3.isConnected("node1", "node2"));
-        assertFalse(graph3.isConnected("node3", "node2"));
     }
 
     @Test
@@ -230,14 +187,22 @@ public class DirectedGraphTest {
     }
 
     @Test
-    public void testGetAllNodesRemoving() {
-        assertEquals(nodes3, graph3.getAllNodes());
-        graph3.removeNode("node1");
-        nodes3.remove("node1");
-        assertEquals(nodes3, graph3.getAllNodes());
+    public void testChildrenOf() {
+        assertTrue(graph2.childrenOf("node1").isEmpty());
+        nodes3 = new HashSet<>();
+        nodes3.add("node1");
+        nodes3.add("node2");
+        assertEquals(nodes3, graph3.childrenOf("node1"));
     }
 
-    // TODO: adding tests for adjacentNodes() and getEdges()
+    @Test
+    public void testGetEdges() {
+        assertTrue(graph2.childrenOf("node1").isEmpty());
+        edges3 = new HashSet<>();
+        edges3.add(new LabeledEdge("node2", "edge12"));
+        edges3.add(new LabeledEdge("node1", "edge11"));
+        assertEquals(edges3, graph3.getEdges("node1"));
+    }
 
     @Test
     public void testGetAllEdges() {
@@ -252,14 +217,6 @@ public class DirectedGraphTest {
         graph2.addEdge("node1", "node1", "edge1");
         edges2.add(new LabeledEdge("node1", "edge1"));
         assertEquals(edges2, graph2.getAllEdges());
-    }
-
-    @Test
-    public void testGetAllEdgesRemoving() {
-        assertEquals(edges3, graph3.getAllEdges());
-        graph3.removeEdge("node1", "node2", "edge12");
-        edges3.remove(new LabeledEdge("node2", "edge12"));
-        assertEquals(edges3, graph3.getAllEdges());
     }
 
     @Test
