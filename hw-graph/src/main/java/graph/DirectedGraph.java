@@ -161,7 +161,7 @@ public class DirectedGraph {
      * Standard equality operation.
      *
      * @param obj the object to be compared for equality
-     * @return true if obj represents the same DirectedGraph instance as this edge
+     * @return true if obj represents the same DirectedGraph instance as this graph
      */
     @Override
     public boolean equals(Object obj) {

@@ -87,12 +87,6 @@ public class LabeledEdgeTest {
         assertTrue(edge3.equals(new LabeledEdge("b", "ab")));
     }
 
-    // test hashCode()
-    @Test
-    public void testHashCode() {
-        assertEquals("b".hashCode() + "ab".hashCode(), edge3.hashCode());
-    }
-
     // test hashCode() for the same edge
     @Test
     public void testHashCodeOfSameEdge() {

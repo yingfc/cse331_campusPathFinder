@@ -220,4 +220,20 @@ public class DirectedGraphTest {
         edges2.add(new DirectedGraph.LabeledEdge("node1", "edge1"));
         assertEquals(edges2, graph2.getAllEdges());
     }
+
+    // test hashCode() method for graph with same nodes/edges
+    @Test
+    public void testHashCodeGraph() {
+        graph1 = new DirectedGraph();
+        graph1.addNode("node1");
+        assertEquals(graph2.hashCode(), graph1.hashCode());
+    }
+
+    // test equals() method for graph with same nodes/edges
+    @Test
+    public void testEqualsGraph() {
+        graph1 = new DirectedGraph();
+        graph1.addNode("node1");
+        assertTrue(graph2.equals(graph1));
+    }
 }
