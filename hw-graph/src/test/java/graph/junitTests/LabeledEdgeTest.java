@@ -51,14 +51,6 @@ public class LabeledEdgeTest {
         assertEquals("ab", edge1.getEdgeLabel());
     }
 
-    // test toString() method
-    @Test
-    public void testToString() {
-        assertEquals("(,)", edge1.toString());
-        assertEquals("(a,aa)", edge2.toString());
-        assertEquals("(b,ab)", edge3.toString());
-    }
-
     // test equals() method - reflexive equality
     @Test
     public void testEqualsReflexive() {
