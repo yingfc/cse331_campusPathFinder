@@ -21,7 +21,7 @@ public class DirectedGraphTest {
 
 
     @Before
-    public void setUp() throws Exception {
+    public void init() throws Exception {
         graph1 = new DirectedGraph();
         nodes1 = new HashSet<>();
         edges1 = new HashSet<>();
@@ -55,6 +55,7 @@ public class DirectedGraphTest {
         edges3.add(new DirectedGraph.LabeledEdge("node3", "edge33"));
     }
 
+    // test isEmpty() method for graph
     @Test
     public void testIsEmpty() {
         assertTrue(graph1.isEmpty());
@@ -62,6 +63,7 @@ public class DirectedGraphTest {
         assertFalse(graph3.isEmpty());
     }
 
+    // test isEmpty() method after adding nodes into the graph
     @Test
     public void testIsEmptyAdding() {
         // before adding nodes
@@ -78,6 +80,7 @@ public class DirectedGraphTest {
         assertFalse(graph3.isEmpty());
     }
 
+    // test size() method for graph
     @Test
     public void testSize() {
         assertEquals(0, graph1.size());
@@ -85,6 +88,7 @@ public class DirectedGraphTest {
         assertEquals(3, graph3.size());
     }
 
+    // test size() method after adding nodes into the graph
     @Test
     public void testSizeAdding() {
         // before adding nodes
@@ -101,6 +105,7 @@ public class DirectedGraphTest {
         assertEquals(4, graph3.size());
     }
 
+    // test containsNode() method
     @Test
     public void testContainsNode() {
         assertFalse(graph1.containsNode("node1"));
@@ -111,6 +116,7 @@ public class DirectedGraphTest {
         assertFalse(graph3.containsNode("node8"));
     }
 
+    // test containsNode() method after adding nodes
     @Test
     public void testContainsNodeAfterAdding() {
         // before adding nodes
@@ -127,19 +133,7 @@ public class DirectedGraphTest {
         assertTrue(graph3.containsNode("node8"));
     }
 
-    @Test
-    public void testContainsNodeAfterRemoving() {
-        // before removing nodes
-        assertTrue(graph2.containsNode("node1"));
-        assertTrue(graph3.containsNode("node1"));
-
-        // after removing nodes
-        graph2.addNode("node1");
-        graph3.addNode("node1");
-        assertFalse(graph2.containsNode("node1"));
-        assertFalse(graph3.containsNode("node1"));
-    }
-
+    // test containsEdge() method
     @Test
     public void testContainsEdge() {
         assertFalse(graph1.containsEdge("node1", "node1", "edge11"));
@@ -149,6 +143,7 @@ public class DirectedGraphTest {
         assertFalse(graph3.containsEdge("node8", "node8", "edge88"));
     }
 
+    // test containsEdge() method after adding edge into the graph
     @Test
     public void testContainsEdgeAfterAdding() {
         assertFalse(graph2.containsEdge("node1", "node1", "edge11"));
@@ -156,6 +151,7 @@ public class DirectedGraphTest {
         assertTrue(graph2.containsEdge("node1", "node1", "edge11"));
     }
 
+    // test isConnected() method for nodes
     @Test
     public void testIsConnected() {
         assertFalse(graph2.isConnected("node1", "node1"));
@@ -163,6 +159,7 @@ public class DirectedGraphTest {
         assertFalse(graph3.isConnected("node4", "node2"));
     }
 
+    // test isConnected() method after adding node into the graph
     @Test
     public void testIsConnectedAfterAdding() {
         assertFalse(graph2.isConnected("node1", "node1"));
@@ -170,6 +167,7 @@ public class DirectedGraphTest {
         assertTrue(graph2.isConnected("node1", "node1"));
     }
 
+    // test getAllNodes() method for graph
     @Test
     public void testGetAllNodes() {
         assertEquals(nodes1, graph1.getAllNodes());
@@ -177,6 +175,7 @@ public class DirectedGraphTest {
         assertEquals(nodes3, graph3.getAllNodes());
     }
 
+    // test getAllNodes() method for graph after adding node into the graph
     @Test
     public void testGetAllNodesAdding() {
         assertEquals(nodes1, graph1.getAllNodes());
@@ -185,6 +184,7 @@ public class DirectedGraphTest {
         assertEquals(nodes1, graph1.getAllNodes());
     }
 
+    // test childrenOf() method to get the children nodes of a typical head node
     @Test
     public void testChildrenOf() {
         assertTrue(graph2.childrenOf("node1").isEmpty());
@@ -194,6 +194,7 @@ public class DirectedGraphTest {
         assertEquals(nodes3, graph3.childrenOf("node1"));
     }
 
+    // test getEdges() method for typical head node
     @Test
     public void testGetEdges() {
         assertTrue(graph2.childrenOf("node1").isEmpty());
@@ -203,6 +204,7 @@ public class DirectedGraphTest {
         assertEquals(edges3, graph3.getEdges("node1"));
     }
 
+    // test getAllEdges() method for the graph
     @Test
     public void testGetAllEdges() {
         assertEquals(edges1, graph1.getAllEdges());
@@ -210,6 +212,7 @@ public class DirectedGraphTest {
         assertEquals(edges3, graph3.getAllEdges());
     }
 
+    // test getAllEdges() method for the graph after adding edges into the graph
     @Test
     public void testGetAllEdgesAdding() {
         assertEquals(edges2, graph2.getAllEdges());
@@ -218,6 +221,7 @@ public class DirectedGraphTest {
         assertEquals(edges2, graph2.getAllEdges());
     }
 
+    // test toString() method
     @Test
     public void testToString() {
         assertEquals("{}", graph1.toString());

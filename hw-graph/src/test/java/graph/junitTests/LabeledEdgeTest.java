@@ -17,18 +17,19 @@ public class LabeledEdgeTest {
     private LabeledEdge edge1, edge2, edge3;
 
     @Before
-    public void setUp() throws Exception {
+    public void init() throws Exception {
         edge1 = new LabeledEdge("", "");
         edge2 = new LabeledEdge("a", "aa");
         edge3 = new LabeledEdge("b", "ab");
     }
 
-    // tests for constructor
+    // tests for constructor with dest argument being null
     @Test(expected = IllegalArgumentException.class)
     public void testConstructEdgeWithNullDest() {
         new LabeledEdge(null, "aa");
     }
 
+    // tests for constructor with edgeLabel argument being null
     @Test(expected = IllegalArgumentException.class)
     public void testConstructEdgeWithNullEdgeLabel() {
         new LabeledEdge("a", null);
@@ -50,7 +51,7 @@ public class LabeledEdgeTest {
         assertEquals("ab", edge1.getEdgeLabel());
     }
 
-    // test toString()
+    // test toString() method
     @Test
     public void testToString() {
         assertEquals("(,)", edge1.toString());
@@ -58,12 +59,13 @@ public class LabeledEdgeTest {
         assertEquals("(b,ab)", edge3.toString());
     }
 
-    // test equals()
+    // test equals() method - reflexive equality
     @Test
     public void testEqualsReflexive() {
         assertTrue(edge1.equals(edge1));
     }
 
+    // test equals() method - symmetric equality
     @Test
     public void testEqualsSymmetric() {
         edge2 = new LabeledEdge("", "");
@@ -71,6 +73,7 @@ public class LabeledEdgeTest {
         assertTrue(edge2.equals(edge1));
     }
 
+    // test equals() method - transitive equality
     @Test
     public void testEqualsTransitive() {
         edge2 = new LabeledEdge("", "");
@@ -80,11 +83,13 @@ public class LabeledEdgeTest {
         assertTrue(edge3.equals(edge1));
     }
 
+    // test equals() method with different edge
     @Test
     public void testEqualsDifferentEdge() {
         assertTrue(edge3.equals(new LabeledEdge("bb", "bb")));
     }
 
+    // test equals() method with same edge
     @Test
     public void testEqualsSameEdge() {
         assertTrue(edge3.equals(new LabeledEdge("b", "ab")));
@@ -96,6 +101,7 @@ public class LabeledEdgeTest {
         assertEquals("b".hashCode() + "ab".hashCode(), edge3.hashCode());
     }
 
+    // test hashCode() for the same edge
     @Test
     public void testHashCodeOfSameEdge() {
         assertEquals(new LabeledEdge("b", "ab").hashCode(), edge3.hashCode());
