@@ -1,6 +1,5 @@
 package graph;
 
-import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -105,7 +104,7 @@ public class DirectedGraph {
      * @return the set of edges that are connecting to the given node
      * @spec.requires node != null &amp;&amp; node is in the graph
      */
-    public HashMap<String, String> getEdges(String node) {
+    public Set<LabeledEdge> getEdges(String node) {
         throw new RuntimeException("getEdges method is not yet implemented");
     }
 
