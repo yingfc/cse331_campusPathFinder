@@ -6,8 +6,8 @@ import java.util.Set;
 /**
  * <b>DirectedGraph</b> class represents a mutable, directed graph.
  * This graph does not contain two identical edges with same source, destination, and label.
- * It is a collection of nodes (also called vertices) and edges. Each edge contains an destination
- * node and an edge label.
+ * It is a collection of nodes (also called vertices) and edges.
+ * Each edge contains an destination node and an edge label.
  */
 public class DirectedGraph {
 
@@ -180,6 +180,9 @@ public class DirectedGraph {
 
     /**
      * <b>LabeledEdge</b> represents an edge with label and destination node.
+     *
+     * An example labeled edge could be LabeledEdge("node1", "edge11") showing its
+     * destination node being "node1" and its edge label being "edge11".
      */
     public static class LabeledEdge {
 
