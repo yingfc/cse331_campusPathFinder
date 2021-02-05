@@ -105,7 +105,7 @@ I included two classes here, an inner helper class named LabeledEdge and a main 
 I used the inner helper class for better clarity, making things to be more organized.
 
 LabeledEdge inner class stores the destination node and the edge label of an edge.
-It has the following constructors/methods:
+It has the following constructor/methods:
     LabeledEdge(String dest, String edgeLabel)
         Creates a labeled edge.
 
@@ -127,7 +127,7 @@ It has the following constructors/methods:
 
 
 DirectedGraph class stores all the nodes and edges in the graph.
-It has the following constructors/methods:
+It has the following constructor/methods:
     DirectedGraph()
         Creates an empty directed graph.
 
@@ -189,7 +189,6 @@ What was your testing strategy for this assignment? How do your script tests and
 differ from each other (if they do), and why?
 
 I followed the hint of designing tests, using "0, 1, 2" case analysis.
-
 For the script tests, I wrote a bunch of tests that can be checked using the given test script commands.
 Specifically, I have cases of empty graph, graph with only one node, graph with one node and one
 edge, graph with only two nodes, graph with two nodes and one edge, graph with two nodes and two edges
@@ -200,7 +199,10 @@ starting node and destination node). Also, I included the case to check the addi
 and edges to test the order.
 While for the JUnit tests, they cover the tests for that cannot be tested using the given test script
 commands, such as tests on toString(), equals(), and hashCode() methods for the Edge class, and
-tests on isConnected(), toString(), size(), isEmpty(), childrenOf(), etc for the Graph class.
+tests on isConnected(), toString(), size(), isEmpty(), childrenOf(), etc for the Graph class. I made
+cases for every public methods in the class. For the inner Edge class, I created 3 demo edges to test
+its public methods. For the Graph class, I created 3 graph objects to cover cases of empty graph,
+graph with only one node, and the graph with both nodes and edges.
 
 Therefore, the script tests and the JUnit tests combine together to cover as many tests as possible,
 The script tests mainly work on creating graph, adding node/edge, getting nodes/children nodes, these

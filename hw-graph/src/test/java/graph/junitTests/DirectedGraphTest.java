@@ -15,9 +15,9 @@ public class DirectedGraphTest {
     @Rule
     public Timeout globalTimeout = Timeout.seconds(10); // 10 seconds max per method tested
 
-    private DirectedGraph graph1, graph2, graph3, graph4;
-    private Set<String> nodes1, nodes2, nodes3, nodes4;
-    private Set<DirectedGraph.LabeledEdge> edges1, edges2, edges3, edges4;
+    private DirectedGraph graph1, graph2, graph3;
+    private Set<String> nodes1, nodes2, nodes3;
+    private Set<DirectedGraph.LabeledEdge> edges1, edges2, edges3;
 
 
     @Before
