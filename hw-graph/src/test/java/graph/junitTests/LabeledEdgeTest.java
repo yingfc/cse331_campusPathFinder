@@ -100,30 +100,4 @@ public class LabeledEdgeTest {
     public void testHashCodeOfSameEdge() {
         assertEquals(new LabeledEdge("b", "ab").hashCode(), edge3.hashCode());
     }
-
-    // test compareTo()
-    @Test
-    public void testCompareToSameEdge() {
-        assertTrue(edge3.compareTo(new LabeledEdge("b", "ab")) == 0);
-    }
-
-    @Test
-    public void testCompareToSmallerDest() {
-        assertTrue(edge3.compareTo(new LabeledEdge("a", "ab")) > 0);
-    }
-
-    @Test
-    public void testCompareToBiggerDest() {
-        assertTrue(edge3.compareTo(new LabeledEdge("d", "ab")) < 0);
-    }
-
-    @Test
-    public void testCompareToSmallerEdgeLabel() {
-        assertTrue(edge3.compareTo(new LabeledEdge("a", "aa")) > 0);
-    }
-
-    @Test
-    public void testCompareToBiggerEdgeLabel() {
-        assertTrue(edge3.compareTo(new LabeledEdge("a", "cc")) < 0);
-    }
 }

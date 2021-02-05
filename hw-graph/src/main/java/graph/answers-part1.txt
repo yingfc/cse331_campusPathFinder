@@ -124,9 +124,6 @@ It has the following constructors/methods:
     int hashCode()
         Standard hashCode function.
 
-    int compareTo(LabeledEdge obj)
-        Compares this object with object obj for order.
-
 
 
 DirectedGraph class stores all the nodes and edges in the graph.
@@ -202,7 +199,7 @@ and the graph with two nodes and multiple edges(including the repeated edges tha
 starting node and destination node). Also, I included the case to check the adding order of nodes
 and edges to test the order.
 While for the JUnit tests, they cover the tests for that cannot be tested using the given test script
-commands, such as tests on toString(), equals(), hashCode(), and compareTo() for the Edge class, and
+commands, such as tests on toString(), equals(), and hashCode() methods for the Edge class, and
 tests on isConnected(), toString(), size(), isEmpty(), childrenOf(), etc for the Graph class.
 
 Therefore, the script tests and the JUnit tests combine together to cover as many tests as possible,

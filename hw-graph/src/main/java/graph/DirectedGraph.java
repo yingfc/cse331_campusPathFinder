@@ -181,7 +181,7 @@ public class DirectedGraph {
     /**
      * <b>LabeledEdge</b> represents an edge with label and destination node.
      */
-    public static class LabeledEdge implements Comparable<LabeledEdge> {
+    public static class LabeledEdge {
 
         /**
          * Creates a labeled edge.
@@ -242,20 +242,6 @@ public class DirectedGraph {
         @Override
         public int hashCode() {
             throw new RuntimeException("hashCode method is not yet implemented");
-        }
-
-        /**
-         * Compares this object with object obj for order. Returns a negative integer, zero,
-         * or a positive integer in the case of this object is less than, equal to, or greater
-         * than the compared object obj.
-         *
-         * @param obj the object to be compared
-         * @return a negative integer, zero, or a positive integer in the case of this object
-         * is less than, equal to, or greater than the compared object obj
-         */
-        @Override
-        public int compareTo(LabeledEdge obj) {
-            throw new RuntimeException("compareTo method is not yet implemented");
         }
     }
 }
