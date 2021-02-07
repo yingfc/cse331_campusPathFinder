@@ -6,8 +6,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class LabeledEdgeTest {
 
@@ -39,7 +38,7 @@ public class LabeledEdgeTest {
     @Test
     public void testGetDestNode() {
         assertEquals("", edge1.getDest());
-        assertEquals("1", edge2.getDest());
+        assertEquals("a", edge2.getDest());
         assertEquals("b", edge3.getDest());
     }
 
@@ -47,8 +46,8 @@ public class LabeledEdgeTest {
     @Test
     public void testGetEdgeLabel() {
         assertEquals("", edge1.getEdgeLabel());
-        assertEquals("aa", edge1.getEdgeLabel());
-        assertEquals("ab", edge1.getEdgeLabel());
+        assertEquals("aa", edge2.getEdgeLabel());
+        assertEquals("ab", edge3.getEdgeLabel());
     }
 
     // test equals() method - reflexive equality
@@ -78,7 +77,7 @@ public class LabeledEdgeTest {
     // test equals() method with different edge
     @Test
     public void testEqualsDifferentEdge() {
-        assertTrue(edge3.equals(new LabeledEdge("bb", "bb")));
+        assertFalse(edge3.equals(new LabeledEdge("bb", "bb")));
     }
 
     // test equals() method with same edge
