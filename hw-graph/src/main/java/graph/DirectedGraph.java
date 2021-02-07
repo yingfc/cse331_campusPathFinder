@@ -1,5 +1,9 @@
 package graph;
 
+import java.awt.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -10,13 +14,30 @@ import java.util.Set;
  */
 public class DirectedGraph {
 
+    // the graph that holds nodes and nodes' connecting edges with labels.
+    private final HashMap<String, Set<LabeledEdge>> g;
+
+    // Abstraction Function:
+    // AF(this) = a graph, g, such that
+    //      g = {} when it is an empty graph
+    //      g = {node1=[], ...} when node1 has no outgoing edges
+    //      g = {node1=[(node2,edge12), (node3,edge13), ...], node11=[...], node22=[...]}
+    //          when node2 and node3 are destination node of the edge12 and edge13 connecting
+    //          from node1.
+
+    // Representation Invariant:
+    //      graph != null
+    //      && each node/edge != null
+    //      && graph must have the node that is included in a edge info
+
     /**
      * Creates an empty directed graph.
      *
      * @spec.effects Constructs an empty directed graph
      */
     public DirectedGraph() {
-        throw new RuntimeException("DirectedGraph constructor is not yet implemented");
+        g = new HashMap<String, Set<LabeledEdge>>();
+        checkRep();
     }
 
     /**
@@ -29,7 +50,13 @@ public class DirectedGraph {
      * @spec.effects add the node to the graph if it is not already present
      */
     public boolean addNode(String node) {
-        throw new RuntimeException("addNode method is not yet implemented");
+        checkRep();
+        if (containsNode(node)) {
+            return false;
+        } else {
+            g.put(node, new HashSet<LabeledEdge>());
+            return true;
+        }
     }
 
     /**
@@ -46,7 +73,13 @@ public class DirectedGraph {
      * @spec.effects add the edge to the graph if it is not already present
      */
     public boolean addEdge(String source, String dest, String label) {
-        throw new RuntimeException("addEdge method is not yet implemented");
+        LabeledEdge curr = new LabeledEdge(dest, label);
+        if (g.get(source).contains(curr)) {
+            return false;
+        } else {
+            g.get(source).add(curr);
+            return true;
+        }
     }
 
     /**
@@ -57,7 +90,7 @@ public class DirectedGraph {
      * @spec.requires node != null
      */
     public boolean containsNode(String node) {
-        throw new RuntimeException("containsNode method is not yet implemented");
+        return g.containsKey(node);
     }
 
     /**
@@ -71,7 +104,9 @@ public class DirectedGraph {
      *                source and dest nodes are in the graph
      */
     public boolean containsEdge(String source, String dest, String label) {
-        throw new RuntimeException("containsEdge method is not yet implemented");
+        LabeledEdge curr = new LabeledEdge(dest, label);
+        checkRep();
+        return containsNode(source) && containsNode(dest) && getEdges(source).contains(curr);
     }
 
     /**
@@ -83,7 +118,14 @@ public class DirectedGraph {
      * @spec.requires source != null &amp;&amp; dest != null &amp;&amp; source and dest nodes are in the graph
      */
     public boolean isConnected(String source, String dest) {
-        throw new RuntimeException("isConnected method is not yet implemented");
+        if (source != null && dest != null && containsNode(source) && containsNode(dest)) {
+            for (LabeledEdge le : g.get(source)) {
+                if (le.getDest().equals(dest)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -94,7 +136,14 @@ public class DirectedGraph {
      * @spec.requires node != null &amp;&amp; node is in the graph
      */
     public Set<String> childrenOf(String node) {
-        throw new RuntimeException("childrenOf method is not yet implemented");
+        if (node == null || !g.containsKey(node)) {
+            throw new IllegalArgumentException();
+        }
+        Set<String> childrenNodes = new HashSet<>();
+        for (LabeledEdge le: g.get(node)) {
+            childrenNodes.add(le.getDest());
+        }
+        return childrenNodes;
     }
 
     /**
@@ -105,7 +154,10 @@ public class DirectedGraph {
      * @spec.requires node != null &amp;&amp; node is in the graph
      */
     public Set<LabeledEdge> getEdges(String node) {
-        throw new RuntimeException("getEdges method is not yet implemented");
+        if (node == null || !g.containsKey(node)) {
+            throw new IllegalArgumentException();
+        }
+        return new HashSet<>(g.get(node));
     }
 
     /**
@@ -115,7 +167,7 @@ public class DirectedGraph {
      * @spec.requires the graph is not null
      */
     public Set<String> getAllNodes() {
-        throw new RuntimeException("getAllNodes method is not yet implemented");
+        return Collections.unmodifiableSet(g.keySet());
     }
 
     /**
@@ -125,7 +177,11 @@ public class DirectedGraph {
      * @spec.requires the graph is not null
      */
     public Set<LabeledEdge> getAllEdges() {
-        throw new RuntimeException("getAllEdges method is not yet implemented");
+        Set<LabeledEdge> res = new HashSet<>();
+        for (String source: g.keySet()) {
+            res.addAll(g.get(source));
+        }
+        return res;
     }
 
     /**
@@ -134,7 +190,8 @@ public class DirectedGraph {
      * @return the number of nodes in the graph
      */
     public int size() {
-        throw new RuntimeException("size method is not yet implemented");
+        checkRep();
+        return g.size();
     }
 
     /**
@@ -143,7 +200,8 @@ public class DirectedGraph {
      * @return true if the graph is empty
      */
     public boolean isEmpty() {
-        throw new RuntimeException("isEmpty method is not yet implemented");
+        checkRep();
+        return g.isEmpty();
     }
 
     /**
@@ -153,7 +211,8 @@ public class DirectedGraph {
      */
     @Override
     public int hashCode() {
-        throw new RuntimeException("hashCode method is not yet implemented");
+        checkRep();
+        return g.hashCode();
     }
 
     /**
@@ -164,7 +223,14 @@ public class DirectedGraph {
      */
     @Override
     public boolean equals(Object obj) {
-        throw new RuntimeException("equals method is not yet implemented");
+        if (obj instanceof DirectedGraph) {
+            DirectedGraph graph = (DirectedGraph) obj;
+            if (this.g.size() != graph.size()) {
+                return false;
+            }
+            return g.equals(graph.g);
+        }
+        return false;
     }
 
     /**
@@ -174,7 +240,22 @@ public class DirectedGraph {
      */
     @Override
     public String toString() {
-        throw new RuntimeException("toString method is not yet implemented");
+        checkRep();
+        return g.toString();
+    }
+
+    /**
+     * Throws an exception if the representation invariant is violated.
+     */
+    private void checkRep() {
+        assert(this.g != null): "NULL GRAPH";
+        for (String node : g.keySet()) {
+            assert(node != null): "NULL NODE";
+            for (LabeledEdge le : g.get(node)) {
+                assert(le != null): "NULL LABELED EDGE";
+                assert(g.containsKey(le.getDest())): "NON-EXIST NODE IN GRAPH";
+            }
+        }
     }
 
     /**
@@ -185,6 +266,24 @@ public class DirectedGraph {
      */
     public static class LabeledEdge {
 
+        // Abstraction Function:
+        // AF(this) = a labeled edge with no origin, le, such that
+        //      le.destination = this.dest
+        //      le.label = this.edgeLabel
+
+        // Representation Invariant:
+        // dest != null && edgeLabel != null
+
+        /**
+         * Destination of this edge
+         */
+        private final String dest;
+
+        /**
+         * Label of this edge
+         */
+        private final String edgeLabel;
+
         /**
          * Creates a labeled edge.
          *
@@ -194,7 +293,12 @@ public class DirectedGraph {
          * @spec.effects Constructs a new labeled edge e, with e.dest = dest, and e.edgeLabel = edgeLabel
          */
         public LabeledEdge(String dest, String edgeLabel) {
-            throw new RuntimeException("LabeledEdge constructor is not yet implemented");
+            if (dest == null || edgeLabel == null) {
+                throw new IllegalArgumentException();
+            }
+            this.dest = dest;
+            this.edgeLabel = edgeLabel;
+            checkRep();
         }
 
         /**
@@ -203,7 +307,8 @@ public class DirectedGraph {
          * @return the destination node of this edge
          */
         public String getDest() {
-            throw new RuntimeException("getDest method is not yet implemented");
+            checkRep();
+            return this.dest;
         }
 
         /**
@@ -212,7 +317,8 @@ public class DirectedGraph {
          * @return the edge label of this edge
          */
         public String getEdgeLabel() {
-            throw new RuntimeException("getEdgeLabel method is not yet implemented");
+            checkRep();
+            return this.edgeLabel;
         }
 
         /**
@@ -222,7 +328,10 @@ public class DirectedGraph {
          */
         @Override
         public String toString() {
-            throw new RuntimeException("toString method is not yet implemented");
+            checkRep();
+            String res = "(" + this.dest + "," + this.edgeLabel + ")";
+            checkRep();
+            return res;
         }
 
         /**
@@ -233,7 +342,13 @@ public class DirectedGraph {
          */
         @Override
         public boolean equals(Object obj) {
-            throw new RuntimeException("equals method is not yet implemented");
+            checkRep();
+            if (!(obj instanceof LabeledEdge)) {
+                return false;
+            }
+            LabeledEdge le = (LabeledEdge) obj;
+            checkRep();
+            return this.dest.equals(le.dest) && this.edgeLabel.equals(le.edgeLabel);
         }
 
         /**
@@ -243,7 +358,16 @@ public class DirectedGraph {
          */
         @Override
         public int hashCode() {
-            throw new RuntimeException("hashCode method is not yet implemented");
+            checkRep();
+            return this.dest.hashCode() * this.edgeLabel.hashCode();
+        }
+
+        /**
+         * Throws an exception if the representation invariant is violated.
+         */
+        private void checkRep() {
+            assert(dest != null): "NULL DESTINATION NODE";
+            assert(edgeLabel != null): "NULL EDGE LABEL";
         }
     }
 }
