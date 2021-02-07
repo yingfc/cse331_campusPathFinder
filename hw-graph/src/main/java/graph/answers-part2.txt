@@ -10,11 +10,26 @@ A few examples of possible Graph representations:
 
     A: A collection of edges.
     B: An adjacency list, in which each node is associated with a list of its outgoing edges.
-    C: An adjacency matrix, which explicitly represents, for every pair ⟨A,B⟩ of edges, whether there is a link from A to B, and how many.
+    C: An adjacency matrix, which explicitly represents, for every pair ⟨A,B⟩ of nodes, whether there is a link from A to B, and how many.
 
 1. In two or three sentences, explain an advantage and a disadvantage of each of the
 representations listed above (for example, in terms of runtime complexity, space
 complexity, or ease of implementation).
+
+    A.  Using a collection of edges needs no other helper class, it is more clear as we only have
+    one data structure and makes the implementation easier, and having time complexity of O(1) for
+    adding edge. Besides, it has very low space complexity.
+        But it has the disadvantage of taking the complexity of O(n) to find the edge connecting
+    typical nodeA and nodeB as we need to iterate over the entire collection.
+
+    B.  Using an adjacency list makes getting adjacent edges and adding new edge much easier as
+    outgoing edges are already organized in that manner and only takes the runtime complexity of
+    O(1) for adding edge.
+        But it has the disadvantage of TODO
+
+    C.  Using an adjacency matrix has the advantage of having runtime complexity of O(1) when
+    adding/removing edge.
+        But it has the disadvantage of TODO
 
 
 
@@ -22,7 +37,13 @@ complexity, or ease of implementation).
 2. In two to three sentences, describe the representation you chose and explain why you
 chose it. If you chose to use a different representation than one of the three we described
 above, be sure to list its advantages and disadvantages, too.
+    My representation is a HashMap of each node being the key and a HashSet of the node's connected
+    edges: HashMap<String, HashSet<LabeledEdge>>. For the LabeledEdge type, I used the representation
+    of <String dest, String edgeLabel> to store the children/destination node and the edge label.
 
+    The representation has the advantage of having constant time complexity for basic operations
+    like getting and adding nodes/edges because of this data structure.
+    While it has the disadvantage of TODO
 
 
 
@@ -34,11 +55,15 @@ above, be sure to list its advantages and disadvantages, too.
 1. Describe any new tests you added and why you added them, or why you feel that your original
 tests alone are sufficient.
 
-
+    I feel my original tests alone are sufficient. When I first design those tests in hw5-part1,
+    I've already considered testing on every method in the ADT classes and that already covers
+    many test cases. As long as the test driver is implemented correctly, the Script Tests should
+    work as expected. I did make several changes to the some specific test cases after running the
+    validate task but without adding new tests overall. fixme
 
 
 2. Did you make any changes to your specifications as you were implementing your Graph? (yes/no)
 If yes, describe your changes and why you made them.
 
-
+    No. I didn't make any changes to the specifications.
 
