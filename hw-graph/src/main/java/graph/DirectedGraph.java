@@ -14,6 +14,8 @@ import java.util.Set;
  */
 public class DirectedGraph {
 
+    public static final boolean DEBUG = true;
+
     // the graph that holds nodes and nodes' connecting edges with labels.
     private final HashMap<String, Set<LabeledEdge>> g;
 
@@ -248,12 +250,14 @@ public class DirectedGraph {
      * Throws an exception if the representation invariant is violated.
      */
     private void checkRep() {
-        assert(this.g != null): "NULL GRAPH";
-        for (String node : g.keySet()) {
-            assert(node != null): "NULL NODE";
-            for (LabeledEdge le : g.get(node)) {
-                assert(le != null): "NULL LABELED EDGE";
-                assert(g.containsKey(le.getDest())): "NON-EXIST NODE IN GRAPH";
+        if (DEBUG) {
+            assert(this.g != null): "NULL GRAPH";
+            for (String node : g.keySet()) {
+                assert(node != null): "NULL NODE";
+                for (LabeledEdge le : g.get(node)) {
+                    assert(le != null): "NULL LABELED EDGE";
+                    assert(g.containsKey(le.getDest())): "NON-EXIST NODE IN GRAPH";
+                }
             }
         }
     }
@@ -265,6 +269,8 @@ public class DirectedGraph {
      * destination node being "node1" and its edge label being "edge11".
      */
     public static class LabeledEdge {
+
+        public static final boolean DEBUG = true;
 
         // Abstraction Function:
         // AF(this) = a labeled edge with no origin, le, such that
@@ -366,8 +372,10 @@ public class DirectedGraph {
          * Throws an exception if the representation invariant is violated.
          */
         private void checkRep() {
-            assert(dest != null): "NULL DESTINATION NODE";
-            assert(edgeLabel != null): "NULL EDGE LABEL";
+            if (DEBUG) {
+                assert (dest != null) : "NULL DESTINATION NODE";
+                assert (edgeLabel != null) : "NULL EDGE LABEL";
+            }
         }
     }
 }
