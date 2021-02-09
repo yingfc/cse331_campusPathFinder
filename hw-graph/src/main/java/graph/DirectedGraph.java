@@ -53,6 +53,9 @@ public class DirectedGraph {
      */
     public boolean addNode(String node) {
         checkRep();
+        if (node == null) {
+            throw new IllegalArgumentException("Node should not be null");
+        }
         if (containsNode(node)) {
             return false;
         } else {
@@ -75,12 +78,22 @@ public class DirectedGraph {
      * @spec.effects add the edge to the graph if it is not already present
      */
     public boolean addEdge(String source, String dest, String label) {
+        checkSpecRequires(source, dest, label);
         LabeledEdge curr = new LabeledEdge(dest, label);
         if (g.get(source).contains(curr)) {
             return false;
         } else {
             g.get(source).add(curr);
             return true;
+        }
+    }
+
+    private void checkSpecRequires(String source, String dest, String label) {
+        if (source == null || dest == null || label == null) {
+            throw new IllegalArgumentException("Nodes and label should not be null");
+        }
+        if (!(containsNode(source) || !(containsNode(dest)))) {
+            throw new IllegalArgumentException("source and dest nodes should be in the graph");
         }
     }
 
@@ -92,6 +105,9 @@ public class DirectedGraph {
      * @spec.requires node != null
      */
     public boolean containsNode(String node) {
+        if (node == null) {
+            throw new IllegalArgumentException("node should not be null");
+        }
         return g.containsKey(node);
     }
 
@@ -106,9 +122,12 @@ public class DirectedGraph {
      *                source and dest nodes are in the graph
      */
     public boolean containsEdge(String source, String dest, String label) {
-        LabeledEdge curr = new LabeledEdge(dest, label);
-        checkRep();
-        return containsNode(source) && containsNode(dest) && getEdges(source).contains(curr);
+        if (source != null && dest != null && label != null && containsNode(source) && containsNode(dest)) {
+            LabeledEdge curr = new LabeledEdge(dest, label);
+            checkRep();
+            return getEdges(source).contains(curr);
+        }
+        return false;
     }
 
     /**
