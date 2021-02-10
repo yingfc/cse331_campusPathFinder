@@ -60,10 +60,11 @@ above, be sure to list its advantages and disadvantages, too.
 tests alone are sufficient.
 
     I feel my original tests alone are sufficient. When I first design those tests in hw5-part1,
-    I've already considered testing on every method in the ADT classes and that already covers
-    many test cases. As long as the test driver is implemented correctly, the Script Tests should
-    work as expected. I did make several changes to the some specific test cases after running the
-    validate task but without adding new tests overall. fixme
+    I've already considered testing on all methods in the ADT classes and that already covered
+    many test cases. And I also got feedback from the staff telling me that I have good test coverage.
+    As long as the test driver is implemented correctly, the Script Tests should work as expected
+    and cover things need to be checked together with the JUnit tests. I did make several changes
+    to some specific test cases after running the validate task but without adding new tests overall.
 
 
 2. Did you make any changes to your specifications as you were implementing your Graph? (yes/no)
