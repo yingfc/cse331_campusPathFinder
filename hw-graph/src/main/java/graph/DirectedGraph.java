@@ -291,9 +291,9 @@ public class DirectedGraph {
         public static final boolean DEBUG = true;
 
         // Abstraction Function:
-        // AF(this) = a labeled edge with no origin, le, such that
-        //      le.destination = this.dest
-        //      le.label = this.edgeLabel
+        // AF(this) = a labeled edge without source node, le, such that
+        //      le.dest = the destination node of this edge
+        //      le.edgeLabel = the edge label of this edge
 
         // Representation Invariant:
         // dest != null && edgeLabel != null
