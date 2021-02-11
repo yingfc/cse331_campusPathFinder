@@ -45,9 +45,9 @@ above, be sure to list its advantages and disadvantages, too.
     of <String dest, String edgeLabel> to store the children/destination node and the edge label.
 
     The representation has the advantage of having constant time complexity for basic operations
-    like getting and adding nodes/edges because of this data structure.
-    While it has the disadvantage of not allowing multiple edges with same destination node and
-    same edge label to be stored as we are using Set. fixme
+    like getting and adding nodes/edges because of this data structure. And it won't permit duplicates
+    as it is stored in set.
+    While it has the disadvantage of todo
 
 
 
@@ -59,12 +59,13 @@ above, be sure to list its advantages and disadvantages, too.
 1. Describe any new tests you added and why you added them, or why you feel that your original
 tests alone are sufficient.
 
-    I feel my original tests alone are sufficient. When I first design those tests in hw5-part1,
-    I've already considered testing on all methods in the ADT classes and that already covered
-    many test cases. And I also got feedback from the staff telling me that I have good test coverage.
-    As long as the test driver is implemented correctly, the Script Tests should work as expected
-    and cover things need to be checked together with the JUnit tests. I did make several changes
-    to some specific test cases after running the validate task but without adding new tests overall.
+    I feel my original tests alone are decent and covered the majority of the methods. When I first
+    design those tests in hw5-part1, I've already considered testing on many methods in the ADT
+    classes and that already covered many cases. And I also got feedback from the staff telling me
+    that I have good test coverage. However, I intentionally left the tests on toString() method
+    as I cannot write JUnit tests without implementing the method in hw5-part1.
+    Therefore, I've added the tests on toString() method for both the DirectedGraph.java class and its
+    inner class named LabeledEdge for better test coverage.
 
 
 2. Did you make any changes to your specifications as you were implementing your Graph? (yes/no)
