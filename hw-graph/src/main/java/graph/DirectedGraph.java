@@ -75,31 +75,17 @@ public class DirectedGraph {
      * @spec.effects add the edge to the graph if it is not already present
      */
     public boolean addEdge(String source, String dest, String label) {
-        checkSpecRequires(source, dest, label);
+        checkRep();
+        if (source == null || dest == null || label == null || !(containsNode(source) || !(containsNode(dest)))) {
+            throw new IllegalArgumentException("Nodes and label should not be null, " +
+                    "source and dest nodes should be in the graph");
+        }
         LabeledEdge curr = new LabeledEdge(dest, label);
         if (g.get(source).contains(curr)) {
             return false;
         } else {
             g.get(source).add(curr);
             return true;
-        }
-    }
-
-    /**
-     * Check if the method parameters holds the spec requirements on
-     *          source != null &amp;&amp; dest != null &amp;&amp; label != null &amp;&amp;
-     *          source and dest nodes are in the graph
-     *
-     * @param source source node of the edge
-     * @param dest destination node of the edge
-     * @param label the label of the edge
-     */
-    private void checkSpecRequires(String source, String dest, String label) {
-        if (source == null || dest == null || label == null) {
-            throw new IllegalArgumentException("Nodes and label should not be null");
-        }
-        if (!(containsNode(source) || !(containsNode(dest)))) {
-            throw new IllegalArgumentException("source and dest nodes should be in the graph");
         }
     }
 
