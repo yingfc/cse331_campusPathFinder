@@ -7,24 +7,22 @@ import java.util.Set;
 
 /**
  * <b>DirectedGraph</b> class represents a mutable, directed graph.
- * This graph does not contain two identical edges with same source, destination, and label.
- * It is a collection of nodes (also called vertices) and edges.
- * Each edge contains an destination node and an edge label.
+ * It contains a collection of nodes and edges. Each edge contains an destination node and the edge label.
  */
 public class DirectedGraph {
 
+    // the debug flag for checkRep()
     public static final boolean DEBUG = true;
 
     // the graph that holds nodes and nodes' connecting edges with labels.
-    private final HashMap<String, Set<LabeledEdge>> g;
+    private final HashMap<String, HashSet<LabeledEdge>> g;
 
     // Abstraction Function:
     // AF(this) = a graph, g, such that
     //      g = {} when it is an empty graph
     //      g = {node1=[], ...} when node1 has no outgoing edges
-    //      g = {node1=[(node2,edge12), (node3,edge13), ...], node11=[...], node22=[...]}
-    //          when node2 and node3 are destination node of the edge12 and edge13 connecting
-    //          from node1.
+    //      g = {node1=[(node2,edge12), (node3,edge13), ...], node2=[...], node3=[...], ...} otherwise
+    //          that node2 and node3 are the destination node of the edge12 and edge13 outgoing from node1.
 
     // Representation Invariant:
     //      graph != null
@@ -37,7 +35,7 @@ public class DirectedGraph {
      * @spec.effects Constructs an empty directed graph
      */
     public DirectedGraph() {
-        g = new HashMap<String, Set<LabeledEdge>>();
+        g = new HashMap<String, HashSet<LabeledEdge>>();
         checkRep();
     }
 
@@ -87,6 +85,15 @@ public class DirectedGraph {
         }
     }
 
+    /**
+     * Check if the method parameters holds the spec requirements on
+     *          source != null &amp;&amp; dest != null &amp;&amp; label != null &amp;&amp;
+     *          source and dest nodes are in the graph
+     *
+     * @param source source node of the edge
+     * @param dest destination node of the edge
+     * @param label the label of the edge
+     */
     private void checkSpecRequires(String source, String dest, String label) {
         if (source == null || dest == null || label == null) {
             throw new IllegalArgumentException("Nodes and label should not be null");
@@ -104,6 +111,7 @@ public class DirectedGraph {
      * @spec.requires node != null
      */
     public boolean containsNode(String node) {
+        checkRep();
         if (node == null) {
             throw new IllegalArgumentException("node should not be null");
         }
@@ -121,6 +129,7 @@ public class DirectedGraph {
      *                source and dest nodes are in the graph
      */
     public boolean containsEdge(String source, String dest, String label) {
+        checkRep();
         if (source != null && dest != null && label != null && containsNode(source) && containsNode(dest)) {
             LabeledEdge curr = new LabeledEdge(dest, label);
             checkRep();
@@ -138,6 +147,7 @@ public class DirectedGraph {
      * @spec.requires source != null &amp;&amp; dest != null &amp;&amp; source and dest nodes are in the graph
      */
     public boolean isConnected(String source, String dest) {
+        checkRep();
         if (source != null && dest != null && containsNode(source) && containsNode(dest)) {
             for (LabeledEdge le : g.get(source)) {
                 if (le.getDest().equals(dest)) {
@@ -156,6 +166,7 @@ public class DirectedGraph {
      * @spec.requires node != null &amp;&amp; node is in the graph
      */
     public Set<String> childrenOf(String node) {
+        checkRep();
         if (node == null || !g.containsKey(node)) {
             throw new IllegalArgumentException();
         }
@@ -174,6 +185,7 @@ public class DirectedGraph {
      * @spec.requires node != null &amp;&amp; node is in the graph
      */
     public Set<LabeledEdge> getEdges(String node) {
+        checkRep();
         if (node == null || !g.containsKey(node)) {
             throw new IllegalArgumentException();
         }
@@ -187,6 +199,7 @@ public class DirectedGraph {
      * @spec.requires the graph is not null
      */
     public Set<String> getAllNodes() {
+        checkRep();
         return Collections.unmodifiableSet(g.keySet());
     }
 
@@ -197,6 +210,7 @@ public class DirectedGraph {
      * @spec.requires the graph is not null
      */
     public Set<LabeledEdge> getAllEdges() {
+        checkRep();
         Set<LabeledEdge> res = new HashSet<>();
         for (String source: g.keySet()) {
             res.addAll(g.get(source));
@@ -225,18 +239,21 @@ public class DirectedGraph {
     }
 
     /**
-     * Standard hashCode function.
+     * Standard hashCode function with the exception of returning 0 when the graph is null.
      *
      * @return an int that all objects equal to this will also return
      */
     @Override
     public int hashCode() {
         checkRep();
+        if (g == null || g.size() == 0) {
+            return 0;
+        }
         return g.hashCode();
     }
 
     /**
-     * Standard equality operation.
+     * Standard equality operation on graph.
      *
      * @param obj the object to be compared for equality
      * @return true if obj represents the same DirectedGraph instance as this graph
@@ -261,7 +278,7 @@ public class DirectedGraph {
     @Override
     public String toString() {
         checkRep();
-        return g.toString();
+        return this.g.toString();
     }
 
     /**
@@ -288,6 +305,7 @@ public class DirectedGraph {
      */
     public static class LabeledEdge {
 
+        // the debug flag for checkRep()
         public static final boolean DEBUG = true;
 
         // Abstraction Function:
