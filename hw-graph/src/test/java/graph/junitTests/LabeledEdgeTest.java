@@ -91,4 +91,12 @@ public class LabeledEdgeTest {
     public void testHashCodeOfSameEdge() {
         assertEquals(new LabeledEdge("b", "ab").hashCode(), edge3.hashCode());
     }
+
+    // test toString() method
+    @Test
+    public void testToString() {
+        assertEquals("(,)", edge1.toString());
+        assertEquals("(a,aa)", edge2.toString());
+        assertEquals("(b,ab)", edge3.toString());
+    }
 }

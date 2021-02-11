@@ -236,4 +236,15 @@ public class DirectedGraphTest {
         graph1.addNode("node1");
         assertTrue(graph2.equals(graph1));
     }
+
+    // test toString() method
+    @Test
+    public void testToString() {
+        assertEquals("{}", graph1.toString());
+        assertEquals("{node1=[]}", graph2.toString());
+        assertEquals("{node2=[(node2,edge22), (node3,edge23)], " +
+                "node3=[(node1,edge31), (node3,edge33)], " +
+                "node1=[(node2,edge12), (node1,edge11)]}", graph3.toString());
+    }
+
 }
