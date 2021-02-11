@@ -26,14 +26,14 @@ complexity, or ease of implementation).
     outgoing edges are already organized in that manner and only takes the runtime complexity of
     O(1) for adding edge.
         But it has the disadvantage of being hard to check the connection between each two nodes
-    as we have to iterate over the list to look to the edge connection, resulting a high runtime
-    complexity in this case. fixme
+    as we have to iterate over the list to look for the edge connection, resulting a high runtime
+    complexity in this case.
 
     C.  Using an adjacency matrix has the advantage of having runtime complexity of O(1) when
-    adding/removing edge.
+    adding edge.
         But it has the disadvantage of being hard to implement and it will be time consuming to
     look for the connected children nodes as we need to iterate over the pair of nodes for edge
-    connections, resulting a high runtime complexity in this case. fixme
+    connections, resulting a high runtime complexity in this case.
 
 
 
@@ -47,7 +47,7 @@ above, be sure to list its advantages and disadvantages, too.
     The representation has the advantage of having constant time complexity for basic operations
     like getting and adding nodes/edges because of this data structure. And it won't permit duplicates
     as it is stored in set.
-    While it has the disadvantage of todo
+    While it has the disadvantage that hashSet won't maintain the insertion order.
 
 
 
