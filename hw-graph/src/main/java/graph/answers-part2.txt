@@ -49,7 +49,7 @@ above, be sure to list its advantages and disadvantages, too.
     like getting and adding nodes/edges because of this data structure. And it won't permit duplicates
     as it is stored in set.
     While it has the disadvantage that my representation generally will take higher space complexity
-    that just using a collection of edges. And hashSet won't maintain the insertion order.
+    that just using a collection of edges.
 
 
 
@@ -61,11 +61,12 @@ above, be sure to list its advantages and disadvantages, too.
 1. Describe any new tests you added and why you added them, or why you feel that your original
 tests alone are sufficient.
 
-    I feel my original tests alone are decent and covered the majority of the methods. When I first
-    design those tests in hw5-part1, I've already considered testing on many methods in the ADT
-    classes and that already covered many cases. And I also got feedback from the staff telling me
-    that I have good test coverage. However, I intentionally left the tests on toString() method
-    as I cannot write JUnit tests without implementing the method in hw5-part1.
+    I feel my original tests alone covered the majority of the methods. When I first design those tests
+    in hw5-part1, I've already considered testing on many methods in the ADT classes and that already
+    covered many cases. And I also got feedback from the staff telling me that I have good test coverage.
+
+    However, I intentionally left the tests on toString() method as I cannot write JUnit tests without
+    implementing the method in hw5-part1.
     Therefore, I've added the tests on toString() method for both the DirectedGraph.java class and its
     inner class named LabeledEdge for better test coverage.
 
