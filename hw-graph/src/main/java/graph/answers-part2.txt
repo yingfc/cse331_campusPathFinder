@@ -16,11 +16,11 @@ A few examples of possible Graph representations:
 representations listed above (for example, in terms of runtime complexity, space
 complexity, or ease of implementation).
 
-    A.  Using a collection of edges needs no other helper class, it is more clear as we only have
-    one data structure and makes the implementation easier, and having time complexity of O(1) for
+    A.  Using a collection of edges has the advantage of having the time complexity of O(1) for
     adding edge. Besides, it has very low space complexity.
-        But it has the disadvantage of taking the complexity of O(n) to find the edge connecting
-    typical nodeA and nodeB as we need to iterate over the entire collection.
+        But it has the disadvantage of being impossible to store single node that has not outgoing
+    edges in a graph. Also, it will take the complexity of O(n) to find the edge connecting typical
+    nodeA and nodeB as we need to iterate over the entire collection.
 
     B.  Using an adjacency list makes getting adjacent edges and adding new edge much easier as
     outgoing edges are already organized in that manner and only takes the runtime complexity of
@@ -33,7 +33,8 @@ complexity, or ease of implementation).
     adding edge.
         But it has the disadvantage of being hard to implement and it will be time consuming to
     look for the connected children nodes as we need to iterate over the pair of nodes for edge
-    connections, resulting a high runtime complexity in this case.
+    connections, resulting a high runtime complexity in this case. Also, it has a high space
+    complexity because of the matrix structure.
 
 
 
@@ -47,7 +48,8 @@ above, be sure to list its advantages and disadvantages, too.
     The representation has the advantage of having constant time complexity for basic operations
     like getting and adding nodes/edges because of this data structure. And it won't permit duplicates
     as it is stored in set.
-    While it has the disadvantage that hashSet won't maintain the insertion order.
+    While it has the disadvantage that my representation generally will take higher space complexity
+    that just using a collection of edges. And hashSet won't maintain the insertion order.
 
 
 
