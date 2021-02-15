@@ -1,0 +1,5 @@
+# Test find path for same rapper
+
+LoadGraph rappers rappers.tsv
+
+FindPath rappers Eminem Eminem

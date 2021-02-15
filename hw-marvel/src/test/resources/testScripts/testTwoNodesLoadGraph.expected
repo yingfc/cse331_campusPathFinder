@@ -1,0 +1,12 @@
+# test parser and BSF on two nodes graph
+
+loaded graph twoNodes
+
+twoNodes contains: Daniel Eric
+the children of Eric in twoNodes are: Daniel(CSE)
+the children of Daniel in twoNodes are: Eric(CSE)
+
+path from Eric to Daniel:
+Eric to Daniel via CSE
+path from Daniel to Eric:
+Daniel to Eric via CSE

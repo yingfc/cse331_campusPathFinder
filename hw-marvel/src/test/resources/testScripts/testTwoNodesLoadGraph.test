@@ -1,0 +1,10 @@
+# test parser and BSF on two nodes graph
+
+LoadGraph twoNodes twoNodes.tsv
+
+ListNodes twoNodes
+ListChildren twoNodes node1
+ListChildren twoNodes node2
+
+FindPath twoNodes node1 node2
+FindPath twoNodes node2 node1
