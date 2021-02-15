@@ -1,0 +1,8 @@
+# Test build graph
+
+LoadGraph rappers rappers.tsv
+
+ListChildren rappers Eminem
+ListChildren rappers Sinto
+
+FindPath rappers Eminem M.I.A.

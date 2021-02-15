@@ -1,0 +1,7 @@
+# test BFS on a long relation graph
+
+LoadGraph long long.tsv
+
+ListNodes long
+
+FindPath long Eric Jason

@@ -1,0 +1,5 @@
+# test BSF on marvel graph
+
+LoadGraph marvel marvel.tsv
+
+FindPath marvel M'SHULLA TYRANNUS

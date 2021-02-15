@@ -12,7 +12,7 @@ import java.util.Set;
 public class DirectedGraph {
 
     // the debug flag for checkRep()
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     // the graph that holds nodes and nodes' connecting edges with labels.
     private final HashMap<String, HashSet<LabeledEdge>> g;

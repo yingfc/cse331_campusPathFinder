@@ -2,11 +2,11 @@
 
 loaded graph twoNodes
 
-twoNodes contains: Daniel Eric
-the children of Eric in twoNodes are: Daniel(CSE)
-the children of Daniel in twoNodes are: Eric(CSE)
+twoNodes contains: node1 node2
+the children of node1 in twoNodes are: node2(label1)
+the children of node2 in twoNodes are: node1(label1)
 
-path from Eric to Daniel:
-Eric to Daniel via CSE
-path from Daniel to Eric:
-Daniel to Eric via CSE
+path from node1 to node2:
+node1 to node2 via label1
+path from node2 to node1:
+node2 to node1 via label1

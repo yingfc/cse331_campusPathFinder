@@ -1,0 +1,10 @@
+# Test build graph
+
+loaded graph rappers
+
+the children of Eminem in rappers are: 21 Savage(United States) Jay Z(United States) Kanye West(United States) Lil Wayne(United States) Pitbull(United States)
+the children of Sinto in rappers are: Jin Line(Ukraine)
+
+path from Eminem to M.I.A.:
+Eminem to 21 Savage via United States
+21 Savage to M.I.A. via United Kingdom

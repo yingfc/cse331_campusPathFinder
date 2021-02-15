@@ -1,0 +1,9 @@
+# test on one node graph
+
+LoadGraph singleNodeGraph singleNodeGraph.tsv
+
+ListNodes singleNodeGraph
+ListChildren singleNodeGraph Yingfan
+
+FindPath singleNodeGraph Yingfan Yingfan
+FindPath singleNodeGraph Yingfan Eric

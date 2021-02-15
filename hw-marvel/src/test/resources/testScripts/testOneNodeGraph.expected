@@ -1,0 +1,9 @@
+# test on one node graph
+
+loaded graph singleNodeGraph
+
+singleNodeGraph contains: Yingfan
+the children of Yingfan in singleNodeGraph are:
+
+path from Yingfan to Yingfan:
+unknown character Eric

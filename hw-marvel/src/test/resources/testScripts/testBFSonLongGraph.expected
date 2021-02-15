@@ -1,0 +1,14 @@
+# test BFS on a long relation graph
+
+loaded graph long
+
+long contains: Chen Daniel Eric Felix Haruhi Jason Jeff William
+
+path from Eric to Jason:
+Eric to Chen via Hook1
+Chen to Felix via Hook2
+Felix to Daniel via Hook3
+Daniel to Haruhi via Hook4
+Haruhi to William via Hook5
+William to Jeff via Hook6
+Jeff to Jason via Hook7
