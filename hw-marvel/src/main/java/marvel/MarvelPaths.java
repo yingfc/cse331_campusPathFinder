@@ -6,6 +6,8 @@ import java.util.*;
 
 public class MarvelPaths {
 
+    private static String defaultFileName = "marvel.tsv";
+
     public static DirectedGraph buildGraph(String filename) {
         if (filename == null) {
             throw new IllegalArgumentException("filename is null");
@@ -96,9 +98,8 @@ public class MarvelPaths {
     }
 
     public static void main(String[] args) throws Exception {
-        String defaultFileName = "marvel.tsv";
 
-        String filename = "src/main/resources/data/" + defaultFileName;
+        String filename = defaultFileName;
         DirectedGraph g = MarvelPaths.buildGraph(filename);
         System.out.println("Finding minimum number of books connecting two marvel heroes...");
 
