@@ -30,9 +30,8 @@ public class MarvelParser {
      *
      * @param filename the file that will be read
      * @spec.requires filename is a valid file in the resources/data folder.
-     * @return an iterator of MarvelModel from the parser
+     * @return an iterator of MarvelModel from the parser of the file being read.
      */
-    // TODO: Replace 'void' with the type you want the parser to produce
     public static Iterator<MarvelModel> parseData(String filename) {
         // You can use this code as an example for getting a file from the resources folder
         // in a project like this. If you access TSV files elsewhere in your code, you'll need
@@ -53,8 +52,6 @@ public class MarvelParser {
         }
         Reader reader = new BufferedReader(new InputStreamReader(stream));
 
-        // TODO: Complete this method
-        // Hint: You might want to create a new bean class to use with the OpenCSV Parser
         Iterator<MarvelModel> csvMarvelIterator = new CsvToBeanBuilder<MarvelModel>(reader)
                                                             .withType(MarvelModel.class)
                                                             .withSeparator('\t')
