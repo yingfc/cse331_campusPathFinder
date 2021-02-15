@@ -4,10 +4,21 @@ import graph.DirectedGraph;
 
 import java.util.*;
 
+/**
+ * MarvelPaths class reads data from a file, and use the data to build a graph,
+ * allowing user to find the shortest path between nodes in the graph.
+ *
+ */
 public class MarvelPaths {
 
-    private static String defaultFileName = "marvel.tsv";
-
+    /**
+     * Build a graph with the data from the given .tsv file
+     *
+     * @param filename file used to build the graph
+     * @spec.requires filename != null
+     * @spec.effects build/create a graph
+     * @return a DirectedGraph built from the given file
+     */
     public static DirectedGraph buildGraph(String filename) {
         if (filename == null) {
             throw new IllegalArgumentException("filename is null");
@@ -50,7 +61,6 @@ public class MarvelPaths {
                 for (String dest : list) {
                     if (!(source.equals(dest))) {
                         marvelGraph.addEdge(source, dest, book);
-//                        marvelGraph.addEdge(dest, source, book);
                     }
                 }
             }
@@ -58,6 +68,16 @@ public class MarvelPaths {
         return marvelGraph;
     }
 
+    /**
+     * Find the shortest path from one node to another node using BFS
+     *
+     * @param g the graph to find the shortest path between two nodes
+     * @param source the source node
+     * @param dest the destination node
+     * @spec.requires graph != null &amp;&amp; source != null &amp;&amp; dest != null &amp;&amp;
+     *                source and dest nodes are in the graph
+     * @return the shortest path from source node to the destination node, return null if no path exist
+     */
     public static List<DirectedGraph.LabeledEdge> BFS(DirectedGraph g, String source, String dest) {
         if (g == null || source == null || dest == null || !g.containsNode(source) || !g.containsNode(dest)) {
             throw new IllegalArgumentException();
@@ -97,9 +117,16 @@ public class MarvelPaths {
         return null;
     }
 
+    /**
+     * Main method that allows the user to interactively enter two nodes to find the shortest path.
+     *
+     * @param args for main method
+     * @spec.requires the given file being in the same folder as this java file
+     * @throws Exception when the given filename is null
+     */
     public static void main(String[] args) throws Exception {
 
-        String filename = defaultFileName;
+        String filename = "marvel.tsv";
         DirectedGraph g = MarvelPaths.buildGraph(filename);
         System.out.println("Finding minimum number of books connecting two marvel heroes...");
 
