@@ -30,6 +30,7 @@ public class MarvelParser {
      *
      * @param filename the file that will be read
      * @spec.requires filename is a valid file in the resources/data folder.
+     * @return an iterator of MarvelModel from the parser
      */
     // TODO: Replace 'void' with the type you want the parser to produce
     public static Iterator<MarvelModel> parseData(String filename) {
