@@ -1,0 +1,5 @@
+# Test BFS of four hops using Marvel dataset.
+
+LoadGraph marvel marvel.tsv
+
+FindPath marvel MASTER_FOUR CAPTAIN_BARRACUDA

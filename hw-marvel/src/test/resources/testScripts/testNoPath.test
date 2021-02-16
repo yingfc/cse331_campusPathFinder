@@ -1,0 +1,5 @@
+# Test BFS on non-exist path between nodes
+
+LoadGraph rappers rappers.tsv
+
+FindPath rappers Drake Kanye_West
