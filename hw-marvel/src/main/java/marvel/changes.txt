@@ -1,2 +1,3 @@
 Briefly list any changes you made to your graph class during hw-marvel, and why you made those changes.
 
+I turned off the DEBUG flag to disable the expensive checkRep tests.
