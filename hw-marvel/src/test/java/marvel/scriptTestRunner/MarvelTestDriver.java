@@ -273,7 +273,6 @@ public class MarvelTestDriver {
     }
 
     private void loadGraph(String graphName, String fileName) {
-//        String fullFilename = "src/main/resources/data/" + fileName;
         DirectedGraph graph = MarvelPaths.buildGraph(fileName);
         graphs.put(graphName, graph);
         output.println("loaded graph " + graphName);
