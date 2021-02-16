@@ -23,11 +23,9 @@ public class MarvelPaths {
         if (filename == null) {
             throw new IllegalArgumentException("filename is null");
         }
-
         DirectedGraph marvelGraph = new DirectedGraph();
         HashSet<String> heroes = new HashSet<>();
         HashMap<String, Set<String>> books = new HashMap<>();
-
         Iterator<MarvelModel> it = MarvelParser.parseData(filename);
 
         while(it.hasNext()) {
