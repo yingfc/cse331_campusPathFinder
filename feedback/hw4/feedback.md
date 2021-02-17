@@ -1,4 +1,4 @@
-### Written Answers: 18/26
+### Written Answers: 20/26
 0.1: You should include a loop invariant for your pseudocode.
 
 0.2: You should include a loop invariant for your pseudocode.
