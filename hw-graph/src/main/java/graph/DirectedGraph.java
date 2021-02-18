@@ -271,8 +271,8 @@ public class DirectedGraph {
      * Throws an exception if the representation invariant is violated.
      */
     private void checkRep() {
+        assert(this.g != null): "NULL GRAPH";
         if (DEBUG) {
-            assert(this.g != null): "NULL GRAPH";
             for (String node : g.keySet()) {
                 assert(node != null): "NULL NODE";
                 for (LabeledEdge le : g.get(node)) {
@@ -394,10 +394,8 @@ public class DirectedGraph {
          * Throws an exception if the representation invariant is violated.
          */
         private void checkRep() {
-            if (DEBUG) {
-                assert (dest != null) : "NULL DESTINATION NODE";
-                assert (edgeLabel != null) : "NULL EDGE LABEL";
-            }
+            assert (dest != null) : "NULL DESTINATION NODE";
+            assert (edgeLabel != null) : "NULL EDGE LABEL";
         }
     }
 }
