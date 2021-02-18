@@ -117,10 +117,6 @@ public class MarvelPaths {
 
     /**
      * Main method that allows the user to interactively enter two nodes to find the shortest path.
-     *
-     * @param args for main method
-     * @spec.requires the given file being in the same folder as this java file
-     * @throws Exception when the given filename is null
      */
     public static void main(String[] args) throws Exception {
 
