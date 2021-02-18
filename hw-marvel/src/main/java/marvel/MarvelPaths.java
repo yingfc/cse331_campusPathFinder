@@ -117,18 +117,19 @@ public class MarvelPaths {
 
     /**
      * Main method that allows the user to interactively enter two nodes to find the shortest path.
+     *
+     * @param args of the main method, not used.
      */
-    public static void main(String[] args) throws Exception {
-
+    public static void main(String[] args) {
         String filename = "marvel.tsv";
         DirectedGraph g = MarvelPaths.buildGraph(filename);
         System.out.println("Finding minimum number of books connecting two marvel heroes...");
 
         Scanner reader = new Scanner(System.in);
         String source, dest;
-        boolean exit = false;
+        boolean found = false;
 
-        while (!exit) {
+        while (!found) {
             System.out.println("Start with your source hero here: ");
             source = reader.nextLine();
             System.out.println("Then enter your destination hero: ");
@@ -141,7 +142,7 @@ public class MarvelPaths {
             } else if (!g.containsNode(dest)) {
                 System.out.println(source + " not found in current graph");
             } else {
-                exit = true;
+                found = true;
                 String node = source;
                 String res = "path from " + source + " to " + dest + ":";
                 List<DirectedGraph.LabeledEdge> path = MarvelPaths.BFS(g, source, dest);
