@@ -1,2 +1,4 @@
 Briefly list any changes you made to your graph class during hw-pathfinder, and why you made those changes.
 
+Apart from making previous implementation generic, I fixed the compilation errors in the corresponding
+tests because of this change.
