@@ -19,11 +19,11 @@ public class MarvelPaths {
      * @spec.effects build/create a graph
      * @return a DirectedGraph built from the given file
      */
-    public static DirectedGraph buildGraph(String filename) {
+    public static DirectedGraph<String, String> buildGraph(String filename) {
         if (filename == null) {
             throw new IllegalArgumentException("filename is null");
         }
-        DirectedGraph marvelGraph = new DirectedGraph();
+        DirectedGraph<String, String> marvelGraph = new DirectedGraph<>();
         HashSet<String> heroes = new HashSet<>();
         HashMap<String, Set<String>> books = new HashMap<>();
         Iterator<MarvelModel> it = MarvelParser.parseData(filename);
@@ -76,12 +76,12 @@ public class MarvelPaths {
      *                source and dest nodes are in the graph
      * @return the shortest path from source node to the destination node, return null if no path exist
      */
-    public static List<DirectedGraph.LabeledEdge> BFS(DirectedGraph g, String source, String dest) {
+    public static List<DirectedGraph.LabeledEdge<String, String>> BFS(DirectedGraph<String, String> g, String source, String dest) {
         if (g == null || source == null || dest == null || !g.containsNode(source) || !g.containsNode(dest)) {
             throw new IllegalArgumentException();
         }
         Queue<String> nodesToVisit = new LinkedList<>();
-        Map<String, List<DirectedGraph.LabeledEdge>> paths = new HashMap<>();
+        Map<String, List<DirectedGraph.LabeledEdge<String, String>>> paths = new HashMap<>();
         nodesToVisit.add(source);
         paths.put(source, new ArrayList<>());
 
@@ -91,7 +91,7 @@ public class MarvelPaths {
                 return paths.get(currNode);
             }
 
-            List<DirectedGraph.LabeledEdge> currEdges = new ArrayList<>(g.getEdges(currNode));
+            List<DirectedGraph.LabeledEdge<String, String>> currEdges = new ArrayList<>(g.getEdges(currNode));
             currEdges.sort((o1, o2) -> {
                 if (!(o1.getDest().equals(o2.getDest()))) {
                     return o1.getDest().compareTo(o2.getDest());
@@ -102,11 +102,11 @@ public class MarvelPaths {
                 return 0;
             });
 
-            for (DirectedGraph.LabeledEdge le : currEdges) {
+            for (DirectedGraph.LabeledEdge<String, String> le : currEdges) {
                 String connectedNode = le.getDest();
                 if (!paths.containsKey(connectedNode)) {
                     nodesToVisit.add(connectedNode);
-                    List<DirectedGraph.LabeledEdge> newPath = new ArrayList<>(paths.get(currNode));
+                    List<DirectedGraph.LabeledEdge<String, String>> newPath = new ArrayList<>(paths.get(currNode));
                     newPath.add(le);
                     paths.put(connectedNode, newPath);
                 }
@@ -123,7 +123,7 @@ public class MarvelPaths {
      */
     public static void main(String[] args) {
         String filename = "marvel.tsv";
-        DirectedGraph g = MarvelPaths.buildGraph(filename);
+        DirectedGraph<String, String> g = MarvelPaths.buildGraph(filename);
         System.out.println("Finding minimum number of books connecting two marvel heroes...");
 
         Scanner reader = new Scanner(System.in);
@@ -146,11 +146,11 @@ public class MarvelPaths {
                 found = true;
                 String node = source;
                 String res = "path from " + source + " to " + dest + ":";
-                List<DirectedGraph.LabeledEdge> path = MarvelPaths.BFS(g, source, dest);
+                List<DirectedGraph.LabeledEdge<String, String>> path = MarvelPaths.BFS(g, source, dest);
                 if (path == null) {
                     res += "\n" + "no path found";
                 } else {
-                    for (DirectedGraph.LabeledEdge le : path) {
+                    for (DirectedGraph.LabeledEdge<String, String> le : path) {
                         res += "\n" + node + " to " + le.getDest() + " via " + le.getEdgeLabel();
                         node = le.getDest();
                     }

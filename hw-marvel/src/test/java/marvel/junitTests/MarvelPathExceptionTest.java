@@ -18,11 +18,11 @@ public class MarvelPathExceptionTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void testBFSonNullSourceNode() {
-        MarvelPaths.BFS(new DirectedGraph(), null, "dest");
+        MarvelPaths.BFS(new DirectedGraph<>(), null, "dest");
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void testBFSonNullDestNode() {
-        MarvelPaths.BFS(new DirectedGraph(), "source", null);
+        MarvelPaths.BFS(new DirectedGraph<>(), "source", null);
     }
 }
