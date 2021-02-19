@@ -9,13 +9,13 @@ import java.util.Set;
  * <b>DirectedGraph</b> class represents a mutable, directed graph.
  * It contains a collection of nodes and edges. Each edge contains an destination node and the edge label.
  */
-public class DirectedGraph {
+public class DirectedGraph<T, E> {
 
     // the debug flag for checkRep()
     public static final boolean DEBUG = false;
 
     // the graph that holds nodes and nodes' connecting edges with labels.
-    private final HashMap<String, HashSet<LabeledEdge>> g;
+    private final HashMap<T, HashSet<LabeledEdge<T, E>>> g;
 
     // Abstraction Function:
     // AF(this) = a graph, g, such that
@@ -35,7 +35,7 @@ public class DirectedGraph {
      * @spec.effects Constructs an empty directed graph
      */
     public DirectedGraph() {
-        g = new HashMap<String, HashSet<LabeledEdge>>();
+        g = new HashMap<>();
         checkRep();
     }
 
@@ -48,7 +48,7 @@ public class DirectedGraph {
      * @spec.modifies this
      * @spec.effects add the node to the graph if it is not already present
      */
-    public boolean addNode(String node) {
+    public boolean addNode(T node) {
         checkRep();
         if (node == null) {
             throw new IllegalArgumentException("Node should not be null");
@@ -56,7 +56,7 @@ public class DirectedGraph {
         if (containsNode(node)) {
             return false;
         } else {
-            g.put(node, new HashSet<LabeledEdge>());
+            g.put(node, new HashSet<>());
             return true;
         }
     }
@@ -74,13 +74,13 @@ public class DirectedGraph {
      * @spec.modifies this
      * @spec.effects add the edge to the graph if it is not already present
      */
-    public boolean addEdge(String source, String dest, String label) {
+    public boolean addEdge(T source, T dest, E label) {
         checkRep();
         if (source == null || dest == null || label == null || !(containsNode(source) || !(containsNode(dest)))) {
             throw new IllegalArgumentException("Nodes and label should not be null, " +
                     "source and dest nodes should be in the graph");
         }
-        LabeledEdge curr = new LabeledEdge(dest, label);
+        LabeledEdge<T, E> curr = new LabeledEdge<>(dest, label);
         if (g.get(source).contains(curr)) {
             return false;
         } else {
@@ -96,7 +96,7 @@ public class DirectedGraph {
      * @return true if the node is in the graph, otherwise return false
      * @spec.requires node != null
      */
-    public boolean containsNode(String node) {
+    public boolean containsNode(T node) {
         checkRep();
         if (node == null) {
             throw new IllegalArgumentException("node should not be null");
@@ -114,10 +114,10 @@ public class DirectedGraph {
      * @spec.requires source != null &amp;&amp; dest != null &amp;&amp; label != null &amp;&amp;
      *                source and dest nodes are in the graph
      */
-    public boolean containsEdge(String source, String dest, String label) {
+    public boolean containsEdge(T source, T dest, E label) {
         checkRep();
         if (source != null && dest != null && label != null && containsNode(source) && containsNode(dest)) {
-            LabeledEdge curr = new LabeledEdge(dest, label);
+            LabeledEdge<T, E> curr = new LabeledEdge<>(dest, label);
             checkRep();
             return getEdges(source).contains(curr);
         }
@@ -132,10 +132,10 @@ public class DirectedGraph {
      * @return true if there are any edge connecting these two nodes, otherwise return false
      * @spec.requires source != null &amp;&amp; dest != null &amp;&amp; source and dest nodes are in the graph
      */
-    public boolean isConnected(String source, String dest) {
+    public boolean isConnected(T source, T dest) {
         checkRep();
         if (source != null && dest != null && containsNode(source) && containsNode(dest)) {
-            for (LabeledEdge le : g.get(source)) {
+            for (LabeledEdge<T, E> le : g.get(source)) {
                 if (le.getDest().equals(dest)) {
                     return true;
                 }
@@ -151,13 +151,13 @@ public class DirectedGraph {
      * @return the set of nodes that are the children of the given nodes
      * @spec.requires node != null &amp;&amp; node is in the graph
      */
-    public Set<String> childrenOf(String node) {
+    public Set<T> childrenOf(T node) {
         checkRep();
         if (node == null || !g.containsKey(node)) {
             throw new IllegalArgumentException();
         }
-        Set<String> childrenNodes = new HashSet<>();
-        for (LabeledEdge le: g.get(node)) {
+        Set<T> childrenNodes = new HashSet<>();
+        for (LabeledEdge<T, E> le: g.get(node)) {
             childrenNodes.add(le.getDest());
         }
         return childrenNodes;
@@ -170,7 +170,7 @@ public class DirectedGraph {
      * @return the set of edges that are connecting to the given node
      * @spec.requires node != null &amp;&amp; node is in the graph
      */
-    public Set<LabeledEdge> getEdges(String node) {
+    public Set<LabeledEdge<T, E>> getEdges(T node) {
         checkRep();
         if (node == null || !g.containsKey(node)) {
             throw new IllegalArgumentException();
@@ -184,7 +184,7 @@ public class DirectedGraph {
      * @return the set of all nodes in the graph
      * @spec.requires the graph is not null
      */
-    public Set<String> getAllNodes() {
+    public Set<T> getAllNodes() {
         checkRep();
         return Collections.unmodifiableSet(g.keySet());
     }
@@ -195,10 +195,10 @@ public class DirectedGraph {
      * @return the set of of all edges in the graph
      * @spec.requires the graph is not null
      */
-    public Set<LabeledEdge> getAllEdges() {
+    public Set<LabeledEdge<T, E>> getAllEdges() {
         checkRep();
-        Set<LabeledEdge> res = new HashSet<>();
-        for (String source: g.keySet()) {
+        Set<LabeledEdge<T, E>> res = new HashSet<>();
+        for (T source: g.keySet()) {
             res.addAll(g.get(source));
         }
         return res;
@@ -247,7 +247,7 @@ public class DirectedGraph {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof DirectedGraph) {
-            DirectedGraph graph = (DirectedGraph) obj;
+            DirectedGraph<?, ?> graph = (DirectedGraph<?, ?>) obj;
             if (this.g.size() != graph.size()) {
                 return false;
             }
@@ -273,9 +273,9 @@ public class DirectedGraph {
     private void checkRep() {
         assert(this.g != null): "NULL GRAPH";
         if (DEBUG) {
-            for (String node : g.keySet()) {
+            for (T node : g.keySet()) {
                 assert(node != null): "NULL NODE";
-                for (LabeledEdge le : g.get(node)) {
+                for (LabeledEdge<T, E> le : g.get(node)) {
                     assert(le != null): "NULL LABELED EDGE";
                     assert(g.containsKey(le.getDest())): "NON-EXIST NODE IN GRAPH";
                 }
@@ -289,7 +289,7 @@ public class DirectedGraph {
      * An example labeled edge could be LabeledEdge("node1", "edge11") showing its
      * destination node being "node1" and its edge label being "edge11".
      */
-    public static class LabeledEdge {
+    public static class LabeledEdge<T, E> {
 
         // the debug flag for checkRep()
         public static final boolean DEBUG = true;
@@ -305,12 +305,12 @@ public class DirectedGraph {
         /**
          * Destination of this edge
          */
-        private final String dest;
+        private final T dest;
 
         /**
          * Label of this edge
          */
-        private final String edgeLabel;
+        private final E edgeLabel;
 
         /**
          * Creates a labeled edge.
@@ -320,7 +320,7 @@ public class DirectedGraph {
          * @spec.requires dest != null &amp;&amp; edgeLabel != null
          * @spec.effects Constructs a new labeled edge e, with e.dest = dest, and e.edgeLabel = edgeLabel
          */
-        public LabeledEdge(String dest, String edgeLabel) {
+        public LabeledEdge(T dest, E edgeLabel) {
             if (dest == null || edgeLabel == null) {
                 throw new IllegalArgumentException();
             }
@@ -334,7 +334,7 @@ public class DirectedGraph {
          *
          * @return the destination node of this edge
          */
-        public String getDest() {
+        public T getDest() {
             checkRep();
             return this.dest;
         }
@@ -344,7 +344,7 @@ public class DirectedGraph {
          *
          * @return the edge label of this edge
          */
-        public String getEdgeLabel() {
+        public E getEdgeLabel() {
             checkRep();
             return this.edgeLabel;
         }
@@ -374,7 +374,7 @@ public class DirectedGraph {
             if (!(obj instanceof LabeledEdge)) {
                 return false;
             }
-            LabeledEdge le = (LabeledEdge) obj;
+            LabeledEdge<?, ?> le = (LabeledEdge<?, ?>) obj;
             checkRep();
             return this.dest.equals(le.dest) && this.edgeLabel.equals(le.edgeLabel);
         }

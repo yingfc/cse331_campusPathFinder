@@ -15,24 +15,24 @@ public class DirectedGraphTest {
     @Rule
     public Timeout globalTimeout = Timeout.seconds(10); // 10 seconds max per method tested
 
-    private DirectedGraph graph1, graph2, graph3;
+    private DirectedGraph<String, String> graph1, graph2, graph3;
     private Set<String> nodes1, nodes2, nodes3;
-    private Set<DirectedGraph.LabeledEdge> edges1, edges2, edges3;
+    private Set<DirectedGraph.LabeledEdge<String, String>> edges1, edges2, edges3;
 
 
     @Before
     public void init() throws Exception {
-        graph1 = new DirectedGraph();
+        graph1 = new DirectedGraph<>();
         nodes1 = new HashSet<>();
         edges1 = new HashSet<>();
 
-        graph2 = new DirectedGraph();
+        graph2 = new DirectedGraph<>();
         nodes2 = new HashSet<>();
         edges2 = new HashSet<>();
         graph2.addNode("node1");
         nodes2.add("node1");
 
-        graph3 = new DirectedGraph();
+        graph3 = new DirectedGraph<>();
         nodes3 = new HashSet<>();
         edges3 = new HashSet<>();
         graph3.addNode("node1");
@@ -47,12 +47,12 @@ public class DirectedGraphTest {
         graph3.addEdge("node1", "node1", "edge11");
         graph3.addEdge("node2", "node2", "edge22");
         graph3.addEdge("node3", "node3", "edge33");
-        edges3.add(new DirectedGraph.LabeledEdge("node2", "edge12"));
-        edges3.add(new DirectedGraph.LabeledEdge("node3", "edge23"));
-        edges3.add(new DirectedGraph.LabeledEdge("node1", "edge31"));
-        edges3.add(new DirectedGraph.LabeledEdge("node1", "edge11"));
-        edges3.add(new DirectedGraph.LabeledEdge("node2", "edge22"));
-        edges3.add(new DirectedGraph.LabeledEdge("node3", "edge33"));
+        edges3.add(new DirectedGraph.LabeledEdge<>("node2", "edge12"));
+        edges3.add(new DirectedGraph.LabeledEdge<>("node3", "edge23"));
+        edges3.add(new DirectedGraph.LabeledEdge<>("node1", "edge31"));
+        edges3.add(new DirectedGraph.LabeledEdge<>("node1", "edge11"));
+        edges3.add(new DirectedGraph.LabeledEdge<>("node2", "edge22"));
+        edges3.add(new DirectedGraph.LabeledEdge<>("node3", "edge33"));
     }
 
     // test isEmpty() method for graph
@@ -199,8 +199,8 @@ public class DirectedGraphTest {
     public void testGetEdges() {
         assertTrue(graph2.childrenOf("node1").isEmpty());
         edges3 = new HashSet<>();
-        edges3.add(new DirectedGraph.LabeledEdge("node2", "edge12"));
-        edges3.add(new DirectedGraph.LabeledEdge("node1", "edge11"));
+        edges3.add(new DirectedGraph.LabeledEdge<>("node2", "edge12"));
+        edges3.add(new DirectedGraph.LabeledEdge<>("node1", "edge11"));
         assertEquals(edges3, graph3.getEdges("node1"));
     }
 
@@ -217,14 +217,14 @@ public class DirectedGraphTest {
     public void testGetAllEdgesAdding() {
         assertEquals(edges2, graph2.getAllEdges());
         graph2.addEdge("node1", "node1", "edge1");
-        edges2.add(new DirectedGraph.LabeledEdge("node1", "edge1"));
+        edges2.add(new DirectedGraph.LabeledEdge<>("node1", "edge1"));
         assertEquals(edges2, graph2.getAllEdges());
     }
 
     // test hashCode() method for graph with same nodes/edges
     @Test
     public void testHashCodeGraph() {
-        graph1 = new DirectedGraph();
+        graph1 = new DirectedGraph<>();
         graph1.addNode("node1");
         assertEquals(graph2.hashCode(), graph1.hashCode());
     }
@@ -232,7 +232,7 @@ public class DirectedGraphTest {
     // test equals() method for graph with same nodes/edges
     @Test
     public void testEqualsGraph() {
-        graph1 = new DirectedGraph();
+        graph1 = new DirectedGraph<>();
         graph1.addNode("node1");
         assertTrue(graph2.equals(graph1));
     }
