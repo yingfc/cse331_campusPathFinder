@@ -116,7 +116,8 @@ public class MarvelPaths {
     }
 
     /**
-     * Main method that allows the user to interactively enter two nodes to find the shortest path.
+     * Main method that allows the user to interactively enter two nodes to find the shortest path/books
+     * that connect two marvel characters.
      *
      * @param args of the main method, not used.
      */
