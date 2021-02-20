@@ -246,7 +246,7 @@ public class DirectedGraph<T, E> {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof DirectedGraph) {
+        if (obj instanceof DirectedGraph<?, ?>) {
             DirectedGraph<?, ?> graph = (DirectedGraph<?, ?>) obj;
             if (this.g.size() != graph.size()) {
                 return false;
@@ -371,7 +371,7 @@ public class DirectedGraph<T, E> {
         @Override
         public boolean equals(Object obj) {
             checkRep();
-            if (!(obj instanceof LabeledEdge)) {
+            if (!(obj instanceof LabeledEdge<?, ?>)) {
                 return false;
             }
             LabeledEdge<?, ?> le = (LabeledEdge<?, ?>) obj;
