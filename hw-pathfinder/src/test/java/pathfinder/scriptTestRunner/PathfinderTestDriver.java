@@ -141,9 +141,6 @@ public class PathfinderTestDriver {
                 case "ListChildren":
                     listChildren(arguments);
                     break;
-                case "LoadGraph":
-                    loadGraph(arguments);
-                    break;
                 case "FindPath":
                     findPath(arguments);
                     break;
@@ -260,22 +257,6 @@ public class PathfinderTestDriver {
             res += " " + le.getDest() + "(" + le.getEdgeLabel() + ")";
         }
         output.println(res);
-    }
-
-    private void loadGraph(List<String> arguments) {
-        if (arguments.size() != 2) {
-            throw new CommandException("Bad arguments to loadGraph: " + arguments);
-        }
-
-        String graphName = arguments.get(0);
-        String fileName = arguments.get(1);
-        loadGraph(graphName, fileName);
-    }
-
-    private void loadGraph(String graphName, String fileName) {
-        DirectedGraph<String, Double> graph = MarvelPathsWeighted.buildGraph(fileName);
-        graphs.put(graphName, graph);
-        output.println("loaded graph " + graphName);
     }
 
     private void findPath(List<String> arguments) {
