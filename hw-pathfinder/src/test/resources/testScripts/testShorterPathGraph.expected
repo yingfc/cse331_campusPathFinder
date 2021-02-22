@@ -1,0 +1,13 @@
+# Find shorter path via Dijkstra's algorithm for graph
+
+created graph graph
+
+added node node1 to graph
+added node node2 to graph
+added edge 20.000 from node1 to node2 in graph
+added edge 13.000 from node1 to node2 in graph
+added edge 12.999 from node1 to node2 in graph
+
+path from node1 to node2:
+node1 to node2 with weight 12.999
+total cost: 12.999

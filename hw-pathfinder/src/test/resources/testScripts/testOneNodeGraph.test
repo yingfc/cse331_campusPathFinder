@@ -1,0 +1,7 @@
+# Find path via Dijkstra's algorithm for graph containing only one node
+
+CreateGraph oneNode
+
+AddNode oneNode node1
+
+FindPath oneNode node1 node1

@@ -1,0 +1,11 @@
+# Find shorter path via Dijkstra's algorithm for graph
+
+CreateGraph graph
+
+AddNode graph node1
+AddNode graph node2
+AddEdge graph node1 node2 20.0
+AddEdge graph node1 node2 13.0
+AddEdge graph node1 node2 12.999
+
+FindPath graph node1 node2

@@ -1,0 +1,8 @@
+# Find path via Dijkstra's algorithm for graph containing only one node
+
+created graph oneNode
+
+added node node1 to oneNode
+
+path from node1 to node1:
+total cost: 0.000

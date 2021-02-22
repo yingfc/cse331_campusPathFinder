@@ -1,0 +1,7 @@
+# Find path via Dijkstra's algorithm for empty graph
+
+CreateGraph empty
+
+ListNodes empty
+
+FindPath empty node1 node2

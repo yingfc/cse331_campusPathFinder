@@ -2,8 +2,6 @@ package pathfinder;
 
 import graph.DirectedGraph;
 import marvel.MarvelPaths;
-import pathfinder.datastructures.Path;
-import pathfinder.datastructures.Point;
 
 import java.util.*;
 

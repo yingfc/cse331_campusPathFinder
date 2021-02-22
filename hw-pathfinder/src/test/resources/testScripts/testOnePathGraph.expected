@@ -1,0 +1,14 @@
+# Find path via Dijkstra's algorithm for graph containing only one potential path
+
+created graph graph
+
+added node node1 to graph
+added node node2 to graph
+added node node3 to graph
+added edge 20.000 from node1 to node2 in graph
+added edge 13.000 from node2 to node3 in graph
+
+path from node1 to node3:
+node1 to node2 with weight 20.000
+node2 to node3 with weight 13.000
+total cost: 33.000

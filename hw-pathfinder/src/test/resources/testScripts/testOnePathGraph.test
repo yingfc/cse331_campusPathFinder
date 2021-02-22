@@ -1,0 +1,11 @@
+# Find path via Dijkstra's algorithm for graph containing only one potential path
+
+CreateGraph graph
+
+AddNode graph node1
+AddNode graph node2
+AddNode graph node3
+AddEdge graph node1 node2 20.0
+AddEdge graph node2 node3 13.0
+
+FindPath graph node1 node3
