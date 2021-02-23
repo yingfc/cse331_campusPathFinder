@@ -5,8 +5,21 @@ import marvel.MarvelPaths;
 
 import java.util.*;
 
+/**
+ * MarvelPathsWeighted class reads data from a file, and use the data to build a graph,
+ * allowing user to find the shortest path via weights between nodes in the graph.
+ *
+ */
 public class MarvelPathsWeighted {
 
+    /**
+     * Build a graph with the data from the given .tsv file
+     *
+     * @param filename  file used to build the graph
+     * @spec.requires   filename != null
+     * @spec.effects    build/create a graph
+     * @return          a DirectedGraph built from the given file
+     */
     public static DirectedGraph<String, Double> buildGraph(String filename) {
         DirectedGraph<String, String> g = MarvelPaths.buildGraph(filename);
         DirectedGraph<String, Double> weightedGraph = new DirectedGraph<>();
@@ -36,8 +49,20 @@ public class MarvelPathsWeighted {
         return weightedGraph;
     }
 
+    /**
+     * Find the shortest path from one node to another node using Dijkstra's algorithm.
+     *
+     * @param g         the graph to find the shortest path between two nodes
+     * @param source    the source node
+     * @param dest      the destination node
+     * @param <T>       generic type representing the node
+     * @param <E>       generic type representing the edge weight
+     * @spec.requires   graph != null &amp;&amp; source != null &amp;&amp; dest != null &amp;&amp;
+     *                  source and dest nodes are in the graph
+     * @return          the shortest path from source node to the destination node, return null if no path exist
+     */
     public static <T, E extends Number> List<DirectedGraph.LabeledEdge<T, Double>> Dijkstra (DirectedGraph<T, E> g, T source, T dest) {
-        if (g == null || source == null || dest == null) {
+        if (g == null || source == null || dest == null || !g.containsNode(source) || !g.containsNode(dest)) {
             throw new IllegalArgumentException();
         }
 
