@@ -66,9 +66,9 @@ public class PathfinderTestDriver {
     private static void printUsage() {
         System.err.println("Usage:");
         System.err.println("  Run the gradle 'build' task");
-        System.err.println("  Open a terminal at hw-graph/build/classes/java/test");
-        System.err.println("  To read from a file: java graph.scriptTestRunner.PathfinderTestDriver <name of input script>");
-        System.err.println("  To read from standard in (interactive): java graph.scriptTestRunner.PathfinderTestDriver");
+        System.err.println("  Open a terminal at hw-pathfinder/build/classes/java/test");
+        System.err.println("  To read from a file: java pathfinder.scriptTestRunner.PathfinderTestDriver <name of input script>");
+        System.err.println("  To read from standard in (interactive): java pathfinder.scriptTestRunner.PathfinderTestDriver");
     }
 
     // ***************************
@@ -204,7 +204,7 @@ public class PathfinderTestDriver {
         g.addNode(parentName);
         g.addNode(childName);
         g.addEdge(parentName, childName, edgeLabel);
-        output.println("added edge " + edgeLabel + " from " + parentName + " to " + childName + " in " + graphName);
+        output.println(String.format("added edge %.3f", edgeLabel) + " from " + parentName + " to " + childName + " in " + graphName);
     }
 
     private void listNodes(List<String> arguments) {
@@ -254,7 +254,7 @@ public class PathfinderTestDriver {
         });
 
         for (DirectedGraph.LabeledEdge<String, Double> le: list) {
-            res += " " + le.getDest() + "(" + le.getEdgeLabel() + ")";
+            res += " " + le.getDest() + String.format("(%.3f", le.getEdgeLabel()) + ")";
         }
         output.println(res);
     }
@@ -288,10 +288,14 @@ public class PathfinderTestDriver {
             if (path == null) {
                 res += "\n" + "no path found";
             } else {
+                double cost = 0;
+                path.remove(0);
                 for (DirectedGraph.LabeledEdge<String, Double> le : path) {
-                    res += "\n" + s + " to " + le.getDest() + " via " + le.getEdgeLabel();
+                    res += "\n" + s + " to " + le.getDest() + " with weight " + String.format("%.3f", le.getEdgeLabel() - cost);
+                    cost = le.getEdgeLabel();
                     s = le.getDest();
                 }
+                res += "\n" + "total cost: " + String.format("%.3f", cost);
             }
             output.println(res);
         }
