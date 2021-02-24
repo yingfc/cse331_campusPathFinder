@@ -291,8 +291,8 @@ public class PathfinderTestDriver {
                 double cost = 0;
                 path.remove(0);
                 for (DirectedGraph.LabeledEdge<String, Double> le : path) {
-                    res += "\n" + s + " to " + le.getDest() + " with weight " + String.format("%.3f", le.getEdgeLabel() - cost);
-                    cost = le.getEdgeLabel();
+                    res += "\n" + s + " to " + le.getDest() + " with weight " + String.format("%.3f", le.getEdgeLabel());
+                    cost += le.getEdgeLabel();
                     s = le.getDest();
                 }
                 res += "\n" + "total cost: " + String.format("%.3f", cost);
