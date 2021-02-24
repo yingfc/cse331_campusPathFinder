@@ -25,12 +25,12 @@ import java.util.Map;
 public class CampusMap implements ModelAPI {
 
     private Map<String, String> short2Full;
-    private Map<String, Point> locationMap;
+    private Map<String, Point> buildingMap;
     private DirectedGraph<Point, Double> g;
 
     public CampusMap() {
         short2Full = new HashMap<>();
-        locationMap = new HashMap<>();
+        buildingMap = new HashMap<>();
         g = new DirectedGraph<>();
         String buildingFileName = "campus_buildings.tsv";
         String pathFileName = "campus_paths.tsv";
@@ -38,7 +38,7 @@ public class CampusMap implements ModelAPI {
         List<CampusBuilding> campusBuildings = CampusPathsParser.parseCampusBuildings(buildingFileName);
         for (CampusBuilding building : campusBuildings) {
             short2Full.put(building.getShortName(), building.getLongName());
-            locationMap.put(building.getShortName(), new Point(building.getX(), building.getY()));
+            buildingMap.put(building.getShortName(), new Point(building.getX(), building.getY()));
         }
 
         List<CampusPath> campusPaths = CampusPathsParser.parseCampusPaths(pathFileName);
@@ -72,8 +72,8 @@ public class CampusMap implements ModelAPI {
     @Override
     public Path<Point> findShortestPath(String startShortName, String endShortName) {
         if (shortNameExists(startShortName) && shortNameExists(endShortName)) {
-            Point startPoint = locationMap.get(startShortName);
-            Point endPoint = locationMap.get(endShortName);
+            Point startPoint = buildingMap.get(startShortName);
+            Point endPoint = buildingMap.get(endShortName);
             Path<Point> res = new Path<>(startPoint);
             List<DirectedGraph.LabeledEdge<Point, Double>> dijkstra = MarvelPathsWeighted.Dijkstra(g, startPoint, endPoint);
             if (dijkstra != null) {
