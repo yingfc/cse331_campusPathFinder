@@ -67,12 +67,15 @@ public class MarvelPathsWeighted {
         }
 
         Queue<ArrayList<DirectedGraph.LabeledEdge<T, Double>>> active = new PriorityQueue<>((o1, o2) -> {
-            DirectedGraph.LabeledEdge<T, Double> le1 = o1.get(o1.size() - 1);
-            DirectedGraph.LabeledEdge<T, Double> le2 = o2.get(o2.size() - 1);
-            if (!(le1.getEdgeLabel().equals(le2.getEdgeLabel()))) {
-                return le1.getEdgeLabel().compareTo(le2.getEdgeLabel());
+            double sum1 = o1.stream().mapToDouble(DirectedGraph.LabeledEdge::getEdgeLabel).sum();
+            double sum2 = o2.stream().mapToDouble(DirectedGraph.LabeledEdge::getEdgeLabel).sum();
+            if (sum1 - sum2 > 0) {
+                return 1;
+            } else if (sum1 - sum2 < 0) {
+                return -1;
+            } else {
+                return 0;
             }
-            return o1.size() - o2.size();
         });
         Set<T> finished = new HashSet<>();
 
@@ -83,7 +86,6 @@ public class MarvelPathsWeighted {
         while (!active.isEmpty()) {
             List<DirectedGraph.LabeledEdge<T, Double>> minPath = active.remove();
             T minDest = minPath.get(minPath.size() - 1).getDest();
-            double minCost = minPath.get(minPath.size() - 1).getEdgeLabel();
             if (minDest.equals(dest)) {
                 return minPath;
             }
@@ -95,8 +97,7 @@ public class MarvelPathsWeighted {
             for (DirectedGraph.LabeledEdge<T, E> le : g.getEdges(minDest)) {
                 if (!finished.contains(le.getDest())) {
                     ArrayList<DirectedGraph.LabeledEdge<T, Double>> newPath = new ArrayList<>(minPath);
-                    double newCost = minCost + le.getEdgeLabel().doubleValue();
-                    newPath.add(new DirectedGraph.LabeledEdge<>(le.getDest(), newCost));
+                    newPath.add(new DirectedGraph.LabeledEdge<>(le.getDest(), le.getEdgeLabel().doubleValue()));
                     active.add(newPath);
                 }
             }
