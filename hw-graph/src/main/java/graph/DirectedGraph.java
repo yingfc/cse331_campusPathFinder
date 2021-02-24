@@ -8,6 +8,9 @@ import java.util.Set;
 /**
  * <b>DirectedGraph</b> class represents a mutable, directed graph.
  * It contains a collection of nodes and edges. Each edge contains an destination node and the edge label.
+ *
+ * @param <T> The type of nodes in the DirectedGraph
+ * @param <E> The type of edges in the DirectedGraph
  */
 public class DirectedGraph<T, E> {
 
@@ -288,6 +291,9 @@ public class DirectedGraph<T, E> {
      *
      * An example labeled edge could be LabeledEdge("node1", "edge11") showing its
      * destination node being "node1" and its edge label being "edge11".
+     *
+     * @param <T>   The type of the node of a LabeledEdge
+     * @param <E>   The type of the edge label of a LabeledEdge
      */
     public static class LabeledEdge<T, E> {
 
