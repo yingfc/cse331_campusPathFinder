@@ -13,43 +13,6 @@ import java.util.*;
 public class MarvelPathsWeighted {
 
     /**
-     * Build a graph with the data from the given .tsv file
-     *
-     * @param filename  file used to build the graph
-     * @spec.requires   filename != null
-     * @spec.effects    build/create a graph
-     * @return          a DirectedGraph built from the given file
-     */
-    public static DirectedGraph<String, Double> buildGraph(String filename) {
-        DirectedGraph<String, String> g = MarvelPaths.buildGraph(filename);
-        DirectedGraph<String, Double> weightedGraph = new DirectedGraph<>();
-        Map<String, Map<String, Integer>> data = new HashMap<>();
-
-        for (String source: g.getAllNodes()) {
-            weightedGraph.addNode(source);
-            data.put(source, new HashMap<>());
-        }
-
-        for (String source: g.getAllNodes()) {
-            Set<DirectedGraph.LabeledEdge<String, String>> s = g.getEdges(source);
-            for (DirectedGraph.LabeledEdge<String, String> le : s) {
-                if (!data.get(source).containsKey(le.getDest())) {
-                    data.get(source).put(le.getDest(), 1);
-                } else {
-                    data.get(source).put(le.getDest(), data.get(source).get(le.getDest()) + 1);
-                }
-            }
-        }
-
-        for (String source : data.keySet()) {
-            for (String dest : data.get(source).keySet()) {
-                weightedGraph.addEdge(source, dest, 1.0/data.get(source).get(dest));
-            }
-        }
-        return weightedGraph;
-    }
-
-    /**
      * Find the shortest path from one node to another node using Dijkstra's algorithm.
      *
      * @param g         the graph to find the shortest path between two nodes

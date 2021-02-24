@@ -7,11 +7,6 @@ import pathfinder.MarvelPathsWeighted;
 public class MarvelPathsWeightedExceptionTest {
 
     @Test (expected = IllegalArgumentException.class)
-    public void testBuildNullGraph() throws Exception {
-        MarvelPathsWeighted.buildGraph(null);
-    }
-
-    @Test (expected = IllegalArgumentException.class)
     public void testDijkstraNullGraph() {
         MarvelPathsWeighted.Dijkstra(null, "start", "end");
     }
