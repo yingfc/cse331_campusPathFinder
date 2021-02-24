@@ -22,12 +22,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class implements the ModelAPI interface, enabling the controller to return data
+ * from the model and request the model to do some computation.
+ */
 public class CampusMap implements ModelAPI {
 
     private Map<String, String> short2Full;
     private Map<String, Point> buildingMap;
     private DirectedGraph<Point, Double> g;
 
+    /**
+     * The constructor that initializes the map information.
+     */
     public CampusMap() {
         short2Full = new HashMap<>();
         buildingMap = new HashMap<>();
