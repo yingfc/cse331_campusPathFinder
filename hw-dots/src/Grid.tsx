@@ -15,6 +15,7 @@ interface GridProps {
     size: number;    // size of the grid to display
     width: number;   // width of the canvas on which to draw
     height: number;  // height of the canvas on which to draw
+    edges: string[];
 }
 
 interface GridState {
@@ -86,6 +87,43 @@ class Grid extends Component<GridProps, GridState> {
         for (let coordinate of coordinates) {
             this.drawCircle(ctx, coordinate);
         }
+
+        if (this.props.edges.toString() !== "") {
+            const edgeEntry: string[] = this.props.edges;
+            let lineCount: number = 0;
+            for (let e of edgeEntry) {
+                if (e.length > 0) {
+                    lineCount++;
+                    let info = e.split(" ");
+                    if (info.length === 3) {
+                        let startX: number = parseInt(info[0].split(",")[0]);
+                        let startY: number = parseInt(info[0].split(",")[1]);
+                        let endX: number = parseInt(info[1].split(",")[0]);
+                        let endY: number = parseInt(info[1].split(",")[1]);
+                        let widthThreshold: number = Math.max(startX, endX);
+                        let lengthThreshold: number = Math.max(startY, endY);
+                        let size: number = this.props.size;
+                        if (widthThreshold >= size || lengthThreshold >= size) {
+                            alert("Cannot draw edges, grid myst be at least size " + Math.max(widthThreshold, lengthThreshold));
+                            ctx.clearRect(0, 0, this.props.width, this.props.height);
+                            if (this.state.backgroundImage !== null) {
+                                ctx.drawImage(this.state.backgroundImage, 0, 0);
+                            }
+                            for (let coordinate of coordinates) {
+                                this.drawCircle(ctx, coordinate);
+                            }
+                            break;
+                        } else {
+                            let sourceNode: [number, number] = [this.props.width / (size + 1) * (startX + 1), this.props.width / (size + 1) * (startY + 1)];
+                            let destNode: [number, number] = [this.props.width / (size + 1) * (endX + 1), this.props.width / (size + 1) * (endY + 1)];
+                            this.drawEdge(ctx, sourceNode, destNode, info[2]);
+                        }
+                    } else {
+                        alert("Line " + lineCount + ": Missing a portion of the line, or missing a space.");
+                    }
+                }
+            }
+        }
     };
 
     /**
@@ -113,6 +151,16 @@ class Grid extends Component<GridProps, GridState> {
         ctx.arc(coordinate[0], coordinate[1], radius, 0, 2 * Math.PI);
         ctx.fill();
     };
+
+    drawEdge = (ctx: CanvasRenderingContext2D, sourceCoordinate: [number, number], destCoordinate: [number, number], color: string) => {
+        console.log("drawEdge called");
+        ctx.lineWidth = Math.min(4, 200 / this.props.size);
+        ctx.strokeStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(sourceCoordinate[0], sourceCoordinate[1]);
+        ctx.lineTo(destCoordinate[0], destCoordinate[1]);
+        ctx.stroke();
+    }
 
     render() {
         return (
