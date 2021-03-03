@@ -91,6 +91,17 @@ class Grid extends Component<GridProps, GridState> {
         if (this.props.edges.toString() !== "") {
             const edgeEntry: string[] = this.props.edges;
             let lineCount: number = 0;
+            let widthThreshold: number = 0;
+            let lengthThreshold: number = 0;
+
+            for (let e of edgeEntry) {
+                let info = e.split(" ");
+                if (info.length === 3) {
+                    widthThreshold = Math.max(parseInt(info[0].split(",")[0]), parseInt(info[1].split(",")[0]), widthThreshold);
+                    lengthThreshold = Math.max(parseInt(info[0].split(",")[1]), parseInt(info[1].split(",")[1]), lengthThreshold);
+                }
+            }
+
             for (let e of edgeEntry) {
                 if (e.length > 0) {
                     lineCount++;
@@ -100,18 +111,10 @@ class Grid extends Component<GridProps, GridState> {
                         let startY: number = parseInt(info[0].split(",")[1]);
                         let endX: number = parseInt(info[1].split(",")[0]);
                         let endY: number = parseInt(info[1].split(",")[1]);
-                        let widthThreshold: number = Math.max(startX, endX);
-                        let lengthThreshold: number = Math.max(startY, endY);
                         let size: number = this.props.size;
                         if (widthThreshold >= size || lengthThreshold >= size) {
-                            alert("Cannot draw edges, grid myst be at least size " + Math.max(widthThreshold, lengthThreshold));
-                            ctx.clearRect(0, 0, this.props.width, this.props.height);
-                            if (this.state.backgroundImage !== null) {
-                                ctx.drawImage(this.state.backgroundImage, 0, 0);
-                            }
-                            for (let coordinate of coordinates) {
-                                this.drawCircle(ctx, coordinate);
-                            }
+                            const threshold: number = Math.max(widthThreshold, lengthThreshold) + 1;
+                            alert("Cannot draw edges, grid myst be at least size " + threshold);
                             break;
                         } else {
                             let sourceNode: [number, number] = [this.props.width / (size + 1) * (startX + 1), this.props.width / (size + 1) * (startY + 1)];
@@ -153,7 +156,6 @@ class Grid extends Component<GridProps, GridState> {
     };
 
     drawEdge = (ctx: CanvasRenderingContext2D, sourceCoordinate: [number, number], destCoordinate: [number, number], color: string) => {
-        console.log("drawEdge called");
         ctx.lineWidth = Math.min(4, 200 / this.props.size);
         ctx.strokeStyle = color;
         ctx.beginPath();
