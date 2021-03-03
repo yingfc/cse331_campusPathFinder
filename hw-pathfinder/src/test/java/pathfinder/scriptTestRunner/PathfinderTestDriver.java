@@ -274,12 +274,12 @@ public class PathfinderTestDriver {
         DirectedGraph<String, Double> g = graphs.get(graphName);
 
         if (!g.containsNode(sourceNode) && !g.containsNode(destNode)) {
-            output.println("unknown character " + sourceNode);
-            output.println("unknown character " + destNode);
+            output.println("unknown node " + sourceNode);
+            output.println("unknown node " + destNode);
         } else if (!g.containsNode(sourceNode)) {
-            output.println("unknown character " + sourceNode);
+            output.println("unknown node " + sourceNode);
         } else if (!g.containsNode(destNode)) {
-            output.println("unknown character " + destNode);
+            output.println("unknown node " + destNode);
         } else {
             String s = sourceNode;
             String res = "path from " + sourceNode + " to " + destNode + ":";
