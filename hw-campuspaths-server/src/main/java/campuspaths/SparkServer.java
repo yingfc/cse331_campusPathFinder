@@ -12,6 +12,16 @@
 package campuspaths;
 
 import campuspaths.utils.CORSFilter;
+import com.google.gson.Gson;
+import pathfinder.CampusMap;
+import pathfinder.datastructures.Path;
+import pathfinder.datastructures.Point;
+import spark.Request;
+import spark.Response;
+import spark.Route;
+import spark.Spark;
+
+import java.util.Map;
 
 public class SparkServer {
 
@@ -23,7 +33,38 @@ public class SparkServer {
         // comes from a different server.
         // You should leave these two lines at the very beginning of main().
 
-        // TODO: Create all the Spark Java routes you need here.
+        CampusMap map = new CampusMap();
+
+        // listBuilding endpoint
+        Spark.get("/listBuilding", new Route() {
+            @Override
+            public Object handle(Request request, Response response) throws Exception {
+                Map<String, String> res = map.buildingNames();
+                if (res == null) {
+                    Spark.halt(400, "Error listing buildings");
+                }
+                Gson gson = new Gson();
+                return gson.toJson(res);
+            }
+        });
+
+        // findPath endpoint
+        Spark.get("findPath", new Route() {
+            @Override
+            public Object handle(Request request, Response response) throws Exception {
+                String sourceNode = request.queryParams("start");
+                String destNode = request.queryParams("end");
+                if (sourceNode == null || destNode == null) {
+                    Spark.halt(400, "Must have start and end node");
+                }
+                Path<Point> path = map.findShortestPath(sourceNode, destNode);
+                if (path == null) {
+                    Spark.halt(400, "Must provide valid building abbreviation");
+                }
+                Gson gson = new Gson();
+                return gson.toJson(path);
+            }
+        });
     }
 
 }
