@@ -28,6 +28,18 @@ import java.util.Map;
  */
 public class CampusMap implements ModelAPI {
 
+    // Rep invariant:
+    // short2Full != null && buildingMap != null && g != null
+    // && every key and value of short2Full are not null
+    // && every key and value of buildingMap are not null
+    // && every key and value of g are not null
+
+    // Abstract Function:
+    // AF(this) = a CampusMap such that
+    //      this.short2Full = a map of buildings' short names to full names
+    //      this.buildingMap = a map of buildings' short names to locations
+    //      this.g = a directed graph of campus paths
+
     private Map<String, String> short2Full;
     private Map<String, Point> buildingMap;
     private DirectedGraph<Point, Double> g;
