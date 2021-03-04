@@ -38,7 +38,6 @@ class GridSizePicker extends Component<GridSizePickerProps, GridSizePickerState>
         // box updates, it'll tell you the new contents of the text box, like we're using
         // below.
         //
-        // TODO - Not currently doing any validation or error handling. Should probably add some...
         const newSize: number = parseInt(event.target.value);
         this.setState({
             displayValue: event.target.value

@@ -88,12 +88,14 @@ class Grid extends Component<GridProps, GridState> {
             this.drawCircle(ctx, coordinate);
         }
 
+        // Draw the edges
         if (this.props.edges.toString() !== "") {
             const edgeEntry: string[] = this.props.edges;
             let lineCount: number = 0;
             let widthThreshold: number = 0;
             let lengthThreshold: number = 0;
 
+            // get the threshold coordinate of given edges
             for (let e of edgeEntry) {
                 let info = e.split(" ");
                 if (info.length === 3) {
@@ -155,6 +157,7 @@ class Grid extends Component<GridProps, GridState> {
         ctx.fill();
     };
 
+    // draw the edge using the given source node, destination node and edge color
     drawEdge = (ctx: CanvasRenderingContext2D, sourceCoordinate: [number, number], destCoordinate: [number, number], color: string) => {
         ctx.lineWidth = Math.min(4, 200 / this.props.size);
         ctx.strokeStyle = color;

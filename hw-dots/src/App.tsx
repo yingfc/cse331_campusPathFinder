@@ -19,7 +19,7 @@ import "./App.css";
 
 interface AppState {
     gridSize: number;  // size of the grid to display
-    edgeList: string;
+    edgeList: string;  // the edge list content
 }
 
 class App extends Component<{}, AppState> { // <- {} means no props.
