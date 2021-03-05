@@ -61,6 +61,15 @@ p {
     align-items: center;
 }
 
+select {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    color: #474747;
+    height: 50px;
+    font-size: 20px;
+}
+
 button {
     width: 200px;
     height: 50px;
@@ -119,13 +128,4 @@ button:after {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
-}
-
-select {
-    margin: 5px;
-    padding: 10px;
-    border-radius: 10px;
-    color: #474747;
-    height: 50px;
-    font-size: 20px;
 }
