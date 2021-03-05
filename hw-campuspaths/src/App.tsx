@@ -10,12 +10,61 @@
  */
 
 import React, {Component} from 'react';
+import Map from "./Map";
+import BuildingSelector from "./BuildingSelector";
+import PathFinder from "./PathFinder";
 
-class App extends Component<{}, {}> {
+interface AppState {
+    sourceNodeName: string;
+    destNodeName: string;
+    path: any;  // FIXME type
+}
+
+class App extends Component<{}, AppState> {
+
+    constructor(props: {}) {
+        super(props);
+        this.state = {
+            sourceNodeName: "",
+            destNodeName: "",
+            path: "",   // FIXME
+        }
+    }
+
+    updateStartNode = (newNode: string) => {
+        this.setState({
+            sourceNodeName: newNode
+        })
+    }
+
+    updateEndNode = (newNode: string) => {
+        this.setState({
+            destNodeName: newNode
+        })
+    }
+
+    drawPath = (newPath: any) => {
+        this.setState({
+            path: newPath
+        })
+    }
+
+    onResetButton = () => {
+        this.setState({
+            sourceNodeName: "",
+            destNodeName: "",
+            path: "",
+        })
+    }
 
     render() {
         return (
-            <p>Here's the beginning of your AMAZING CampusPaths GUI!</p>
+            <div>
+                <p>UW Ultimate CampusPaths Finding Tool!</p>
+                <Map path={this.state.path}/>
+                <BuildingSelector onStartChange={this.updateStartNode} onEndChange={this.updateEndNode} onResetClick={this.onResetButton}/>
+                <PathFinder startNode={this.state.sourceNodeName} endNode={this.state.destNodeName} onChange={this.drawPath}/>
+            </div>
         );
     }
 

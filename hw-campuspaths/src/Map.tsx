@@ -16,7 +16,11 @@ interface MapState {
     backgroundImage: HTMLImageElement | null;
 }
 
-class Map extends Component<{}, MapState> {
+interface MapProps {
+    path: any;
+}
+
+class Map extends Component<MapProps, MapState> {
 
     // NOTE:
     // This component is a suggestion for you to use, if you would like to.
@@ -27,7 +31,7 @@ class Map extends Component<{}, MapState> {
 
     canvas: React.RefObject<HTMLCanvasElement>;
 
-    constructor(props: {}) {
+    constructor(props: MapProps) {
         super(props);
         this.state = {
             backgroundImage: null
@@ -36,11 +40,13 @@ class Map extends Component<{}, MapState> {
     }
 
     componentDidMount() {
-        // Might want to do something here?
+        this.fetchAndSaveImage();
+        this.drawBackgroundImage();
     }
 
     componentDidUpdate() {
-        // Might want something here too...
+        this.drawBackgroundImage();
+        this.drawPath();
     }
 
     fetchAndSaveImage() {
@@ -66,10 +72,42 @@ class Map extends Component<{}, MapState> {
         if (this.state.backgroundImage !== null) { // This means the image has been loaded.
             // Sets the internal "drawing space" of the canvas to have the correct size.
             // This helps the canvas not be blurry.
+            ctx.clearRect(0, 0, this.state.backgroundImage.width, this.state.backgroundImage.height);
+
             canvas.width = this.state.backgroundImage.width;
             canvas.height = this.state.backgroundImage.height;
             ctx.drawImage(this.state.backgroundImage, 0, 0);
         }
+    }
+
+    drawPath() {
+        let canvas = this.canvas.current;
+        if (canvas === null) throw Error("Unable to draw, no canvas ref.");
+        let ctx = canvas.getContext("2d");
+        if (ctx === null) throw Error("Unable to draw, no valid graphics context.");
+
+        const coordinates = this.getCoordinates();
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = "magenta";
+        for (let i = 0; i < coordinates.length - 1; i++) {
+            ctx.beginPath();
+            ctx.moveTo(coordinates[i][0], coordinates[i][1]);
+            ctx.lineTo(coordinates[i+1][0], coordinates[i+1][1]);
+            ctx.stroke();
+        }
+    }
+
+    getCoordinates = (): [number, number][] => {
+        let coordinates: [number, number][] = [];
+        if (this.props.path !== "") {
+            const currPath = this.props.path;
+            coordinates.push([currPath.start.x, currPath.start.y]);
+            for (let i = 0; i < currPath.path.length; i++) {
+                const onePath = currPath.path[i].end;
+                coordinates.push([onePath.x, onePath.y]);
+            }
+        }
+        return coordinates;
     }
 
     render() {
