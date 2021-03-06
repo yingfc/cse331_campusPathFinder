@@ -31,6 +31,9 @@ canvas {
     display: block;
 }
 
+/*
+paragraph css idea from https://freefrontend.com/css-text-effects/
+ */
 p {
     font-family: 'Montserrat', sans-serif;
     text-align: center;
@@ -49,6 +52,14 @@ p {
     margin: auto;
 }
 
+#reset-btn {
+    color: black;
+}
+
+#reset-btn:after {
+    background: gold;
+}
+
 #selector {
     display: flex;
     justify-content: center;
@@ -61,6 +72,10 @@ p {
     align-items: center;
 }
 
+#pathFinderBtn:after {
+    background: rebeccapurple;
+}
+
 select {
     margin: 5px;
     padding: 10px;
@@ -70,6 +85,9 @@ select {
     font-size: 20px;
 }
 
+/*
+button css from https://dev.to/webdeasy/top-20-css-buttons-animations-f41
+ */
 button {
     width: 200px;
     height: 50px;

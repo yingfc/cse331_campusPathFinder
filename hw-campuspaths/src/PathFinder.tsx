@@ -40,7 +40,7 @@ class PathFinder extends Component<PathFinderProps, PathFinderState> {
         return (
             <div id="path-finder">
                 <br/>
-                <button onClick={this.findPath}>FIND THE PATH</button>
+                <button id="pathFinderBtn" onClick={this.findPath}>FIND THE PATH</button>
             </div>
         );
     }
