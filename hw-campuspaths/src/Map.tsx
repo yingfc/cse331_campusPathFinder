@@ -14,6 +14,8 @@ import "./Map.css";
 
 interface MapState {
     backgroundImage: HTMLImageElement | null;
+    startImage: HTMLImageElement | null;
+    destinationImage: HTMLImageElement | null;
 }
 
 interface MapProps {
@@ -34,7 +36,9 @@ class Map extends Component<MapProps, MapState> {
     constructor(props: MapProps) {
         super(props);
         this.state = {
-            backgroundImage: null
+            backgroundImage: null,
+            startImage: null,
+            destinationImage: null
         };
         this.canvas = React.createRef();
     }
@@ -53,14 +57,28 @@ class Map extends Component<MapProps, MapState> {
         // Creates an Image object, and sets a callback function
         // for when the image is done loading (it might take a while).
         let background: HTMLImageElement = new Image();
+        let start: HTMLImageElement = new Image();
+        let destination: HTMLImageElement = new Image();
         background.onload = () => {
             this.setState({
                 backgroundImage: background
             });
         };
+        start.onload = () => {
+            this.setState({
+                startImage: start
+            })
+        }
+        destination.onload = () => {
+            this.setState({
+                destinationImage: destination
+            })
+        }
         // Once our callback is set up, we tell the image what file it should
         // load from. This also triggers the loading process.
         background.src = "./campus_map.jpg";
+        start.src = "./start.jpg";
+        destination.src = "./destination_flag.jpg";
     }
 
     drawBackgroundImage() {
@@ -87,13 +105,25 @@ class Map extends Component<MapProps, MapState> {
         if (ctx === null) throw Error("Unable to draw, no valid graphics context.");
 
         const coordinates = this.getCoordinates();
-        ctx.lineWidth = 10;
+        ctx.lineWidth = 12;
         ctx.strokeStyle = "magenta";
+        ctx.beginPath();
+        let destinationPoint: [number, number] = [0, 0];
+
+        if (this.state.startImage !== null && coordinates.length > 0) {
+            const img = this.state.startImage;
+            ctx.drawImage(img, coordinates[0][0] - 1.4 * img.width, coordinates[0][1] - 1.4 * img.height, img.width * 1.4, img.height * 1.4);
+        }
         for (let i = 0; i < coordinates.length - 1; i++) {
-            ctx.beginPath();
             ctx.moveTo(coordinates[i][0], coordinates[i][1]);
             ctx.lineTo(coordinates[i+1][0], coordinates[i+1][1]);
             ctx.stroke();
+            if (i === coordinates.length - 2) {
+                destinationPoint = [coordinates[i+1][0], coordinates[i+1][1]];
+            }
+        }
+        if (this.state.destinationImage !== null && destinationPoint !== [0, 0]) {
+            ctx.drawImage(this.state.destinationImage, destinationPoint[0], destinationPoint[1] - 150, 150, 150);
         }
     }
 
