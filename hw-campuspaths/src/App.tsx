@@ -15,9 +15,9 @@ import BuildingSelector from "./BuildingSelector";
 import PathFinder from "./PathFinder";
 
 interface AppState {
-    sourceNodeName: string;
-    destNodeName: string;
-    path: any;  // FIXME type
+    sourceNodeName: string;     // the name of the source building
+    destNodeName: string;       // the name of the destination building
+    path: any;                  // the path between the two buildings FIXME
 }
 
 class App extends Component<{}, AppState> {
@@ -27,7 +27,7 @@ class App extends Component<{}, AppState> {
         this.state = {
             sourceNodeName: "",
             destNodeName: "",
-            path: "",   // FIXME
+            path: "",
         }
     }
 

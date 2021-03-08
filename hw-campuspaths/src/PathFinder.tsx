@@ -1,13 +1,13 @@
 import React, {Component} from "react";
 
 interface PathFinderProps {
-    startNode: string;
-    endNode: string;
-    onChange(newPath: JSON): void;
+    startNode: string;      // the start building to be used for path finding
+    endNode: string;        // the end building to be used for path finding
+    onChange(newPath: any): void;  // called when new path is created
 }
 
 interface PathFinderState {
-    currPath: any;  // FIXME
+    currPath: any;      // the path from start building to end building  FIXME
 }
 
 class PathFinder extends Component<PathFinderProps, PathFinderState> {

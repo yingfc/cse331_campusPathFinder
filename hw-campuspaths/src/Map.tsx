@@ -13,13 +13,13 @@ import React, {Component} from 'react';
 import "./Map.css";
 
 interface MapState {
-    backgroundImage: HTMLImageElement | null;
-    startImage: HTMLImageElement | null;
-    destinationImage: HTMLImageElement | null;
+    backgroundImage: HTMLImageElement | null;   // background image object rendered into the canvas
+    startImage: HTMLImageElement | null;        // image object that indicates the starting building
+    destinationImage: HTMLImageElement | null;  // image object that indicates the destination building
 }
 
 interface MapProps {
-    path: any;
+    path: any;  // the path between the start building and destination building
 }
 
 class Map extends Component<MapProps, MapState> {
@@ -98,6 +98,7 @@ class Map extends Component<MapProps, MapState> {
         }
     }
 
+    // draw the shortest path using the given coordinates
     drawPath() {
         let canvas = this.canvas.current;
         if (canvas === null) throw Error("Unable to draw, no canvas ref.");
@@ -127,6 +128,9 @@ class Map extends Component<MapProps, MapState> {
         }
     }
 
+    /**
+     * Returns an array of coordinate pairs that represent each segment of a shortest path
+     */
     getCoordinates = (): [number, number][] => {
         let coordinates: [number, number][] = [];
         if (this.props.path !== "") {

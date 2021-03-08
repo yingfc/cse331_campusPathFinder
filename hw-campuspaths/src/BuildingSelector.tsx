@@ -1,15 +1,15 @@
 import React, {Component} from "react";
 
 interface BuildingSelectorState {
-    allInfo: any;
-    startNode: string;
-    endNode: string;
+    allInfo: any;       // all building information to display as select options
+    startNode: string;  // the start building
+    endNode: string;    // the end building
 }
 
 interface BuildingSelectorProps {
-    onStartChange(newNode: string): void;
-    onEndChange(newNode: string): void;
-    onResetClick(): void;
+    onStartChange(newNode: string): void;   // called when a new start building is selected
+    onEndChange(newNode: string): void;     // called when a new end building is selected
+    onResetClick(): void;       // called when the reset button is clicked
 }
 
 class BuildingSelector extends Component<BuildingSelectorProps, BuildingSelectorState> {
