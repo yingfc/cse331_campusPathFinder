@@ -40,6 +40,10 @@ class BuildingSelector extends Component<BuildingSelectorProps, BuildingSelector
         }
     }
 
+    async componentDidMount() {
+        await this.listBuilding();
+    }
+
     onSelectStartChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const newNode: string = event.target.value;
         this.setState({
@@ -58,8 +62,7 @@ class BuildingSelector extends Component<BuildingSelectorProps, BuildingSelector
 
     onResetBtnClick = () => {
         this.setState({
-            allInfo: "",
-            startNode: "start",
+            startNode: "",
             endNode: "",
         })
         this.props.onResetClick();
@@ -67,26 +70,25 @@ class BuildingSelector extends Component<BuildingSelectorProps, BuildingSelector
 
     render() {
         const buildingShortName = Object.keys(this.state.allInfo);
+        const options = [];
+        for (let i = 0; i < buildingShortName.length; i++) {
+            options.push(<option key={i}>{buildingShortName[i]}</option>)
+        }
         return (
             <div id="building-selector">
                 <br/>
-                <button id="start-btn" onClick={this.listBuilding}>Click to START</button>
-                <br/>
                 <div id="selector">
-                    <select onChange={this.onSelectStartChange}>
+                    <select onChange={this.onSelectStartChange} value={this.state.startNode}>
                         <option>--- select START building ---</option>
-                        {
-                            buildingShortName.map((x,y) => <option key={y}>{x}</option>)
-                        }
+                        {options}
                     </select>
 
-                    <select onChange={this.onSelectEndChange}>
+                    <select onChange={this.onSelectEndChange} value={this.state.endNode}>
                         <option>--- select END building ---</option>
-                        {
-                            buildingShortName.map((x,y) => <option key={y}>{x}</option>)
-                        }
+                        {options}
                     </select>
                 </div>
+                <br/>
                 <button id="reset-btn" onClick={this.onResetBtnClick}>RESET</button>
                 <br/>
             </div>
