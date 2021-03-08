@@ -23,6 +23,10 @@ import spark.Spark;
 
 import java.util.Map;
 
+/**
+ * This is the main class that runs the server, it includes a main method that
+ * sets up the server and allows it to accept requests.
+ */
 public class SparkServer {
 
     public static void main(String[] args) {
