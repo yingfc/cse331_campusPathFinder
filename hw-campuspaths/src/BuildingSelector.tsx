@@ -40,8 +40,8 @@ class BuildingSelector extends Component<BuildingSelectorProps, BuildingSelector
         }
     }
 
-    async componentDidMount() {
-        await this.listBuilding();
+    componentDidMount() {
+        this.listBuilding();
     }
 
     onSelectStartChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
