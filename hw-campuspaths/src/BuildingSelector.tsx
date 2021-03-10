@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 
 interface BuildingSelectorState {
-    allInfo: any;       // all building information to display as select options
+    allInfo: JSON | null;       // all building information to display as select options
     startNode: string;  // the start building
     endNode: string;    // the end building
 }
@@ -17,7 +17,7 @@ class BuildingSelector extends Component<BuildingSelectorProps, BuildingSelector
     constructor(props: BuildingSelectorProps) {
         super(props);
         this.state = {
-            allInfo: "",
+            allInfo: null,
             startNode: "",
             endNode: "",
         }
@@ -69,10 +69,12 @@ class BuildingSelector extends Component<BuildingSelectorProps, BuildingSelector
     }
 
     render() {
-        const buildingShortName = Object.keys(this.state.allInfo);
         const options = [];
-        for (let i = 0; i < buildingShortName.length; i++) {
-            options.push(<option key={i}>{buildingShortName[i]}</option>)
+        if (this.state.allInfo !== null) {
+            const buildingShortName = Object.keys(this.state.allInfo);
+            for (let i = 0; i < buildingShortName.length; i++) {
+                options.push(<option key={i}>{buildingShortName[i]}</option>)
+            }
         }
         return (
             <div id="building-selector">

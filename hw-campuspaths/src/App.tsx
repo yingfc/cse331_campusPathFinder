@@ -13,11 +13,12 @@ import React, {Component} from 'react';
 import Map from "./Map";
 import BuildingSelector from "./BuildingSelector";
 import PathFinder from "./PathFinder";
+import {Path} from "./Interface";
 
 interface AppState {
     sourceNodeName: string;     // the name of the source building
     destNodeName: string;       // the name of the destination building
-    path: any;                  // the path between the two buildings FIXME
+    path: Path | null;          // the path between the two buildings
 }
 
 class App extends Component<{}, AppState> {
@@ -27,7 +28,7 @@ class App extends Component<{}, AppState> {
         this.state = {
             sourceNodeName: "",
             destNodeName: "",
-            path: "",
+            path: null,
         }
     }
 
@@ -43,7 +44,7 @@ class App extends Component<{}, AppState> {
         })
     }
 
-    drawPath = (newPath: any) => {
+    drawPath = (newPath: Path) => {
         this.setState({
             path: newPath
         })
@@ -53,7 +54,7 @@ class App extends Component<{}, AppState> {
         this.setState({
             sourceNodeName: "",
             destNodeName: "",
-            path: "",
+            path: null,
         })
     }
 

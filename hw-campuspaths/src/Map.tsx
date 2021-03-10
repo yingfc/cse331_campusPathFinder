@@ -11,6 +11,7 @@
 
 import React, {Component} from 'react';
 import "./Map.css";
+import {Path} from "./Interface";
 
 interface MapState {
     backgroundImage: HTMLImageElement | null;   // background image object rendered into the canvas
@@ -19,7 +20,7 @@ interface MapState {
 }
 
 interface MapProps {
-    path: any;  // the path between the start building and destination building
+    path: Path | null;  // the path between the start building and destination building
 }
 
 class Map extends Component<MapProps, MapState> {
@@ -133,7 +134,7 @@ class Map extends Component<MapProps, MapState> {
      */
     getCoordinates = (): [number, number][] => {
         let coordinates: [number, number][] = [];
-        if (this.props.path !== "") {
+        if (this.props.path !== null) {
             const currPath = this.props.path;
             coordinates.push([currPath.start.x, currPath.start.y]);
             for (let i = 0; i < currPath.path.length; i++) {

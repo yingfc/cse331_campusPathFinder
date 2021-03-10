@@ -1,20 +1,21 @@
 import React, {Component} from "react";
+import {Path} from "./Interface";
 
 interface PathFinderProps {
     startNode: string;      // the start building to be used for path finding
     endNode: string;        // the end building to be used for path finding
-    onChange(newPath: any): void;  // called when new path is created
+    onChange(newPath: Path): void;  // called when new path is created
 }
 
 interface PathFinderState {
-    currPath: any;      // the path from start building to end building  FIXME
+    currPath: Path | null;      // the path from start building to end building  FIXME
 }
 
 class PathFinder extends Component<PathFinderProps, PathFinderState> {
     constructor(props: PathFinderProps) {
         super(props);
         this.state = {
-            currPath: "",
+            currPath: null,
         }
     }
 
@@ -29,7 +30,9 @@ class PathFinder extends Component<PathFinderProps, PathFinderState> {
             this.setState({
                 currPath: path
             })
-            this.props.onChange(this.state.currPath);
+            if (this.state.currPath !== null) {
+                this.props.onChange(this.state.currPath);
+            }
         } catch (e) {
             alert("There was an error contacting the server.");
             console.log(e);
