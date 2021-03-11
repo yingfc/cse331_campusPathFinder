@@ -41,6 +41,14 @@ public class SparkServer {
 
         // listBuilding endpoint
         Spark.get("/listBuilding", new Route() {
+            /**
+             * The handle function of the list building endpoint that returns the campus building names
+             * in the format of JSON.
+             * @param request   the request object that provides information about the HTTP request
+             * @param response  the response object that provides functionality for modifying the response
+             * @return  the campus building names in the format of JSON if the object is not null;
+             *          return 400 error status code to the requester otherwise.
+             */
             @Override
             public Object handle(Request request, Response response) throws Exception {
                 Map<String, String> res = map.buildingNames();
@@ -54,6 +62,14 @@ public class SparkServer {
 
         // findPath endpoint
         Spark.get("findPath", new Route() {
+            /**
+             * The handle function of the find path endpoint that returns the shortest path between two
+             * campus buildings in the format of JSON.
+             * @param request   the request object that provides information about the HTTP request
+             * @param response  the response object that provides functionality for modifying the response
+             * @return  the path between two buildings in the format of JSON if the object is not null;
+             *          return 400 error status code to the requester otherwise.
+             */
             @Override
             public Object handle(Request request, Response response) throws Exception {
                 String sourceNode = request.queryParams("start");
