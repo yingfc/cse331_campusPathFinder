@@ -26,7 +26,7 @@ class PathFinder extends Component<PathFinderProps, PathFinderState> {
                 alert("The status is wrong! Expected 200, Was: " + response.status + "\nPlease check you've selected valid START/END node");
                 return;
             }
-            let path = await response.json();
+            let path = await response.json() as Path;
             this.setState({
                 currPath: path
             })
